@@ -68,23 +68,23 @@
 
 {% if opportunities.object_list|length > 0 %}
 <div class="col-12 col-md-12 results-section p-4">
-    {% for opportunity in opportunities.object_list %}
+    {% for program in opportunities.object_list %}
     <div class="result-card p-3 shadow-sm bg-white border-1 mb-4">
         <div class="row align-items-start">
             <div class="col-12 col-sm-8 col-md-8 order-2 order-sm-1">
-                <p class="program-title mb-1 mt-2 mt-sm-0">{{ opportunity.title|title }}</p>
+                <p class="program-title mb-1 mt-2 mt-sm-0">{{ program.title|title }}</p>
                 <p class="text-muted small mb-2 d-flex align-items-center">
                     <i class="bi bi-geo-fill me-1 pb-1"></i> 
-                    <span>{{ opportunity.city|title }}, {{ opportunity.state|upper }}</span>
+                    <span>{{ program.city|title }}, {{ program.state|upper }}</span>
                 </p>
             </div>
 
             <div class="col-sm-4 col-md-4 d-none d-sm-block order-1 order-sm-2">
                 <div class="logo-container d-flex">
-                    {% with opportunity.logo_image as img %}
+                    {% with program.logo_image as img %}
                         {% if img %}
                             {% image img width-300 as logo_img %}
-                            <img src="{{ logo_img.url }}" alt="{{ opportunity.title|title }}" class="img-fluid">
+                            <img src="{{ logo_img.url }}" alt="{{ program.title|title }}" class="img-fluid">
                         {% endif %}
                     {% endwith %}
                 </div>
@@ -94,18 +94,18 @@
         <div class="row mt-2">
             <div class="col-12">
                 <div class="small text-secondary">
-                    {{ opportunity.program_summary }}
+                    {{ program.program_summary }}
                 </div>
             </div>
         </div>
         
         <div class="row mt-3 justify-content-end">
             <div class="col-12 d-flex justify-content-end gap-2">
-                <a href="{% pageurl opportunity %}" class="btn btn-primary btn-sm btn-learn-more">
+                <a href="{% pageurl program %}" class="btn btn-primary btn-sm btn-learn-more">
                     Learn More
                 </a>
-                {% if opportunity.website %}
-                <a href="{{opportunity.website}}" target="_blank" class="btn btn-secondary btn-sm btn-website">
+                {% if program.website %}
+                <a href="{{program.website}}" target="_blank" class="btn btn-secondary btn-sm btn-website">
                     Website
                 </a>
                 {% endif %}

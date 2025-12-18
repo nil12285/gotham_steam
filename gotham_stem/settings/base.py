@@ -14,10 +14,11 @@ https://docs.djangoproject.com/en/6.0/ref/settings/#dat
 from pathlib import Path
 import configparser
 import os 
+from cast import CAST_APPS, CAST_MIDDLEWARE
 
 PROJECT_DIR = Path(__file__).resolve().parent.parent
 BASE_DIR = PROJECT_DIR.parent
-
+SITE_ID = 1
 DEBUG_LEVEL = 'INFO'
 try:
     config = configparser.SafeConfigParser(allow_no_value=True)
@@ -49,7 +50,7 @@ def get_config_value(group, key, default=None):
 
 # Application definition
 
-INSTALLED_APPS = [
+INSTALLED_APPS = list(set([
     "home",
     "search",
     "wagtail.contrib.forms",
@@ -72,9 +73,14 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    'django.contrib.sites',  # Required for RSS/Podcasts
     "wagtail_color_panel",
     "wagtail_newsletter",
-]
+    # Required allauth apps
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+] + CAST_APPS))
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -84,8 +90,9 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "allauth.account.middleware.AccountMiddleware",
     "wagtail.contrib.redirects.middleware.RedirectMiddleware",
-]
+] + CAST_MIDDLEWARE
 
 ROOT_URLCONF = "gotham_stem.urls"
 
@@ -107,6 +114,13 @@ TEMPLATES = [
         },
     },
 ]
+
+
+AUTHENTICATION_BACKENDS = [
+    "django.contrib.auth.backends.ModelBackend",
+    "allauth.account.auth_backends.AuthenticationBackend",
+]
+
 
 WSGI_APPLICATION = "gotham_stem.wsgi.application"
 
@@ -174,6 +188,24 @@ STATIC_URL = "/static/"
 
 MEDIA_ROOT = BASE_DIR / "media"
 MEDIA_URL = "/media/"
+# WAGTAILIMAGES_IMAGE_MODEL = "cast.Image"
+
+DJANGO_VITE_DEV_MODE = True
+
+DJANGO_VITE = {
+    "default": {
+        "dev_mode": True,
+    },
+    "cast": {
+        "dev_mode": True,
+        # This tells Vite where to find the blog's specific manifest file
+        "manifest_path": os.path.join(STATIC_ROOT, "cast", "vite", "manifest.json"),
+        "static_url_prefix": "cast/",
+    }
+}
+
+CAST_IMAGE_FORMATS = ["jpeg", "avif"]
+CAST_BOOTSTRAP_VERSION = 5
 
 # Default storage settings
 # See https://docs.djangoproject.com/en/6.0/ref/settings/#std-setting-STORAGES
@@ -247,7 +279,7 @@ WAGTAILSEARCH_BACKENDS = {
 
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
-WAGTAILADMIN_BASE_URL = "http://example.com"
+WAGTAILADMIN_BASE_URL = "http://localhost:8000"
 
 # Allowed file extensions for documents in the document library.
 # This can be omitted to allow all files, but note that this may present a security risk

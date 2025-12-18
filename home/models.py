@@ -86,8 +86,13 @@ class InsightsArticlePage(Page):
 
 class InsightsIndexPage(Page):
     
-    subpage_types = ['home.InsightsArticlePage']
+    class Meta:
+        verbose_name = "Insights"
+
     parent_page_types = ['home.HomePage']
+    subpage_types = [
+        "cast.Blog",
+    ]
     
     intro = RichTextField(blank=True)
     
@@ -102,9 +107,15 @@ class InsightsIndexPage(Page):
 
 
 class HomePage(Page):
-    
+    class Meta:
+        verbose_name = "Gotham Homepage"
     parent_page_types = ['wagtailcore.Page']
-    
+    page_ptr = models.OneToOneField(
+        Page,
+        on_delete=models.CASCADE,
+        parent_link=True,
+        related_name='home_homepage_pointer', # Give it a unique name
+    )
     hero_image = models.ForeignKey(
         'wagtailimages.Image',
         null=True,
@@ -153,7 +164,7 @@ class HomePage(Page):
     ]
 
     subpage_types = [
-        "home.OpportunityIndexPage", 
+        "home.ProgramIndexPage", 
         "home.InsightsIndexPage",
         "home.ContactPage",
         "home.PrivacyPolicyPage",

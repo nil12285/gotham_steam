@@ -5,6 +5,7 @@ from django.contrib import admin
 from wagtail.admin import urls as wagtailadmin_urls
 from wagtail import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
+from cast import cast_and_wagtail_urls
 
 from search import views as search_views
 
@@ -43,7 +44,7 @@ from django.contrib import admin
 from wagtail.admin import urls as wagtailadmin_urls
 from wagtail import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
-
+from cast.urls import urlpatterns as cast_urls
 from search import views as search_views
 
 urlpatterns = [
@@ -51,10 +52,13 @@ urlpatterns = [
     path("admin/", include(wagtailadmin_urls)),
     path("documents/", include(wagtaildocs_urls)),
     path("search/", search_views.search, name="search"),
-    
-    # 1. Include the new URLs for the Opportunity search
     path("opportunities/", include("home.urls")), 
-
+    
+    # DJANGO Cast URLs
+    path("accounts/", include("allauth.urls")),
+    # path("cast/", include(cast_urls)), # Optional: for dedicated cast views
+    path("cast/comments/", include("cast.comments.urls")),
+    path("cast/", include((cast_urls, "cast"), namespace="cast")),
     # 2. For anything not caught by a more specific rule, hand over to Wagtail
     path("", include(wagtail_urls)),
 ]

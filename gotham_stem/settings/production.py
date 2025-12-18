@@ -6,6 +6,12 @@ ALLOWED_HOSTS = ["*"]
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
+DJANGO_VITE_DEV_MODE = False
+
+DJANGO_VITE["default"]["dev_mode"] = False
+DJANGO_VITE["cast"]["dev_mode"] = False
+
+
 WAGTAILADMIN_BASE_URL = "https://gothamstem.com"
 
 # ManifestStaticFilesStorage is recommended in production, to prevent

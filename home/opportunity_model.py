@@ -117,63 +117,63 @@ class AgeGroup(AbstractBaseFilterModel):
 
 
 
-class OpportunityPageTag(TaggedItemBase):
+class ProgramTag(TaggedItemBase):
     content_object = ParentalKey(
-        'home.OpportunityPage',
+        'home.Program',
         on_delete=models.CASCADE,
         related_name='tagged_items'
     )
 
-class OpportunityProgramType(models.Model):
-    page = ParentalKey('home.OpportunityPage', on_delete=models.CASCADE, related_name='opportunity_program_types')
+class ProgramProgramType(models.Model):
+    page = ParentalKey('home.Program', on_delete=models.CASCADE, related_name='program_program_types')
     program_type = models.ForeignKey('home.ProgramType', on_delete=models.CASCADE, related_name='+')
 
-class OpportunityProgramDelivery(models.Model):
-    page = ParentalKey('home.OpportunityPage', on_delete=models.CASCADE, related_name='opportunity_delivery_methods')
+class ProgramProgramDelivery(models.Model):
+    page = ParentalKey('home.Program', on_delete=models.CASCADE, related_name='program_delivery_methods')
     delivery_method = models.ForeignKey('home.ProgramDelivery', on_delete=models.CASCADE, related_name='+')
 
-class OpportunityProgramLocation(models.Model):
-    page = ParentalKey('home.OpportunityPage', on_delete=models.CASCADE, related_name='opportunity_locations')
+class ProgramProgramLocation(models.Model):
+    page = ParentalKey('home.Program', on_delete=models.CASCADE, related_name='program_locations')
     location = models.ForeignKey('home.ProgramLocation', on_delete=models.CASCADE, related_name='+')
 
-class OpportunityNYCNeighborhood(models.Model):
-    page = ParentalKey('home.OpportunityPage', on_delete=models.CASCADE, related_name='opportunity_neighborhoods')
+class ProgramNYCNeighborhood(models.Model):
+    page = ParentalKey('home.Program', on_delete=models.CASCADE, related_name='program_neighborhoods')
     neighborhood = models.ForeignKey('home.NYCNeighborhood', on_delete=models.CASCADE, related_name='+')
 
-class OpportunitySessionStart(models.Model):
-    page = ParentalKey('home.OpportunityPage', on_delete=models.CASCADE, related_name='opportunity_session_starts')
+class ProgramSessionStart(models.Model):
+    page = ParentalKey('home.Program', on_delete=models.CASCADE, related_name='program_session_starts')
     session_start = models.ForeignKey('home.SessionStart', on_delete=models.CASCADE, related_name='+')
 
-class OpportunitySessionLength(models.Model):
-    page = ParentalKey('home.OpportunityPage', on_delete=models.CASCADE, related_name='opportunity_session_lengths')
+class ProgramSessionLength(models.Model):
+    page = ParentalKey('home.Program', on_delete=models.CASCADE, related_name='program_session_lengths')
     session_length = models.ForeignKey('home.SessionLength', on_delete=models.CASCADE, related_name='+')
 
-class OpportunityFeesCategory(models.Model):
-    page = ParentalKey('home.OpportunityPage', on_delete=models.CASCADE, related_name='opportunity_fees_categories')
+class ProgramFeesCategory(models.Model):
+    page = ParentalKey('home.Program', on_delete=models.CASCADE, related_name='program_fees_categories')
     fees_category = models.ForeignKey('home.FeesCategory', on_delete=models.CASCADE, related_name='+')
 
-class OpportunityGenderFilter(models.Model):
-    page = ParentalKey('home.OpportunityPage', on_delete=models.CASCADE, related_name='opportunity_gender_filters')
+class ProgramGenderFilter(models.Model):
+    page = ParentalKey('home.Program', on_delete=models.CASCADE, related_name='program_gender_filters')
     gender_filter = models.ForeignKey('home.GenderFilter', on_delete=models.CASCADE, related_name='+')
 
-class OpportunityFocusTopic(models.Model):
-    page = ParentalKey('home.OpportunityPage', on_delete=models.CASCADE, related_name='opportunity_focus_topics')
+class ProgramFocusTopic(models.Model):
+    page = ParentalKey('home.Program', on_delete=models.CASCADE, related_name='program_focus_topics')
     focus_topic = models.ForeignKey('home.FocusTopic', on_delete=models.CASCADE, related_name='+')
 
-class OpportunityAgeGroup(models.Model):
-    page = ParentalKey('home.OpportunityPage', on_delete=models.CASCADE, related_name='opportunity_age_groups')
+class ProgramAgeGroup(models.Model):
+    page = ParentalKey('home.Program', on_delete=models.CASCADE, related_name='program_age_groups')
     age_group = models.ForeignKey('home.AgeGroup', on_delete=models.CASCADE, related_name='+')
 
 
-class OpportunityPage(Page):
+class Program(Page):
     """
-    Model for an individual STEM opportunity entry.
+    Model for an individual STEM program entry.
     """
-
+    template = 'home/program_page.html'
     class Meta:
         verbose_name = "program"
 
-    parent_page_types = ['home.OpportunityIndexPage']
+    parent_page_types = ['home.ProgramIndexPage']
     subpage_types = []
 
     name = models.CharField(max_length=255, null=True, blank=True)
@@ -198,7 +198,7 @@ class OpportunityPage(Page):
     
     age_groups = ParentalManyToManyField(
         AgeGroup,
-        through='home.OpportunityAgeGroup',
+        through='home.ProgramAgeGroup',
         blank=True,
         help_text="The age/school-level groups targeted (e.g., Middle School, High School)."
     )
@@ -237,28 +237,28 @@ class OpportunityPage(Page):
 
     program_types = ParentalManyToManyField(
         ProgramType,
-        through='home.OpportunityProgramType',
+        through='home.ProgramProgramType',
         blank=True,
-        help_text="The general categories this opportunity falls under (e.g., Class, Summer Day Camp)."
+        help_text="The general categories this program falls under (e.g., Class, Summer Day Camp)."
     )
 
     locations = ParentalManyToManyField(
         ProgramLocation,
-        through='home.OpportunityProgramLocation',
+        through='home.ProgramProgramLocation',
         blank=True,
         help_text="The geographical area of operation (e.g., NYC, Nationwide)."
     )
     
     gender = ParentalManyToManyField(
         GenderFilter,
-        through='home.OpportunityGenderFilter',
+        through='home.ProgramGenderFilter',
         blank=True,
         help_text="Who the program is for (e.g., Coed, Girls Only)."
     )
     
     focus_topics = ParentalManyToManyField(
         FocusTopic,
-        through='home.OpportunityFocusTopic',
+        through='home.ProgramFocusTopic',
         blank=True,
         help_text="The STEM topics covered (e.g., Mathematics, Engineering)."
     )
@@ -268,7 +268,7 @@ class OpportunityPage(Page):
 
     nyc_neighborhood = ParentalManyToManyField(
         NYCNeighborhood,
-        through='home.OpportunityNYCNeighborhood',
+        through='home.ProgramNYCNeighborhood',
         blank=True,
         help_text="Specific NYC neighborhoods where the program takes place."
     )
@@ -282,27 +282,27 @@ class OpportunityPage(Page):
     
     program_delivery = ParentalManyToManyField(
         ProgramDelivery,
-        through='home.OpportunityProgramDelivery',
+        through='home.ProgramProgramDelivery',
         blank=True,
         help_text="How the program is delivered (e.g., In-person, Online, Hybrid)."
     )
 
     session_start = ParentalManyToManyField(
         SessionStart,
-        through='home.OpportunitySessionStart',
+        through='home.ProgramSessionStart',
         blank=True
     )
 
     fees_category = ParentalManyToManyField(
         FeesCategory,
-        through='home.OpportunityFeesCategory',
+        through='home.ProgramFeesCategory',
         blank=True,
         help_text="free_low_cost_program"
     )
 
     session_length = ParentalManyToManyField(
         SessionLength,
-        through='home.OpportunitySessionLength',
+        through='home.ProgramSessionLength',
         blank=True
     )
     
@@ -331,7 +331,7 @@ class OpportunityPage(Page):
                 ], heading="Staff & Program Flag"),
                 FieldPanel('scholarship_details'),
             ],
-            heading="1. Opportunity Content & Overview"
+            heading="1. Program Content & Overview"
         ),
 
         MultiFieldPanel(
@@ -512,7 +512,7 @@ class OpportunityPage(Page):
 
 
 
-class OpportunityIntroBlock(blocks.StructBlock):
+class ProgramIntroBlock(blocks.StructBlock):
     """
     A block for alternating image/text feature sections used on the HomePage.
     Updated to use ChoiceBlock for better user experience with Bootstrap utilities.
@@ -556,14 +556,14 @@ class OpportunityIntroBlock(blocks.StructBlock):
 
 
 
-class OpportunityIndexPage(Page):
+class ProgramIndexPage(Page):
     
     class Meta:
         verbose_name = "programs"
     
-    template = 'home/opportunity_search_results.html'
+    template = 'home/program_search_results.html'
     
-    subpage_types = ['home.OpportunityPage']
+    subpage_types = ['home.Program']
     parent_page_types = ['home.HomePage']
 
     PROGRAM_FILTERS = OrderedDict({
@@ -647,7 +647,7 @@ class OpportunityIndexPage(Page):
 
     intro = StreamField(
         [
-            ("intro_block", OpportunityIntroBlock()),
+            ("intro_block", ProgramIntroBlock()),
             ("raw_html", RawHTMLBlock()),
         ],
         block_counts={
@@ -670,14 +670,14 @@ class OpportunityIndexPage(Page):
         if request.headers.get('x-requested-with') == 'XMLHttpRequest':
             self.template = "home/blocks/programs_results.html"
         else:
-            self.template = "home/opportunity_search_results.html"
+            self.template = "home/program_search_results.html"
             
         return super().serve(request, *args, **kwargs)
     
     
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
-        opportunities = OpportunityPage.objects.descendant_of(self).live()
+        opportunities = Program.objects.descendant_of(self).live()
         search_query = request.GET.get('q', '').strip()
         get_params = request.GET
         selected_filters = {}
@@ -695,11 +695,11 @@ class OpportunityIndexPage(Page):
 
                 selected_filters[param_name] = param_values
                 if search_query and hasattr(opportunities, 'get_queryset'):
-                    opportunity_ids = [obj.pk for obj in opportunities]
-                    opportunities = OpportunityPage.objects.filter(pk__in=opportunity_ids)
+                    program_ids = [obj.pk for obj in opportunities]
+                    opportunities = Program.objects.filter(pk__in=program_ids)
                 elif search_query: 
-                    opportunity_ids = [obj.pk for obj in opportunities]
-                    opportunities = OpportunityPage.objects.filter(pk__in=opportunity_ids)
+                    program_ids = [obj.pk for obj in opportunities]
+                    opportunities = Program.objects.filter(pk__in=program_ids)
 
                 field_path = config['field']
 
@@ -723,7 +723,7 @@ class OpportunityIndexPage(Page):
             
         if search_query:
             selected_filters['q'] = search_query
-        
+            
         context.update({
             'search_query': search_query,
             'opportunities': paginated_opportunities, 
