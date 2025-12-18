@@ -4,99 +4,74 @@
 {% block body_class %}template-opportunitypage{% endblock %}
 
 {% block content %}
-    <div class="container py-5">
-        <div class="row">
-            
-            {# Left Column: Main Content and Overview #}
-            <div class="col-lg-8">
+    <div class="container py-4 mt-2">
+        {# TOP HEADER ROW: Title and Logo #}
+        <div class="row align-items-start mb-2">
+            <div class="col-md-7 col-12">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        {# Assuming the parent is the Opportunity Search page #}
-                        <li class="breadcrumb-item"><a href="{% pageurl page.get_parent %}" class="text-dark-blue">Opportunities</a></li>
+                        <li class="breadcrumb-item"><a href="/">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{% pageurl page.get_parent %}">Programs</a></li>
                         <li class="breadcrumb-item active" aria-current="page">{{ page.title }}</li>
                     </ol>
                 </nav>
-                
-                <h1 class="display-4 text-dark-blue fw-bold mb-4">{{ page.title }}</h1>
-                
-                <p class="lead text-secondary">{{ page.search_description }}</p>
-                
-                {# Main Content Sections #}
-                
-                <div class="mt-5 pt-3 border-top">
-                    <h2 class="h3 fw-bold mb-3 text-dark-blue">Overview</h2>
-                    {# Renders the RichTextField content #}
-                    <div class="text-secondary">{{ page.overview|richtext }}</div>
-                </div>
+                <h1 class="display-4 text-dark-blue display-title text-uppercase mb-0">{{ page.title }}</h1>
+                <p class="h5 text-secondary mb-3">{{ page.city }}, {{ page.state }}</p>
 
-                <div class="mt-5 pt-3 border-top">
-                    <h2 class="h3 fw-bold mb-3 text-dark-blue">Staff Details</h2>
-                    {# Renders the plain text field, using linebreaks for formatting #}
-                    <div class="text-secondary">{{ page.staff_details|linebreaks }}</div>
+                {# MOBILE CONTACT SECTION (Visible on mobile, hidden on desktop) #}
+                <div class="contact-section d-block d-md-none mt-3 mb-4">
+                    {% include "home/blocks/program_contact_block.html" %}
                 </div>
             </div>
-            
-            {# Right Column: Essential Information and Image #}
-            <div class="col-lg-4">
-                <div class="sticky-top" style="top: 20px;">
+
+            {# LOGO COLUMN: Aligned with title on desktop #}
+            <div class="col-md-5 d-none d-md-block text-center pt-4">
+                {% if page.logo_image %}
+                    {% image page.logo_image width-400 as logo_img %}
+                    <img src="{{ logo_img.url }}" alt="{{ logo_img.title }}" class="img-fluid" style="max-height: 100px;">
+                {% endif %}
+            </div>
+        </div>
+
+        {# MAIN CONTENT ROW #}
+        <div class="row g-5">
+            {# LEFT COLUMN: Desktop Contact + Overview #}
+            <div class="col-12 col-md-6 order-2 order-md-1">
+                
+                {# DESKTOP CONTACT SECTION (Hidden on mobile, visible on desktop) #}
+                <div class="contact-section d-none d-md-block mb-5">
+                    {% include "home/blocks/program_contact_block.html" %}
+                </div>
+
+                <h2 class="display-5 text-dark-blue overview-title mb-4">Overview</h2>
+                <div class="text-secondary rich-text-content">
+                    {{ page.program_overview|richtext }}
                     
-                    {# Opportunity Image #}
-                    {% if page.main_image %}
-                        {% image page.main_image fill-400x300 as sidebar_img %}
-                        <img src="{{ sidebar_img.url }}" alt="{{ sidebar_img.alt }}" class="img-fluid rounded-3 shadow-lg mb-4 w-100">
+                    {% if page.staff_details %}
+                        <div class="mt-5 border-top pt-4">
+                            <h3 class="h4 text-dark-blue fw-bold mb-3 text-uppercase">Staff Details</h3>
+                            {{ page.staff_details|linebreaks }}
+                        </div>
                     {% endif %}
+                </div>
+            </div>
 
-                    <div class="card p-4 shadow-sm border-0 rounded-3 bg-light">
-                        <h2 class="h5 fw-bolder mb-3 text-dark-blue border-bottom pb-2">ESSENTIAL INFORMATION</h2>
+            {# RIGHT COLUMN: Essential Information #}
+            <div class="col-12 col-md-6 order-1 order-md-2">
+                <div class="sticky-sidebar-container sticky-top">
+                    <div class="card border-0 rounded-0 p-4 shadow-sm" style="background-color: #E2E4E9;">
+                        <h2 class="h5 fw-bold mb-4 text-dark-blue text-center text-uppercase" style="letter-spacing: 1px;">Essential Information</h2>
                         
-                        <dl class="row m-0">
-                            
-                            <dt class="col-5 fw-bold text-dark-blue mb-2"><i class="bi bi-tag-fill me-2 text-primary-green"></i>Type:</dt>
-                            <dd class="col-7 mb-2">
-                                {{ page.opportunity_type.name|default:"N/A" }}
-                            </dd>
-
-                            <dt class="col-5 fw-bold text-dark-blue mb-2"><i class="bi bi-person-lines-fill me-2 text-primary-green"></i>Age Group:</dt>
-                            <dd class="col-7 mb-2">
-                                {{ page.age_group.name|default:"Varies" }}
-                            </dd>
-
-                            <dt class="col-5 fw-bold text-dark-blue mb-2"><i class="bi bi-currency-dollar me-2 text-primary-green"></i>Cost:</dt>
-                            <dd class="col-7 mb-2">
-                                {{ page.fees_category.name|default:"Varies" }}
-                            </dd>
-
-                            <dt class="col-5 fw-bold text-dark-blue mb-2"><i class="bi bi-clock-fill me-2 text-primary-green"></i>Time Commitment:</dt>
-                            <dd class="col-7 mb-2">
-                                {{ page.time_commitment.name|default:"N/A" }}
-                            </dd>
-                            
-                            <dt class="col-5 fw-bold text-dark-blue mb-2"><i class="bi bi-geo-alt-fill me-2 text-primary-green"></i>Location/Delivery:</dt>
-                            <dd class="col-7 mb-2">
-                                {{ page.program_location.name|default:"N/A" }}
-                            </dd>
-
-                            <dt class="col-5 fw-bold text-dark-blue mb-2"><i class="bi bi-calendar-date-fill me-2 text-primary-green"></i>Deadline:</dt>
-                            <dd class="col-7 mb-2">
-                                {% if page.application_deadline %}
-                                    {{ page.application_deadline|date:"F j, Y" }}
-                                {% else %}
-                                    Rolling/N/A
+                        <div class="essential-grid px-2">
+                            {% for label, data in essential_info.items %}
+                                {% if data.value and data.value != "N/A" %}
+                                    <div class="row">
+                                        <div class="col-6 text-medium-purple small text-uppercase fw-bold">{{label|title}}</div>
+                                        <div class="col-6 text-dark-blue small">{{data.value}}</div>
+                                    </div>
                                 {% endif %}
-                            </dd>
-                        </dl>
-                        
-                        {# Call to Action Button #}
-                        {% if page.external_url %}
-                            <a href="{{ page.external_url }}" target="_blank" rel="noopener noreferrer" 
-                               class="btn btn-hero-green btn-lg w-100 mt-4 shadow fw-bold text-uppercase">
-                                APPLY NOW
-                            </a>
-                        {% else %}
-                             <button type="button" class="btn btn-outline-secondary w-100 mt-4" disabled>
-                                Application Link Not Provided
-                            </button>
-                        {% endif %}
+                            {% endfor %}
+                        </div>
                     </div>
                 </div>
             </div>

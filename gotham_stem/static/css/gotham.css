@@ -16,22 +16,39 @@
 
 /* General Link Styling */
 a {
-    color: var(--color-primary-green);
+    color: var(--color-dark-blue);
     text-decoration: none;
     transition: color 0.2s;
 }
 
 a:hover {
-    color: #3e8e41;
+    color: var(--color-dark-blue);
 }
 
 /* Utility Classes */
-.text-primary-green { color: var(--color-primary-green) !important; }
-.text-dark-blue { color: var(--color-dark-blue) !important; }
-.bg-dark-blue { background-color: var(--color-dark-blue) !important; }
-.bg-light-purple { background-color: var(--color-light-purple) !important; }
-.bg-light-blue { background-color: var(--color-light-blue) !important; }
-.bg-medium-purple { background-color: var(--color-medium-purple) !important; }
+.text-primary-green {
+    color: var(--color-primary-green) !important;
+}
+
+.text-dark-blue {
+    color: var(--color-dark-blue) !important;
+}
+
+.bg-dark-blue {
+    background-color: var(--color-dark-blue) !important;
+}
+
+.bg-light-purple {
+    background-color: var(--color-light-purple) !important;
+}
+
+.bg-light-blue {
+    background-color: var(--color-light-blue) !important;
+}
+
+.bg-medium-purple {
+    background-color: var(--color-medium-purple) !important;
+}
 
 /* --- Navigation & Footer Styles --- */
 .btn-dark-blue {
@@ -82,7 +99,9 @@ a:hover {
     display: block;
 }
 
-.footer-link:hover { opacity: 1; }
+.footer-link:hover {
+    opacity: 1;
+}
 
 .full-width-section {
     width: 100%;
@@ -103,7 +122,7 @@ a:hover {
     font-size: calc(1.5rem + 2vw);
     color: var(--color-white);
     font-weight: bold;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 /* --- Results Section & Cards --- */
@@ -117,7 +136,7 @@ a:hover {
     padding: 1.5rem;
     background: #fff;
     border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .program-title {
@@ -133,7 +152,8 @@ a:hover {
     display: flex !important;
 }
 
-.result-card .bi-geo-alt, .result-card .bi-geo-fill {
+.result-card .bi-geo-alt,
+.result-card .bi-geo-fill {
     font-size: 1rem;
     position: relative;
     top: 1px;
@@ -184,6 +204,7 @@ a:hover {
 
 /* --- DESKTOP STABILITY FIXES --- */
 @media (min-width: 768px) {
+
     /* Ensures offcanvas-md is visible on Desktop without adding extra colors */
     #offcanvasFilters.offcanvas-md {
         visibility: visible !important;
@@ -193,9 +214,10 @@ a:hover {
         width: 100% !important;
         height: auto !important;
         z-index: 1 !important;
-        background-color: transparent !important; /* Forces removal of any default offcanvas colors */
+        background-color: transparent !important;
+        /* Forces removal of any default offcanvas colors */
     }
-    
+
     .offcanvas-body {
         padding: 0 !important;
         overflow-y: visible !important;
@@ -216,11 +238,11 @@ a:hover {
     #accordionProgramFilter {
         margin-bottom: 2rem;
     }
-    
+
     .results-section {
         padding: 1rem 0 !important;
     }
-    
+
     .offcanvas-md.offcanvas-start {
         width: 280px !important;
     }
@@ -241,13 +263,13 @@ a:hover {
         justify-content: flex-end !important;
         width: 100%;
     }
-    
+
     .logo-container {
         margin-bottom: 1rem;
     }
 
     .result-card .btn {
-        width: auto !important; 
+        width: auto !important;
         padding-left: 1.2rem;
         padding-right: 1.2rem;
     }
@@ -259,7 +281,7 @@ a:hover {
         padding-bottom: 10px;
         -webkit-overflow-scrolling: touch;
     }
-    
+
     .filter-badge {
         flex: 0 0 auto;
     }
@@ -276,4 +298,57 @@ a:hover {
     --bs-accordion-btn-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='M2 5L8 11L14 5'/%3e%3c/svg%3e");
     --bs-accordion-active-btn-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='M2 5L8 11L14 5'/%3e%3c/svg%3e");
     background-image: var(--bs-accordion-btn-icon);
+}
+
+
+.text-medium-purple {
+    color: var(--color-medium-purple) !important;
+}
+
+.contact-vertical-list {
+    font-size: 1.1rem;
+}
+
+.bi-social {
+    color: var(--color-medium-purple);
+    font-size: 1.75rem;
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+.bi-social:hover {
+    color: var(--color-primary-green);
+}
+
+/* Sticky offset: ensures it stops below your site header */
+.sticky-sidebar-container {
+    top: 110px;
+    z-index: 10;
+}
+
+.display-title {
+    letter-spacing: -1px;
+    font-weight: 800;
+}
+
+.overview-title {
+    font-family: serif;
+    font-weight: 300;
+}
+
+/* Contact label width alignment */
+.contact-label {
+    width: 75px;
+    display: inline-block;
+}
+
+/* Essential Information Grid Styling */
+.essential-grid .row {
+    border-bottom: 1px solid #d1d4db;
+    padding-bottom: 8px;
+    margin-bottom: 12px;
+}
+
+.essential-grid .row:last-child {
+    border-bottom: none;
 }

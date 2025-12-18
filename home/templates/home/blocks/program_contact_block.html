@@ -1,0 +1,27 @@
+<div class="contact-vertical-list mb-3">
+    {% if page.phone %}
+    <div class="d-flex mb-1">
+        <span class="text-dark-blue fw-bold contact-label">phone:</span>
+        <span class="text-primary-green ms-4">{{page.phone}}</span>
+    </div>
+    {% endif %}
+    {% if page.email %}
+    <div class="d-flex mb-1">
+        <span class="text-dark-blue fw-bold contact-label">email:</span>
+        <a href="mailto:{{page.email}}" class="text-primary-green ms-4">{{page.email}}</a>
+    </div>
+    {% endif %}
+    {% if page.website %}
+    <div class="d-flex mb-3">
+        <span class="text-dark-blue fw-bold contact-label">website:</span>
+        <a href="{{page.website}}" target="_blank" class="text-primary-green ms-4">{{page.website}}</a>
+    </div>
+    {% endif %}
+</div>
+
+<div class="d-flex gap-3">
+    {% if page.instagram %}<a href="{{page.instagram}}" target="_blank"><i class="bi bi-instagram bi-social"></i></a>{% endif %}
+    {% if page.facebook %}<a href="{{page.facebook}}" target="_blank"><i class="bi bi-facebook bi-social"></i></a>{% endif %}
+    {% if page.youtube %}<a href="{{page.youtube}}" target="_blank"><i class="bi bi-youtube bi-social"></i></a>{% endif %}
+    {% if page.twitter %}<a href="{{page.twitter}}" target="_blank"><i class="bi bi-twitter-x"></i></a>{% endif %}
+</div>

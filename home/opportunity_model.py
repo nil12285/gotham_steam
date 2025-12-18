@@ -439,6 +439,75 @@ class OpportunityPage(Page):
     # Override get_context to fetch all live opportunities for initial load (optional)
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
+        # helper to join M2M names
+        def get_m2m_names(manager):
+            return ", ".join([obj.name for obj in manager.all()]) if manager.exists() else "Varies/N/A"
+
+        # Mapping mockup labels to model fields
+        essential_info = OrderedDict([
+            ("Program type", {
+                "value": get_m2m_names(self.program_types),
+                "field": "program_types"
+            }),
+            ("Program delivery", {
+                "value": get_m2m_names(self.program_delivery),
+                "field": "program_delivery"
+            }),
+            ("Location", {
+                "value": get_m2m_names(self.locations),
+                "field": "locations"
+            }),
+            ("NYC Neighborhood", {
+                "value": get_m2m_names(self.nyc_neighborhood),
+                "field": "nyc_neighborhood"
+            }),
+            ("Topics", {
+                "value": get_m2m_names(self.focus_topics),
+                "field": "focus_topics"
+            }),
+            ("Session Starts", {
+                "value": get_m2m_names(self.session_start),
+                "field": "session_start"
+            }),
+            ("Session length", {
+                "value": get_m2m_names(self.session_length),
+                "field": "session_length"
+            }),
+            ("Ages", {
+                "value": get_m2m_names(self.age_groups),
+                "field": "age_groups"
+            }),
+            ("Gender", {
+                "value": get_m2m_names(self.gender),
+                "field": "gender"
+            }),
+            ("Selective", {
+                "value": self.get_application_selective_display() if self.application_selective else "Varies",
+                "field": "application_selective"
+            }),
+            ("Application Deadline", {
+                "value": self.application_deadline.strftime("%B %d, %Y") if self.application_deadline else "Rolling/N/A",
+                "field": "application_deadline"
+            }),
+            ("Cost", {
+                "value": self.cost if self.cost else "Varies/N/A",
+                "field": "cost"
+            }),
+            ("Scholarships/Financial Aid", {
+                "value": self.scholarship_fin_aid if self.scholarship_fin_aid else "Contact for details",
+                "field": "scholarship_fin_aid"
+            }),
+            ("Accreditation", {
+                "value": self.accreditation if self.accreditation else "N/A",
+                "field": "accreditation"
+            }),
+            ("Years in Business", {
+                "value": self.years_in_business if self.years_in_business else "N/A",
+                "field": "years_in_business"
+            }),
+        ])
+
+        context['essential_info'] = essential_info
         return context
 
 

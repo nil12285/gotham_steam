@@ -83,7 +83,7 @@
                 <div class="logo-container d-flex">
                     {% with opportunity.logo_image as img %}
                         {% if img %}
-                            {% image img fill-300x60 as logo_img %}
+                            {% image img width-300 as logo_img %}
                             <img src="{{ logo_img.url }}" alt="{{ opportunity.title|title }}" class="img-fluid">
                         {% endif %}
                     {% endwith %}
