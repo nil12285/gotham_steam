@@ -1,0 +1,62 @@
+{% load wagtailcore_tags %}
+
+{# page_obj is the paginated object passed from the view, e.g., 'opportunities' #}
+{% if page_obj.has_other_pages %}
+<nav aria-label="Page navigation" class="mt-5">
+    <ul class="pagination justify-content-center flex-wrap">
+        
+        {# Get all current GET parameters, excluding the 'page' parameter to build clean URLs #}
+        {% with all_params=request.GET.urlencode|safe %}
+        {% with current_params=all_params|cut:'page=' %}
+
+        {# Previous Button #}
+        {% if page_obj.has_previous %}
+        <li class="page-item">
+            <a class="page-link text-dark-blue fw-bold" href="?{{ current_params }}&page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span> Previous
+            </a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <span class="page-link">&laquo; Previous</span>
+        </li>
+        {% endif %}
+
+        {# Page Numbers #}
+        {% for i in page_obj.paginator.page_range %}
+            {% if page_obj.number == i %}
+            <li class="page-item active" aria-current="page">
+                <span class="page-link bg-dark-blue border-dark-blue fw-bold">{{ i }}</span>
+            </li>
+            {# Show only pages near the current page (2 before, 2 after) #}
+            {% elif i > page_obj.number|add:'-3' and i < page_obj.number|add:'3' %}
+            <li class="page-item">
+                <a class="page-link text-dark-blue" href="?{{ current_params }}&page={{ i }}">{{ i }}</a>
+            </li>
+            {% endif %}
+            
+            {# Add ellipsis for very long page ranges #}
+            {% if forloop.last and page_obj.number|add:'2' < i %}
+                 <li class="page-item disabled"><span class="page-link">...</span></li>
+            {% endif %}
+
+        {% endfor %}
+
+        {# Next Button #}
+        {% if page_obj.has_next %}
+        <li class="page-item">
+            <a class="page-link text-dark-blue fw-bold" href="?{{ current_params }}&page={{ page_obj.next_page_number }}" aria-label="Next">
+                Next <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <span class="page-link">Next &raquo;</span>
+        </li>
+        {% endif %}
+        
+        {% endwith %}
+        {% endwith %}
+    </ul>
+</nav>
+{% endif %}

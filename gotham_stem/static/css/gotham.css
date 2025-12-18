@@ -1,0 +1,279 @@
+/* --- GOTHAM STEM Custom Styles --- */
+
+/* Site Color Variables based on Mockup */
+:root {
+    --color-dark-blue: #2D3D76;
+    --bs-accordion-active-bg: #2D3D76;
+    --bs-accordion-active-color: #FFFFFF;
+    --color-light-purple: #7091E6;
+    --color-primary-green: #4CAF50;
+    --color-light-blue: #dee8f6;
+    --color-medium-purple: #8697C4;
+    --color-background-light: #f7f7f7;
+    --color-white: #ffffff;
+    --color-dark-gray: #34495e;
+}
+
+/* General Link Styling */
+a {
+    color: var(--color-primary-green);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+a:hover {
+    color: #3e8e41;
+}
+
+/* Utility Classes */
+.text-primary-green { color: var(--color-primary-green) !important; }
+.text-dark-blue { color: var(--color-dark-blue) !important; }
+.bg-dark-blue { background-color: var(--color-dark-blue) !important; }
+.bg-light-purple { background-color: var(--color-light-purple) !important; }
+.bg-light-blue { background-color: var(--color-light-blue) !important; }
+.bg-medium-purple { background-color: var(--color-medium-purple) !important; }
+
+/* --- Navigation & Footer Styles --- */
+.btn-dark-blue {
+    background-color: var(--color-dark-blue);
+    color: var(--color-white);
+}
+
+.footer-dark-blue {
+    background-color: var(--color-dark-blue);
+    color: var(--color-white);
+}
+
+.footer-input-group {
+    border: 1px solid var(--color-white);
+    border-radius: 0.3rem;
+    overflow: hidden;
+    display: flex;
+}
+
+.footer-input-group .form-control {
+    background-color: transparent !important;
+    border: none;
+    color: var(--color-white);
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+}
+
+.footer-input-group .form-control::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.footer-input-group .btn {
+    background-color: transparent !important;
+    border: none;
+    color: var(--color-white);
+    font-weight: bold;
+    font-size: 0.85rem;
+    padding: 0.75rem 1rem;
+    white-space: nowrap;
+}
+
+.footer-link {
+    color: var(--color-white);
+    text-decoration: none;
+    font-size: 0.9rem;
+    opacity: 0.8;
+    line-height: 2.2;
+    display: block;
+}
+
+.footer-link:hover { opacity: 1; }
+
+.full-width-section {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+/* --- Hero Section --- */
+.hero-section {
+    min-height: 60vh;
+    padding: 4rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.responsive-hero-title {
+    font-size: calc(1.5rem + 2vw);
+    color: var(--color-white);
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+/* --- Results Section & Cards --- */
+#results-container {
+    transition: opacity 0.3s ease;
+}
+
+.result-card {
+    border: 1px solid #dee2e6;
+    margin-bottom: 1.5rem;
+    padding: 1.5rem;
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.program-title {
+    color: var(--color-dark-blue);
+    font-weight: bold;
+    font-size: 1.25rem;
+    line-height: 1.2;
+}
+
+.result-card .text-muted.d-flex {
+    gap: 0.5rem;
+    align-items: center;
+    display: flex !important;
+}
+
+.result-card .bi-geo-alt, .result-card .bi-geo-fill {
+    font-size: 1rem;
+    position: relative;
+    top: 1px;
+    color: var(--color-medium-purple);
+}
+
+.logo-container {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.logo-container img {
+    max-height: 100px;
+    width: auto;
+    object-fit: contain;
+}
+
+/* Filter Badges */
+.active-filters-container {
+    gap: 0.5rem;
+}
+
+.filter-badge {
+    white-space: nowrap;
+    font-size: 0.85rem !important;
+    border: 1px solid var(--color-dark-blue);
+    color: var(--color-dark-blue);
+    transition: all 0.2s ease;
+}
+
+.filter-badge:hover {
+    background-color: #f8f9fa;
+    color: #dc3545;
+    border-color: #dc3545;
+}
+
+/* Chevron Rotation */
+.bi-chevron-down {
+    transition: transform 0.3s ease;
+}
+
+.bi-chevron-down.rotate-up {
+    transform: rotate(180deg);
+}
+
+/* --- DESKTOP STABILITY FIXES --- */
+@media (min-width: 768px) {
+    /* Ensures offcanvas-md is visible on Desktop without adding extra colors */
+    #offcanvasFilters.offcanvas-md {
+        visibility: visible !important;
+        transform: none !important;
+        position: relative !important;
+        display: block !important;
+        width: 100% !important;
+        height: auto !important;
+        z-index: 1 !important;
+        background-color: transparent !important; /* Forces removal of any default offcanvas colors */
+    }
+    
+    .offcanvas-body {
+        padding: 0 !important;
+        overflow-y: visible !important;
+    }
+
+    .offcanvas-header {
+        display: none !important;
+    }
+}
+
+/* --- TABLET BREAKPOINT (768px) --- */
+@media (max-width: 768px) {
+    .hero-section {
+        min-height: 45vh;
+        padding: 3rem 1rem;
+    }
+
+    #accordionProgramFilter {
+        margin-bottom: 2rem;
+    }
+    
+    .results-section {
+        padding: 1rem 0 !important;
+    }
+    
+    .offcanvas-md.offcanvas-start {
+        width: 280px !important;
+    }
+}
+
+/* --- MOBILE BREAKPOINT (576px) --- */
+@media (max-width: 576px) {
+    .result-card {
+        padding: 1rem !important;
+    }
+
+    .result-card .col-12 {
+        width: 100% !important;
+        flex: 0 0 100%;
+    }
+
+    .result-card .d-flex.justify-content-end {
+        justify-content: flex-end !important;
+        width: 100%;
+    }
+    
+    .logo-container {
+        margin-bottom: 1rem;
+    }
+
+    .result-card .btn {
+        width: auto !important; 
+        padding-left: 1.2rem;
+        padding-right: 1.2rem;
+    }
+
+    .active-filters-container {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding-bottom: 10px;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .filter-badge {
+        flex: 0 0 auto;
+    }
+}
+
+/* --- Accordion Fixes --- */
+.accordion-button {
+    color: var(--color-white) !important;
+    background-color: var(--color-dark-blue) !important;
+    box-shadow: none !important;
+}
+
+.accordion-button::after {
+    --bs-accordion-btn-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='M2 5L8 11L14 5'/%3e%3c/svg%3e");
+    --bs-accordion-active-btn-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='M2 5L8 11L14 5'/%3e%3c/svg%3e");
+    background-image: var(--bs-accordion-btn-icon);
+}
