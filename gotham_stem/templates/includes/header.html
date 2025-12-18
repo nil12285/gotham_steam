@@ -1,7 +1,5 @@
-{% load static wagtailcore_tags wagtailsettings_tags %}
-{% get_settings %}
+{% load static wagtailcore_tags %}
 
-{% with links=settings.home.WagtailPageLinks %}
 <header class="sticky-top shadow-sm" style="background-color: #647596;">
     
     {# Top Banner for Signup - FULL WIDTH BACKGROUND #}
@@ -29,29 +27,22 @@
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav me-auto me-lg-0">
                     {# Fetching top-level pages for the navigation bar #}
-                    {% with top_level_pages=page.get_site.root_page.get_children.live.in_menu %}
-                        {% for menu_page in top_level_pages %}
-                            <li class="nav-item">
-                                <a class="nav-link text-white px-3" href="{% pageurl menu_page %}">{{ menu_page.title }}</a>
-                            </li>
-                        {% endfor %}
-                    {% endwith %} 
-
+                    
                     {# Hardcoded links based on common project structure and Mockup #}
                     <li class="nav-item">
-                        <a class="nav-link text-white px-3" href="{{links.about_page.url}}">About</a>
+                        <a class="nav-link text-white px-3" href="#">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white px-3" href="{{links.about_page.url}}">Guidance</a>
+                        <a class="nav-link text-white px-3" href="#">Guidance</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white px-3" href="{{links.programs_page.url}}">Opportunities</a>
+                        <a class="nav-link text-white px-3" href="{{site_pages.opportunities.url }}">Opportunities</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-white px-3" href="{{links.insights_page.url}}">Insights</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white px-3" href="{{links.about_page.url}}">Resources</a>
+                        <a class="nav-link text-white px-3" href="#">Resources</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-white px-3" href="{{links.contact_page.url}}">Contact</a>
@@ -61,5 +52,3 @@
         </div>
     </nav>
 </header>
-
-{% endwith %}
