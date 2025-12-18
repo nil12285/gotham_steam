@@ -1,0 +1,64 @@
+{% load wagtailimages_tags %}
+
+{# The surrounding 'with' block has been removed to fix the recurring TemplateSyntaxError. #}
+{# All block properties are now accessed directly using the 'self.' prefix. #}
+
+{# Apply background class to the main container, using self. directly #}
+<div class="container-fluid px-5 py-5 bg-transparent" style="{% if self.background_color %}background-color: {{ self.background_color }} !important;{% else %}{% endif %}">
+    <div class="container py-2" style="{% if self.text_color %}color: {{ self.text_color }} !important;{% else %}{% endif %}">
+        <div class="row align-items-center g-5">
+            
+            {% if self.layout_style == 'side-by-side-left' %}
+                
+                {# Layout: Image on Left (Order 1), Text on Right (Order 2) #}
+                
+                {# Image Column #}
+                <div class="col-lg-4 order-lg-1 order-2">
+                    {% image self.image fill-400x300 as feature_img %}
+                    <img src="{{ feature_img.url }}" alt="{{ feature_img.alt }}" class="img-fluid rounded shadow-lg">
+                </div>
+                
+                {# Text Column #}
+                <div class="col-lg-8 pe-4 order-lg-2 order-1 {% if self.text_alignment %}text-{{ self.text_alignment }}{% endif %}">
+                    <div class="p-4 p-md-0 {{ self.text_size_class }} {{ self.line_height_class }}">
+                        {{ self.text }}
+                    </div>
+                </div>
+            {% elif self.layout_style == 'side-by-side-right' %}
+                
+                {# Layout: Text on Left (Order 1), Image on Right (Order 2) #}
+                
+                {# Text Column #}
+                <div class="col-lg-8 order-lg-1 order-2 {% if self.text_alignment %}text-{{ self.text_alignment }}{% endif %}">
+                    <div class="p-4 p-md-0 {{ self.text_size_class }} {{ self.line_height_class }}">
+                        {{ self.text }}
+                    </div>
+                </div>
+                
+                {# Image Column #}
+                <div class="col-lg-4 order-lg-2 order-1">
+                    {% image self.image fill-400x300 as feature_img %}
+                    <img src="{{ feature_img.url }}" alt="{{ feature_img.alt }}" class="img-fluid rounded shadow-lg">
+                </div>
+
+            {% elif self.layout_style == 'stacked-center' %}
+                
+                {# Layout: Stacked/Centered (Image Top, Text Below) #}
+                
+                {# Image Column (Always center aligned) #}
+                <div class="col-12 text-center">
+                    {% image self.image fill-500x400 as feature_img %}
+                    <img style="width: 500px; height: 400px;" src="{{ feature_img.url }}" alt="{{ feature_img.alt }}" class="img-fluid rounded shadow-lg mb-5">
+                </div>
+                
+                {# Text Column #}
+                <div class="col-lg-12 p-0 m-0 {% if self.text_alignment %}text-{{ self.text_alignment }}{% else %}text-center{% endif %}">
+                    <div class="{{ self.text_size_class }} {{ self.line_height_class }}">
+                        {{ self.text }}
+                    </div>
+                </div>
+
+            {% endif %}
+        </div>
+    </div>
+</div>

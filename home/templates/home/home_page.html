@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags wagtailimages_tags %}
+
+{% block content %}
+
+{# 1. HERO SECTION (Using hero_image as background) #}
+<section class="hero-section text-white text-center d-flex align-items-center justify-content-center" style="
+        {% if page.hero_image %}
+            {% image page.hero_image fill-1920x800 as hero_img %}
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('{{ hero_img.url }}') center/cover no-repeat;
+        {% else %}
+            /* Fallback dark blue gradient */
+            background: linear-gradient(135deg, #0d1a26, #1a2c38);
+        {% endif %}
+        min-height: 70vh;
+        padding: 6rem 1rem;
+    ">
+</section>
+<section>
+    <div class="container">
+        {{ page.hero_text|richtext }}
+    </div>
+</section>
+
+{# 2-4. FEATURE BLOCKS (Render StreamField) #}
+<div class="feature-blocks-container">
+    {% for block in page.body %}
+    {% include_block block %}
+    {% endfor %}
+</div>
+
+{# 5. FEATURED INSIGHTS & RESOURCES #}
+{% if page.featured_blogs_list %}
+<section class="featured-blogs-section py-5 bg-light-gray">
+    <div class="container">
+        <h2 class="text-center display-6 fw-bold mb-5">Insights & Resources</h2>
+
+        <div class="row g-4 justify-content-center">
+            {% for blog in page.featured_blogs_list %}
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 shadow-sm border-0 rounded-3">
+                    {% with blog.main_image as img %}
+                    {% if img %}
+                    {% image img fill-400x250 as blog_img %}
+                    <img src="{{ blog_img.url }}" class="card-img-top" alt="{{ blog_img.alt }}">
+                    {% else %}
+                    <img src="{% static 'images/placeholder-blog.png' %}" class="card-img-top" alt="Placeholder image">
+                    {% endif %}
+                    {% endwith %}
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold text-dark-blue">{{ blog.title }}</h5>
+                        <p class="card-text small text-muted">{{ blog.search_description|default:"Click to read more..."
+                            }}</p>
+                        <a href="{% pageurl blog %}" class="btn btn-sm btn-outline-dark-blue">Read Article &rarr;</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="text-center mt-5">
+            <a href="{% pageurl page.get_parent.insightsindexpage %}"
+                class="btn btn-lg btn-dark-blue text-uppercase">View All Insights</a>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+{% endblock content %}

@@ -1,0 +1,906 @@
+[
+    {
+        "model": "home.ProgramType",
+        "pk": 1,
+        "fields": {
+            "name": "At Home Activities",
+            "slug": "at-home-activities"
+        }
+    },
+    {
+        "model": "home.ProgramType",
+        "pk": 2,
+        "fields": {
+            "name": "Class",
+            "slug": "class"
+        }
+    },
+    {
+        "model": "home.ProgramType",
+        "pk": 3,
+        "fields": {
+            "name": "Class Trips",
+            "slug": "class-trips"
+        }
+    },
+    {
+        "model": "home.ProgramType",
+        "pk": 4,
+        "fields": {
+            "name": "Club/Team",
+            "slug": "club-team"
+        }
+    },
+    {
+        "model": "home.ProgramType",
+        "pk": 5,
+        "fields": {
+            "name": "Competitions",
+            "slug": "competitions"
+        }
+    },
+    {
+        "model": "home.ProgramType",
+        "pk": 6,
+        "fields": {
+            "name": "Event",
+            "slug": "event"
+        }
+    },
+    {
+        "model": "home.ProgramType",
+        "pk": 7,
+        "fields": {
+            "name": "Family Activity",
+            "slug": "family-activity"
+        }
+    },
+    {
+        "model": "home.ProgramType",
+        "pk": 8,
+        "fields": {
+            "name": "Gap Year",
+            "slug": "gap-year"
+        }
+    },
+    {
+        "model": "home.ProgramType",
+        "pk": 9,
+        "fields": {
+            "name": "Hackathon",
+            "slug": "hackathon"
+        }
+    },
+    {
+        "model": "home.ProgramType",
+        "pk": 10,
+        "fields": {
+            "name": "High School Program",
+            "slug": "high-school-program"
+        }
+    },
+    {
+        "model": "home.ProgramType",
+        "pk": 11,
+        "fields": {
+            "name": "Internship/Other Opportunity",
+            "slug": "internship-other-opportunity"
+        }
+    },
+    {
+        "model": "home.ProgramType",
+        "pk": 12,
+        "fields": {
+            "name": "Multi-Year Program",
+            "slug": "multi-year-program"
+        }
+    },
+    {
+        "model": "home.ProgramType",
+        "pk": 13,
+        "fields": {
+            "name": "Organization/Non-Profit",
+            "slug": "organization-non-profit"
+        }
+    },
+    {
+        "model": "home.ProgramType",
+        "pk": 14,
+        "fields": {
+            "name": "Party Places & Resources",
+            "slug": "party-places-resources"
+        }
+    },
+    {
+        "model": "home.ProgramType",
+        "pk": 15,
+        "fields": {
+            "name": "Place/Attraction",
+            "slug": "place-attraction"
+        }
+    },
+    {
+        "model": "home.ProgramType",
+        "pk": 16,
+        "fields": {
+            "name": "Private School",
+            "slug": "private-school"
+        }
+    },
+    {
+        "model": "home.ProgramType",
+        "pk": 17,
+        "fields": {
+            "name": "Public/Charter School",
+            "slug": "public-charter-school"
+        }
+    },
+    {
+        "model": "home.ProgramType",
+        "pk": 18,
+        "fields": {
+            "name": "Scholarships",
+            "slug": "scholarships"
+        }
+    },
+    {
+        "model": "home.ProgramType",
+        "pk": 19,
+        "fields": {
+            "name": "School Year Enrichment",
+            "slug": "school-year-enrichment"
+        }
+    },
+    {
+        "model": "home.ProgramType",
+        "pk": 20,
+        "fields": {
+            "name": "Special Needs",
+            "slug": "special-needs"
+        }
+    },
+    {
+        "model": "home.ProgramType",
+        "pk": 21,
+        "fields": {
+            "name": "STEM College Fair",
+            "slug": "stem-college-fair"
+        }
+    },
+    {
+        "model": "home.ProgramType",
+        "pk": 22,
+        "fields": {
+            "name": "Summer Day Camp",
+            "slug": "summer-day-camp"
+        }
+    },
+    {
+        "model": "home.ProgramType",
+        "pk": 23,
+        "fields": {
+            "name": "Summer Sleep Away Camp",
+            "slug": "summer-sleep-away-camp"
+        }
+    },
+    {
+        "model": "home.ProgramType",
+        "pk": 24,
+        "fields": {
+            "name": "Travel",
+            "slug": "travel"
+        }
+    },
+    {
+        "model": "home.ProgramType",
+        "pk": 25,
+        "fields": {
+            "name": "Tutoring",
+            "slug": "tutoring"
+        }
+    },
+    {
+        "model": "home.ProgramType",
+        "pk": 26,
+        "fields": {
+            "name": "Volunteer Opportunity",
+            "slug": "volunteer-opportunity"
+        }
+    },
+    {
+        "model": "home.FocusTopic",
+        "pk": 27,
+        "fields": {
+            "name": "3D Modeling & Design",
+            "slug": "3d-modeling-design"
+        }
+    },
+    {
+        "model": "home.FocusTopic",
+        "pk": 28,
+        "fields": {
+            "name": "Artificial Intelligence (AI)",
+            "slug": "artificial-intelligence-ai"
+        }
+    },
+    {
+        "model": "home.FocusTopic",
+        "pk": 29,
+        "fields": {
+            "name": "App Design & Development",
+            "slug": "app-design-development"
+        }
+    },
+    {
+        "model": "home.FocusTopic",
+        "pk": 30,
+        "fields": {
+            "name": "Biology/Biotechnology",
+            "slug": "biology-biotechnology"
+        }
+    },
+    {
+        "model": "home.FocusTopic",
+        "pk": 31,
+        "fields": {
+            "name": "Builder/Maker",
+            "slug": "builder-maker"
+        }
+    },
+    {
+        "model": "home.FocusTopic",
+        "pk": 32,
+        "fields": {
+            "name": "Chemistry",
+            "slug": "chemistry"
+        }
+    },
+    {
+        "model": "home.FocusTopic",
+        "pk": 33,
+        "fields": {
+            "name": "Coding/Computer Science",
+            "slug": "coding-computer-science"
+        }
+    },
+    {
+        "model": "home.FocusTopic",
+        "pk": 34,
+        "fields": {
+            "name": "Cybersecurity",
+            "slug": "cybersecurity"
+        }
+    },
+    {
+        "model": "home.FocusTopic",
+        "pk": 35,
+        "fields": {
+            "name": "Dentistry",
+            "slug": "dentistry"
+        }
+    },
+    {
+        "model": "home.FocusTopic",
+        "pk": 36,
+        "fields": {
+            "name": "Digital Media (Design & Animation)",
+            "slug": "digital-media-design-animation"
+        }
+    },
+    {
+        "model": "home.FocusTopic",
+        "pk": 37,
+        "fields": {
+            "name": "Engineering",
+            "slug": "engineering"
+        }
+    },
+    {
+        "model": "home.FocusTopic",
+        "pk": 38,
+        "fields": {
+            "name": "Entrepreneurship",
+            "slug": "entrepreneurship"
+        }
+    },
+    {
+        "model": "home.FocusTopic",
+        "pk": 39,
+        "fields": {
+            "name": "Environmental Science/Climate",
+            "slug": "environmental-science-climate"
+        }
+    },
+    {
+        "model": "home.FocusTopic",
+        "pk": 40,
+        "fields": {
+            "name": "Game Design & Development",
+            "slug": "game-design-development"
+        }
+    },
+    {
+        "model": "home.FocusTopic",
+        "pk": 41,
+        "fields": {
+            "name": "Mathematics",
+            "slug": "mathematics"
+        }
+    },
+    {
+        "model": "home.FocusTopic",
+        "pk": 42,
+        "fields": {
+            "name": "Medical & Healthcare",
+            "slug": "medical-healthcare"
+        }
+    },
+    {
+        "model": "home.FocusTopic",
+        "pk": 43,
+        "fields": {
+            "name": "Neuroscience",
+            "slug": "neuroscience"
+        }
+    },
+    {
+        "model": "home.FocusTopic",
+        "pk": 44,
+        "fields": {
+            "name": "Nursing",
+            "slug": "nursing"
+        }
+    },
+    {
+        "model": "home.FocusTopic",
+        "pk": 45,
+        "fields": {
+            "name": "Physical therapy",
+            "slug": "physical-therapy"
+        }
+    },
+    {
+        "model": "home.FocusTopic",
+        "pk": 46,
+        "fields": {
+            "name": "Pre-Med",
+            "slug": "pre-med"
+        }
+    },
+    {
+        "model": "home.FocusTopic",
+        "pk": 47,
+        "fields": {
+            "name": "Public Health",
+            "slug": "public-health"
+        }
+    },
+    {
+        "model": "home.FocusTopic",
+        "pk": 48,
+        "fields": {
+            "name": "Robotics",
+            "slug": "robotics"
+        }
+    },
+    {
+        "model": "home.FocusTopic",
+        "pk": 49,
+        "fields": {
+            "name": "Science",
+            "slug": "science"
+        }
+    },
+    {
+        "model": "home.FocusTopic",
+        "pk": 50,
+        "fields": {
+            "name": "Science Research",
+            "slug": "science-research"
+        }
+    },
+    {
+        "model": "home.FocusTopic",
+        "pk": 51,
+        "fields": {
+            "name": "STEAM (STEM with Art)",
+            "slug": "steam-stem-with-art"
+        }
+    },
+    {
+        "model": "home.FocusTopic",
+        "pk": 52,
+        "fields": {
+            "name": "Web Design & Development",
+            "slug": "web-design-development"
+        }
+    },
+    {
+        "model": "home.SessionStart",
+        "pk": 53,
+        "fields": {
+            "name": "January",
+            "slug": "january"
+        }
+    },
+    {
+        "model": "home.SessionStart",
+        "pk": 54,
+        "fields": {
+            "name": "February",
+            "slug": "february"
+        }
+    },
+    {
+        "model": "home.SessionStart",
+        "pk": 55,
+        "fields": {
+            "name": "March",
+            "slug": "march"
+        }
+    },
+    {
+        "model": "home.SessionStart",
+        "pk": 56,
+        "fields": {
+            "name": "April",
+            "slug": "april"
+        }
+    },
+    {
+        "model": "home.SessionStart",
+        "pk": 57,
+        "fields": {
+            "name": "May",
+            "slug": "may"
+        }
+    },
+    {
+        "model": "home.SessionStart",
+        "pk": 58,
+        "fields": {
+            "name": "June",
+            "slug": "june"
+        }
+    },
+    {
+        "model": "home.SessionStart",
+        "pk": 59,
+        "fields": {
+            "name": "July",
+            "slug": "july"
+        }
+    },
+    {
+        "model": "home.SessionStart",
+        "pk": 60,
+        "fields": {
+            "name": "August",
+            "slug": "august"
+        }
+    },
+    {
+        "model": "home.SessionStart",
+        "pk": 61,
+        "fields": {
+            "name": "September",
+            "slug": "september"
+        }
+    },
+    {
+        "model": "home.SessionStart",
+        "pk": 62,
+        "fields": {
+            "name": "October",
+            "slug": "october"
+        }
+    },
+    {
+        "model": "home.SessionStart",
+        "pk": 63,
+        "fields": {
+            "name": "November",
+            "slug": "november"
+        }
+    },
+    {
+        "model": "home.SessionStart",
+        "pk": 64,
+        "fields": {
+            "name": "December",
+            "slug": "december"
+        }
+    },
+    {
+        "model": "home.SessionLength",
+        "pk": 65,
+        "fields": {
+            "name": "One Day",
+            "slug": "one-day"
+        }
+    },
+    {
+        "model": "home.SessionLength",
+        "pk": 66,
+        "fields": {
+            "name": "Weekend",
+            "slug": "weekend"
+        }
+    },
+    {
+        "model": "home.SessionLength",
+        "pk": 67,
+        "fields": {
+            "name": "Quarter",
+            "slug": "quarter"
+        }
+    },
+    {
+        "model": "home.SessionLength",
+        "pk": 68,
+        "fields": {
+            "name": "Semester",
+            "slug": "semester"
+        }
+    },
+    {
+        "model": "home.SessionLength",
+        "pk": 69,
+        "fields": {
+            "name": "Academic Year",
+            "slug": "academic-year"
+        }
+    },
+    {
+        "model": "home.SessionLength",
+        "pk": 70,
+        "fields": {
+            "name": "Summer",
+            "slug": "summer"
+        }
+    },
+    {
+        "model": "home.SessionLength",
+        "pk": 71,
+        "fields": {
+            "name": "One Week",
+            "slug": "one-week"
+        }
+    },
+    {
+        "model": "home.SessionLength",
+        "pk": 72,
+        "fields": {
+            "name": "Two Weeks",
+            "slug": "two-weeks"
+        }
+    },
+    {
+        "model": "home.SessionLength",
+        "pk": 73,
+        "fields": {
+            "name": "Three Weeks",
+            "slug": "three-weeks"
+        }
+    },
+    {
+        "model": "home.SessionLength",
+        "pk": 74,
+        "fields": {
+            "name": "Four Weeks",
+            "slug": "four-weeks"
+        }
+    },
+    {
+        "model": "home.SessionLength",
+        "pk": 75,
+        "fields": {
+            "name": "Five Weeks",
+            "slug": "five-weeks"
+        }
+    },
+    {
+        "model": "home.SessionLength",
+        "pk": 76,
+        "fields": {
+            "name": "Six Weeks",
+            "slug": "six-weeks"
+        }
+    },
+    {
+        "model": "home.SessionLength",
+        "pk": 77,
+        "fields": {
+            "name": "Seven Weeks",
+            "slug": "seven-weeks"
+        }
+    },
+    {
+        "model": "home.SessionLength",
+        "pk": 78,
+        "fields": {
+            "name": "Eight Weeks",
+            "slug": "eight-weeks"
+        }
+    },
+    {
+        "model": "home.ProgramLocation",
+        "pk": 79,
+        "fields": {
+            "name": "NYC",
+            "slug": "nyc"
+        }
+    },
+    {
+        "model": "home.ProgramLocation",
+        "pk": 80,
+        "fields": {
+            "name": "Hamptons",
+            "slug": "hamptons"
+        }
+    },
+    {
+        "model": "home.ProgramLocation",
+        "pk": 81,
+        "fields": {
+            "name": "Metro NYC",
+            "slug": "metro-nyc"
+        }
+    },
+    {
+        "model": "home.ProgramLocation",
+        "pk": 82,
+        "fields": {
+            "name": "New Jersey",
+            "slug": "new-jersey"
+        }
+    },
+    {
+        "model": "home.ProgramLocation",
+        "pk": 83,
+        "fields": {
+            "name": "East Coast",
+            "slug": "east-coast"
+        }
+    },
+    {
+        "model": "home.ProgramLocation",
+        "pk": 84,
+        "fields": {
+            "name": "Nationwide",
+            "slug": "nationwide"
+        }
+    },
+    {
+        "model": "home.ProgramLocation",
+        "pk": 85,
+        "fields": {
+            "name": "International",
+            "slug": "international"
+        }
+    },
+    {
+        "model": "home.ProgramLocation",
+        "pk": 86,
+        "fields": {
+            "name": "Online",
+            "slug": "online"
+        }
+    },
+    {
+        "model": "home.ProgramLocation",
+        "pk": 87,
+        "fields": {
+            "name": "Multi Location",
+            "slug": "multi-location"
+        }
+    },
+    {
+        "model": "home.ProgramDelivery",
+        "pk": 88,
+        "fields": {
+            "name": "In-Person",
+            "slug": "in-person"
+        }
+    },
+    {
+        "model": "home.ProgramDelivery",
+        "pk": 89,
+        "fields": {
+            "name": "Online",
+            "slug": "online"
+        }
+    },
+    {
+        "model": "home.ProgramDelivery",
+        "pk": 90,
+        "fields": {
+            "name": "Hybrid",
+            "slug": "hybrid"
+        }
+    },
+    {
+        "model": "home.AgeGroup",
+        "pk": 91,
+        "fields": {
+            "name": "Preschool",
+            "slug": "preschool"
+        }
+    },
+    {
+        "model": "home.AgeGroup",
+        "pk": 92,
+        "fields": {
+            "name": "Elementary School",
+            "slug": "elementary-school"
+        }
+    },
+    {
+        "model": "home.AgeGroup",
+        "pk": 93,
+        "fields": {
+            "name": "Middle School",
+            "slug": "middle-school"
+        }
+    },
+    {
+        "model": "home.AgeGroup",
+        "pk": 94,
+        "fields": {
+            "name": "High School",
+            "slug": "high-school"
+        }
+    },
+    {
+        "model": "home.AgeGroup",
+        "pk": 95,
+        "fields": {
+            "name": "College",
+            "slug": "college"
+        }
+    },
+    {
+        "model": "home.FeesCategory",
+        "pk": 96,
+        "fields": {
+            "name": "Free",
+            "slug": "free"
+        }
+    },
+    {
+        "model": "home.FeesCategory",
+        "pk": 97,
+        "fields": {
+            "name": "Low Cost",
+            "slug": "low-cost"
+        }
+    },
+    {
+        "model": "home.FeesCategory",
+        "pk": 98,
+        "fields": {
+            "name": "Scholarship/Financial Aid",
+            "slug": "scholarship-financial-aid"
+        }
+    },
+    {
+        "model": "home.Selectivity",
+        "pk": 99,
+        "fields": {
+            "name": "Yes",
+            "slug": "yes"
+        }
+    },
+    {
+        "model": "home.Selectivity",
+        "pk": 100,
+        "fields": {
+            "name": "No",
+            "slug": "no"
+        }
+    },
+    {
+        "model": "home.GenderFilter",
+        "pk": 101,
+        "fields": {
+            "name": "Co-ed",
+            "slug": "co-ed"
+        }
+    },
+    {
+        "model": "home.GenderFilter",
+        "pk": 102,
+        "fields": {
+            "name": "Girls Only",
+            "slug": "girls-only"
+        }
+    },
+    {
+        "model": "home.GenderFilter",
+        "pk": 103,
+        "fields": {
+            "name": "Boys Only",
+            "slug": "boys-only"
+        }
+    },
+    {
+        "model": "home.NYCNeighborhood",
+        "pk": 104,
+        "fields": {
+            "name": "Upper East Side",
+            "slug": "upper-east-side"
+        }
+    },
+    {
+        "model": "home.NYCNeighborhood",
+        "pk": 105,
+        "fields": {
+            "name": "Upper West Side",
+            "slug": "upper-west-side"
+        }
+    },
+    {
+        "model": "home.NYCNeighborhood",
+        "pk": 106,
+        "fields": {
+            "name": "Downtown",
+            "slug": "downtown"
+        }
+    },
+    {
+        "model": "home.NYCNeighborhood",
+        "pk": 107,
+        "fields": {
+            "name": "Midtown-East",
+            "slug": "midtown-east"
+        }
+    },
+    {
+        "model": "home.NYCNeighborhood",
+        "pk": 108,
+        "fields": {
+            "name": "Midtown-West",
+            "slug": "midtown-west"
+        }
+    },
+    {
+        "model": "home.NYCNeighborhood",
+        "pk": 109,
+        "fields": {
+            "name": "Brooklyn",
+            "slug": "brooklyn"
+        }
+    },
+    {
+        "model": "home.NYCNeighborhood",
+        "pk": 110,
+        "fields": {
+            "name": "Bronx",
+            "slug": "bronx"
+        }
+    },
+    {
+        "model": "home.NYCNeighborhood",
+        "pk": 111,
+        "fields": {
+            "name": "Queens",
+            "slug": "queens"
+        }
+    },
+    {
+        "model": "home.NYCNeighborhood",
+        "pk": 112,
+        "fields": {
+            "name": "Staten Island",
+            "slug": "staten-island"
+        }
+    },
+    {
+        "model": "home.NYCNeighborhood",
+        "pk": 113,
+        "fields": {
+            "name": "Multi-Location",
+            "slug": "multi-location"
+        }
+    }
+]

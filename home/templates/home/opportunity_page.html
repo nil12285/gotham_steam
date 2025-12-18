@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags static wagtailimages_tags %}
+
+{% block body_class %}template-opportunitypage{% endblock %}
+
+{% block content %}
+    <div class="container py-5">
+        <div class="row">
+            
+            {# Left Column: Main Content and Overview #}
+            <div class="col-lg-8">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        {# Assuming the parent is the Opportunity Search page #}
+                        <li class="breadcrumb-item"><a href="{% pageurl page.get_parent %}" class="text-dark-blue">Opportunities</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ page.title }}</li>
+                    </ol>
+                </nav>
+                
+                <h1 class="display-4 text-dark-blue fw-bold mb-4">{{ page.title }}</h1>
+                
+                <p class="lead text-secondary">{{ page.search_description }}</p>
+                
+                {# Main Content Sections #}
+                
+                <div class="mt-5 pt-3 border-top">
+                    <h2 class="h3 fw-bold mb-3 text-dark-blue">Overview</h2>
+                    {# Renders the RichTextField content #}
+                    <div class="text-secondary">{{ page.overview|richtext }}</div>
+                </div>
+
+                <div class="mt-5 pt-3 border-top">
+                    <h2 class="h3 fw-bold mb-3 text-dark-blue">Staff Details</h2>
+                    {# Renders the plain text field, using linebreaks for formatting #}
+                    <div class="text-secondary">{{ page.staff_details|linebreaks }}</div>
+                </div>
+            </div>
+            
+            {# Right Column: Essential Information and Image #}
+            <div class="col-lg-4">
+                <div class="sticky-top" style="top: 20px;">
+                    
+                    {# Opportunity Image #}
+                    {% if page.main_image %}
+                        {% image page.main_image fill-400x300 as sidebar_img %}
+                        <img src="{{ sidebar_img.url }}" alt="{{ sidebar_img.alt }}" class="img-fluid rounded-3 shadow-lg mb-4 w-100">
+                    {% endif %}
+
+                    <div class="card p-4 shadow-sm border-0 rounded-3 bg-light">
+                        <h2 class="h5 fw-bolder mb-3 text-dark-blue border-bottom pb-2">ESSENTIAL INFORMATION</h2>
+                        
+                        <dl class="row m-0">
+                            
+                            <dt class="col-5 fw-bold text-dark-blue mb-2"><i class="bi bi-tag-fill me-2 text-primary-green"></i>Type:</dt>
+                            <dd class="col-7 mb-2">
+                                {{ page.opportunity_type.name|default:"N/A" }}
+                            </dd>
+
+                            <dt class="col-5 fw-bold text-dark-blue mb-2"><i class="bi bi-person-lines-fill me-2 text-primary-green"></i>Age Group:</dt>
+                            <dd class="col-7 mb-2">
+                                {{ page.age_group.name|default:"Varies" }}
+                            </dd>
+
+                            <dt class="col-5 fw-bold text-dark-blue mb-2"><i class="bi bi-currency-dollar me-2 text-primary-green"></i>Cost:</dt>
+                            <dd class="col-7 mb-2">
+                                {{ page.fees_category.name|default:"Varies" }}
+                            </dd>
+
+                            <dt class="col-5 fw-bold text-dark-blue mb-2"><i class="bi bi-clock-fill me-2 text-primary-green"></i>Time Commitment:</dt>
+                            <dd class="col-7 mb-2">
+                                {{ page.time_commitment.name|default:"N/A" }}
+                            </dd>
+                            
+                            <dt class="col-5 fw-bold text-dark-blue mb-2"><i class="bi bi-geo-alt-fill me-2 text-primary-green"></i>Location/Delivery:</dt>
+                            <dd class="col-7 mb-2">
+                                {{ page.program_location.name|default:"N/A" }}
+                            </dd>
+
+                            <dt class="col-5 fw-bold text-dark-blue mb-2"><i class="bi bi-calendar-date-fill me-2 text-primary-green"></i>Deadline:</dt>
+                            <dd class="col-7 mb-2">
+                                {% if page.application_deadline %}
+                                    {{ page.application_deadline|date:"F j, Y" }}
+                                {% else %}
+                                    Rolling/N/A
+                                {% endif %}
+                            </dd>
+                        </dl>
+                        
+                        {# Call to Action Button #}
+                        {% if page.external_url %}
+                            <a href="{{ page.external_url }}" target="_blank" rel="noopener noreferrer" 
+                               class="btn btn-hero-green btn-lg w-100 mt-4 shadow fw-bold text-uppercase">
+                                APPLY NOW
+                            </a>
+                        {% else %}
+                             <button type="button" class="btn btn-outline-secondary w-100 mt-4" disabled>
+                                Application Link Not Provided
+                            </button>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

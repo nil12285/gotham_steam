@@ -1,0 +1,22 @@
+{% load wagtailimages_tags %}
+
+<div class="container-fluid px-5 py-5 bg-transparent"
+    style="{% if self.background_color %}background-color: {{ self.background_color }} !important;{% else %}{% endif %}">
+    <div class="container py-2"
+        style="{% if self.text_color %}color: {{ self.text_color }} !important;{% else %}{% endif %}">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-4 order-lg-1 order-2">
+                <div class="p-4 p-md-0 {{ self.text_size_class }} {{ self.line_height_class }}">
+                    {{ self.text_left }}
+                </div>
+            </div>
+
+            <div
+                class="col-lg-8 pe-4 order-lg-2 order-1 {% if self.text_alignment %}text-{{ self.text_alignment }}{% endif %}">
+                <div class="p-4 p-md-0 {{ self.text_size_class }} {{ self.line_height_class }}">
+                    {{ self.text_right }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

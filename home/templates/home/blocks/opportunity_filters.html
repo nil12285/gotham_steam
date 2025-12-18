@@ -1,0 +1,310 @@
+{% load static wagtailcore_tags wagtailimages_tags %}
+
+<div class="card shadow-sm p-4 border-0" style="top: 20px;">
+    <h2 class="h5 fw-bold text-dark-blue mb-4 border-bottom pb-2">Filter Opportunities</h2>
+
+    {# The view (views.py) guarantees 'form_action_url' is set. #}
+    <form method="GET" action="{{ form_action_url }}" id="opportunity-filter-form">
+
+        <!-- Search Query (Text Search) -->
+        <div class="mb-4">
+            <label for="id_q" class="form-label fw-bold small text-dark-blue">Search Keywords</label>
+            <input type="text" name="q" id="id_q" value="{{ selected_filters.q|default_if_none:'' }}"
+                class="form-control form-control-sm" placeholder="Name or subject...">
+        </div>
+
+        <div class="d-grid gap-3">
+
+            {% with any_program_type_selected=selected_filters.program_type %}
+            {# 1. Program Type Filter - CONVERTED TO CHECKBOXES #}
+            <div class="border-top pt-3">
+                <a class="d-flex justify-content-between align-items-center text-decoration-none"
+                    data-bs-toggle="collapse" href="#collapseProgramType" role="button"
+                    aria-expanded="{{ any_program_type_selected|yesno:'true,false' }}"
+                    aria-controls="collapseProgramType">
+                    <h3 class="h6 fw-bold mb-0 text-dark-blue">Program Type</h3>
+                    <i class="bi bi-chevron-down small {% if not any_program_type_selected %}collapsed{% endif %}"></i>
+                </a>
+                <div class="collapse {% if any_program_type_selected %}show{% endif %}" id="collapseProgramType">
+                    <div class="mt-2">
+                        {% for choice in program_choices %}
+                        <div class="form-check">
+                            <input id="type-{{ choice.slug }}" name="program_type" type="checkbox"
+                                value="{{ choice.slug }}" 
+                                {% if choice.slug in selected_filters.program_type %}checked{% endif %} 
+                                class="form-check-input filter-input">
+                            <label for="type-{{ choice.slug }}" class="form-check-label small">
+                                {{ choice.name }}
+                            </label>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endwith %}
+
+
+            {% with any_delivery_selected=selected_filters.program_delivery %}
+            {# 2. Program Delivery Filter - CONVERTED TO CHECKBOXES #}
+            <div class="border-top pt-3">
+                <a class="d-flex justify-content-between align-items-center text-decoration-none"
+                    data-bs-toggle="collapse" href="#collapseDelivery" role="button"
+                    aria-expanded="{{ any_delivery_selected|yesno:'true,false' }}" aria-controls="collapseDelivery">
+                    <h3 class="h6 fw-bold mb-0 text-dark-blue">Delivery Mode</h3>
+                    <i class="bi bi-chevron-down small {% if not any_delivery_selected %}collapsed{% endif %}"></i>
+                </a>
+                <div class="collapse {% if any_delivery_selected %}show{% endif %}" id="collapseDelivery">
+                    <div class="mt-2">
+                        {% for choice in delivery_choices %}
+                        <div class="form-check">
+                            <input id="delivery-{{ choice.slug }}" name="program_delivery" type="checkbox"
+                                value="{{ choice.slug }}" 
+                                {% if choice.slug in selected_filters.program_delivery%}checked{% endif %} 
+                                class="form-check-input filter-input">
+                            <label for="delivery-{{ choice.slug }}" class="form-check-label small">
+                                {{ choice.name }}
+                            </label>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endwith %}
+
+
+            {% with any_session_length_selected=selected_filters.session_length %}
+            {# 3. Session Length Filter - CONVERTED TO CHECKBOXES #}
+            <div class="border-top pt-3">
+                <a class="d-flex justify-content-between align-items-center text-decoration-none"
+                    data-bs-toggle="collapse" href="#collapseSessionLength" role="button"
+                    aria-expanded="{{ any_session_length_selected|yesno:'true,false' }}"
+                    aria-controls="collapseSessionLength">
+                    <h3 class="h6 fw-bold mb-0 text-dark-blue">Session Length</h3>
+                    <i
+                        class="bi bi-chevron-down small {% if not any_session_length_selected %}collapsed{% endif %}"></i>
+                </a>
+                <div class="collapse {% if any_session_length_selected %}show{% endif %}" id="collapseSessionLength">
+                    <div class="mt-2">
+                        {% for choice in session_length_choices %}
+                        <div class="form-check">
+                            <input id="length-{{ choice.slug }}" name="session_length" type="checkbox"
+                                value="{{ choice.slug }}" 
+                                {% if choice.slug in selected_filters.session_length %}checked{% endif %} 
+                                class="form-check-input filter-input">
+                            <label for="length-{{ choice.slug }}" class="form-check-label small">
+                                {{ choice.name }}
+                            </label>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endwith %}
+
+
+            {% with any_fees_selected=selected_filters.fees_category %}
+            {# 4. Fees Category Filter - CONVERTED TO CHECKBOXES #}
+            <div class="border-top pt-3">
+                <a class="d-flex justify-content-between align-items-center text-decoration-none"
+                    data-bs-toggle="collapse" href="#collapseFees" role="button"
+                    aria-expanded="{{ any_fees_selected|yesno:'true,false' }}" aria-controls="collapseFees">
+                    <h3 class="h6 fw-bold mb-0 text-dark-blue">Fees Category</h3>
+                    <i class="bi bi-chevron-down small {% if not any_fees_selected %}collapsed{% endif %}"></i>
+                </a>
+                <div class="collapse {% if any_fees_selected %}show{% endif %}" id="collapseFees">
+                    <div class="mt-2">
+                        {% for choice in fees_category_choices %}
+                        <div class="form-check">
+                            <input id="fees-{{ choice.slug }}" name="fees_category" type="checkbox"
+                                value="{{ choice.slug }}" 
+                                {% if choice.slug in selected_filters.fees_category %}checked{% endif %} 
+                                class="form-check-input filter-input">
+                            <label for="fees-{{ choice.slug }}" class="form-check-label small">
+                                {{ choice.name }}
+                            </label>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endwith %}
+
+
+            {% with any_location_selected=selected_filters.program_location %}
+            {# 5. Location Filter - CONVERTED TO CHECKBOXES #}
+            <div class="border-top pt-3">
+                <a class="d-flex justify-content-between align-items-center text-decoration-none"
+                    data-bs-toggle="collapse" href="#collapseLocation" role="button"
+                    aria-expanded="{{ any_location_selected|yesno:'true,false' }}" aria-controls="collapseLocation">
+                    <h3 class="h6 fw-bold mb-0 text-dark-blue">Location</h3>
+                    <i class="bi bi-chevron-down small {% if not any_location_selected %}collapsed{% endif %}"></i>
+                </a>
+                <div class="collapse {% if any_location_selected %}show{% endif %}" id="collapseLocation">
+                    <div class="mt-2">
+                        {% for choice in location_choices %}
+                        <div class="form-check">
+                            <input id="location-{{ choice.slug }}" name="program_location" type="checkbox"
+                                value="{{ choice.slug }}" 
+                                {% if choice.slug in selected_filters.program_location %}checked{% endif %} 
+                                class="form-check-input filter-input">
+                            <label for="location-{{ choice.slug }}" class="form-check-label small">
+                                {{ choice.name }}
+                            </label>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endwith %}
+
+
+            {% with any_neighborhood_selected=selected_filters.nyc_neighborhood %}
+            {# 5.b. NYC Neighborhood Filter - NEW CHECKBOXES #}
+            <div class="border-top pt-3">
+                <a class="d-flex justify-content-between align-items-center text-decoration-none"
+                    data-bs-toggle="collapse" href="#collapseNeighborhood" role="button"
+                    aria-expanded="{{ any_neighborhood_selected|yesno:'true,false' }}"
+                    aria-controls="collapseNeighborhood">
+                    <h3 class="h6 fw-bold mb-0 text-dark-blue">Neighborhood</h3>
+                    <i class="bi bi-chevron-down small {% if not any_neighborhood_selected %}collapsed{% endif %}"></i>
+                </a>
+                <div class="collapse {% if any_neighborhood_selected %}show{% endif %}" id="collapseNeighborhood">
+                    <div class="mt-2">
+                        {% for choice in neighborhood_choices %}
+                        <div class="form-check">
+                            <input id="neighborhood-{{ choice.slug }}" name="nyc_neighborhood" type="checkbox"
+                                value="{{ choice.slug }}" 
+                                {% if choice.slug in selected_filters.nyc_neighborhood %}checked{% endif %} 
+                                class="form-check-input filter-input">
+                            <label for="neighborhood-{{ choice.slug }}" class="form-check-label small">
+                                {{ choice.name }}
+                            </label>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endwith %}
+
+
+            {% with any_start_selected=selected_filters.session_start %}
+            {# 5.c. Session Start Filter - NEW CHECKBOXES #}
+            <div class="border-top pt-3">
+                <a class="d-flex justify-content-between align-items-center text-decoration-none"
+                    data-bs-toggle="collapse" href="#collapseSessionStart" role="button"
+                    aria-expanded="{{ any_start_selected|yesno:'true,false' }}" aria-controls="collapseSessionStart">
+                    <h3 class="h6 fw-bold mb-0 text-dark-blue">Session Start</h3>
+                    <i class="bi bi-chevron-down small {% if not any_start_selected %}collapsed{% endif %}"></i>
+                </a>
+                <div class="collapse {% if any_start_selected %}show{% endif %}" id="collapseSessionStart">
+                    <div class="mt-2">
+                        {% for choice in session_start_choices %}
+                        <div class="form-check">
+                            <input id="session-start-{{ choice.slug }}" name="session_start" type="checkbox"
+                                value="{{ choice.slug }}" 
+                                {% if choice.slug in selected_filters.session_start%}checked{% endif %} 
+                                class="form-check-input filter-input">
+                            <label for="session-start-{{ choice.slug }}" class="form-check-label small">
+                                {{ choice.name }}
+                            </label>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endwith %}
+
+            {# The is_selective filter uses string 'true'/'false', so we only check if it is not empty. #}
+            {% with is_selective_set=selected_filters.is_selective %}
+            {# 7. Selective Filter (Boolean) - REMAINS RADIO #}
+            <div class="border-top pt-3">
+                <a class="d-flex justify-content-between align-items-center text-decoration-none"
+                    data-bs-toggle="collapse" href="#collapseSelective" role="button"
+                    aria-expanded="{{ is_selective_set|yesno:'true,false' }}" aria-controls="collapseSelective">
+                    <h3 class="h6 fw-bold mb-0 text-dark-blue">Program Selectivity</h3>
+                    <i class="bi bi-chevron-down small {% if not is_selective_set %}collapsed{% endif %}"></i>
+                </a>
+                <div class="collapse {% if is_selective_set %}show{% endif %}" id="collapseSelective">
+                    <div class="mt-2">
+                        <div class="form-check">
+                            <input id="selective-true" name="is_selective" type="radio" value="true" 
+                                {% if selected_filters.is_selective is true %}checked{% endif %}
+                                class="form-check-input filter-input">
+                            <label for="selective-true" class="form-check-label small">
+                                Is Selective (Yes)
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input id="selective-false" name="is_selective" type="radio" value="false" 
+                                {% if selected_filters.is_selective is false %}checked{% endif %}
+                                class="form-check-input filter-input">
+                            <label for="selective-false" class="form-check-label small">
+                                Is Not Selective (No)
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input id="selective-none" name="is_selective" type="radio" value="" 
+                                {% if not selected_filters.is_selective or not selected_filters.is_selective %}checked{% endif %} 
+                                class="form-check-input filter-input">
+                            <label for="selective-none" class="form-check-label small text-muted fst-italic">
+                                Any
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endwith %}
+
+
+            {% with any_gender_selected=selected_filters.gender %}
+            {# 6. Gender Filter - CONVERTED TO CHECKBOXES #}
+            <div class="border-top pt-3">
+                <a class="d-flex justify-content-between align-items-center text-decoration-none"
+                    data-bs-toggle="collapse" href="#collapseGender" role="button"
+                    aria-expanded="{{ any_gender_selected|yesno:'true,false' }}" aria-controls="collapseGender">
+                    <h3 class="h6 fw-bold mb-0 text-dark-blue">Gender</h3>
+                    <i class="bi bi-chevron-down small {% if not any_gender_selected %}collapsed{% endif %}"></i>
+                </a>
+                <div class="collapse {% if any_gender_selected %}show{% endif %}" id="collapseGender">
+                    <div class="mt-2">
+                        {% for choice in gender_choices %}
+                        <div class="form-check">
+                            <input id="gender-{{ choice.slug }}" name="gender" type="checkbox" value="{{ choice.slug }}"
+                                {% if choice.slug in selected_filters.gender %}checked{% endif %}
+                                class="form-check-input filter-input">
+                            <label for="gender-{{ choice.slug }}" class="form-check-label small">
+                                {{ choice.name }}
+                            </label>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endwith %}
+
+
+            {# 8. Age Range Filter (Slider) - DOES NOT COLLAPSE (remains open for usability) #}
+            <div class="border-top pt-3">
+                <h3 class="h6 fw-bold mb-2 text-dark-blue">Max Age:
+                    <span id="age-value" class="text-primary-green fw-bold">
+                        {{ selected_filters.age_range|default:'25' }}
+                    </span>
+                </h3>
+                <input type="range" name="age-range" id="age-range-slider" min="5" max="25"
+                    value="{{ selected_filters.age_range|default:'25' }}" class="form-range filter-input">
+            </div>
+        </div>
+
+        <!-- Submit and Clear Buttons -->
+        <div class="d-flex gap-2 border-top pt-4 mt-4">
+            <button type="submit" class="btn btn-primary btn-sm w-50 fw-bold">
+                <i class="bi bi-funnel me-1"></i> Apply
+            </button>
+            {# CLEAR BUTTON URL: Uses the guaranteed form_action_url for clearing filters #}
+            <a href="{{ form_action_url }}" class="btn btn-outline-secondary btn-sm w-50 fw-bold">
+                <i class="bi bi-x-circle me-1"></i> Clear
+            </a>
+        </div>
+
+    </form>
+</div>
