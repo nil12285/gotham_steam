@@ -495,7 +495,7 @@ class OpportunityIndexPage(Page):
     template = 'home/opportunity_search_results.html'
     
     subpage_types = ['home.OpportunityPage']
-    # parent_page_types = ['home.HomePage']
+    parent_page_types = ['home.HomePage']
 
     PROGRAM_FILTERS = OrderedDict({
          'program_types' : {

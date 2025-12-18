@@ -30,6 +30,7 @@ from .utilities import (
 from .opportunity_model import *
 
 class AbstractFilterModel(models.Model):
+    
     name = models.CharField(max_length=255, unique=True)
     slug = models.SlugField(max_length=255, unique=True, blank=True)
 
@@ -49,6 +50,9 @@ class AbstractFilterModel(models.Model):
 
 class InsightsArticlePage(Page):
     
+    subpage_types = []
+    parent_page_types = ['home.InsightsIndexPage']
+
     date = models.DateField("Post date")
     main_image = models.ForeignKey(
         'wagtailimages.Image',
@@ -76,21 +80,20 @@ class InsightsArticlePage(Page):
         FieldPanel('body'),
     ]
     
-    subpage_types = []
-    parent_page_types = ['home.InsightsIndexPage']
     
 
 
 
 class InsightsIndexPage(Page):
+    
+    subpage_types = ['home.InsightsArticlePage']
+    parent_page_types = ['home.HomePage']
+    
     intro = RichTextField(blank=True)
     
     content_panels = Page.content_panels + [
         FieldPanel('intro'),
     ]
-    
-    subpage_types = ['home.InsightsArticlePage']
-    # parent_page_types = ['home.HomePage']
 
     def get_context(self, request):
         context = super().get_context(request)
@@ -99,6 +102,9 @@ class InsightsIndexPage(Page):
 
 
 class HomePage(Page):
+    
+    parent_page_types = ['wagtailcore.Page']
+    
     hero_image = models.ForeignKey(
         'wagtailimages.Image',
         null=True,
@@ -146,7 +152,6 @@ class HomePage(Page):
         ),
     ]
 
-    parent_page_types = ['wagtailcore.Page']
     subpage_types = [
         "home.OpportunityIndexPage", 
         "home.InsightsIndexPage",
@@ -160,6 +165,7 @@ class HomePage(Page):
 
 
 class ContactPage(Page):
+    parent_page_types = ['home.HomePage']
     intro = models.TextField(blank=True)
     content_panels = Page.content_panels + [
         FieldPanel("intro", classname="full"),
@@ -167,6 +173,7 @@ class ContactPage(Page):
 
 
 class PrivacyPolicyPage(Page):
+    parent_page_types = ['home.HomePage']
     body = StreamField(
         [
             ("paragraph", blocks.RichTextBlock(features=RICH_TEXT_BLOCK_FEATURES)),
@@ -180,6 +187,7 @@ class PrivacyPolicyPage(Page):
 
 
 class TermsAndServicesPage(Page):
+    parent_page_types = ['home.HomePage']
     body = StreamField(
         [
             ("paragraph", blocks.RichTextBlock(features=RICH_TEXT_BLOCK_FEATURES)),
