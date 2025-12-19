@@ -26,7 +26,6 @@ from .utilities import (
     LINE_HEIGHT_CHOICES,
     TEXT_ALIGNMENT_CHOICES,
 )
-
 from .opportunity_model import *
 
 class AbstractFilterModel(models.Model):
@@ -47,63 +46,6 @@ class AbstractFilterModel(models.Model):
         super().save(*args, **kwargs)
 
 
-
-# class InsightsArticlePage(Page):
-    
-#     subpage_types = []
-#     parent_page_types = ['home.InsightsIndexPage']
-
-#     date = models.DateField("Post date")
-#     main_image = models.ForeignKey(
-#         'wagtailimages.Image',
-#         null=True,
-#         blank=True,
-#         on_delete=models.SET_NULL,
-#         related_name='+'
-#     )
-
-#     body = StreamField(
-#         [
-#             ("paragraph", blocks.RichTextBlock(features=RICH_TEXT_BLOCK_FEATURES)),
-#             ("image", ImageChooserBlock()),
-#             ("heading", blocks.CharBlock(classname="full title", icon="title")),
-#             ("quote", blocks.BlockQuoteBlock()),
-#             ("raw_html", RawHTMLBlock()),
-#         ],
-#         use_json_field=True,
-#     )
-
-#     content_panels = Page.content_panels + [
-#         FieldPanel('search_description'),
-#         FieldPanel('date'),
-#         FieldPanel('main_image'),
-#         FieldPanel('body'),
-#     ]
-    
-    
-
-
-
-# class InsightsIndexPage(Page):
-    
-#     class Meta:
-#         verbose_name = "Insights"
-
-#     parent_page_types = ['home.HomePage']
-#     subpage_types = [
-#         "cast.Blog",
-#     ]
-    
-#     intro = RichTextField(blank=True)
-    
-#     content_panels = Page.content_panels + [
-#         FieldPanel('intro'),
-#     ]
-
-#     def get_context(self, request):
-#         context = super().get_context(request)
-#         context["articles"] = self.get_children().live().order_by("-first_published_at")
-#         return context
 
 
 class HomePage(Page):

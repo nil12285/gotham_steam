@@ -73,16 +73,20 @@ INSTALLED_APPS = list(set([
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    'django.contrib.sites',  # Required for RSS/Podcasts
+    "django.contrib.sites",  # Required for RSS/Podcasts
+    "django.contrib.sitemaps",
+    "wagtail_modeladmin",
     "wagtail_color_panel",
     "wagtail_newsletter",
+    "wagtailcache",
     # Required allauth apps
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
 ] + CAST_APPS))
 
 MIDDLEWARE = [
+    'wagtailcache.cache.UpdateCacheMiddleware',
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -93,6 +97,8 @@ MIDDLEWARE = [
     "allauth.account.middleware.AccountMiddleware",
     "wagtail.contrib.redirects.middleware.RedirectMiddleware",
 ] + CAST_MIDDLEWARE
+
+MIDDLEWARE = MIDDLEWARE + ['wagtailcache.cache.FetchFromCacheMiddleware']
 
 ROOT_URLCONF = "gotham_stem.urls"
 
@@ -121,6 +127,14 @@ AUTHENTICATION_BACKENDS = [
     "allauth.account.auth_backends.AuthenticationBackend",
 ]
 
+
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.filebased.FileBasedCache",
+        "LOCATION": os.path.join(BASE_DIR, "cache"),
+        "TIMEOUT": 3600, # 1 hour
+    }
+}
 
 WSGI_APPLICATION = "gotham_stem.wsgi.application"
 
@@ -205,8 +219,11 @@ DJANGO_VITE = {
 }
 
 CAST_IMAGE_FORMATS = ["jpeg", "avif"]
-CAST_BOOTSTRAP_VERSION = 5
-
+CAST_BOOTSTRAP_VERSION = 4
+CAST_COMMENTS_ENABLED = False
+POST_LIST_PAGINATION = 9
+CAST_REPOSITORY = True
+CAST_THUMBNAIL_SLOT_DIMENSIONS = (340,240)
 # Default storage settings
 # See https://docs.djangoproject.com/en/6.0/ref/settings/#std-setting-STORAGES
 STORAGES = {

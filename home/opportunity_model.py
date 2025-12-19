@@ -27,6 +27,7 @@ from .utilities import (
     TEXT_ALIGNMENT_CHOICES,
 )
 from collections import OrderedDict
+from wagtailcache.cache import WagtailCacheMixin  # Add this to class for caching 
 
 YES_NO_CHOICES = [
     ("Yes", "Yes"),
@@ -165,7 +166,7 @@ class ProgramAgeGroup(models.Model):
     age_group = models.ForeignKey('home.AgeGroup', on_delete=models.CASCADE, related_name='+')
 
 
-class Program(Page):
+class Program(WagtailCacheMixin, Page):
     """
     Model for an individual STEM program entry.
     """
@@ -711,7 +712,7 @@ class ProgramIndexPage(Page):
                     opportunities = opportunities.filter(**{filter_key: param_values[0]})
         
         page_num = get_params.get('page', 1)
-        paginator = Paginator(opportunities, 10) 
+        paginator = Paginator(opportunities, 5) 
 
         try:
             paginated_opportunities = paginator.page(page_num)

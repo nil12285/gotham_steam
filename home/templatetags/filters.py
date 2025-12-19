@@ -62,6 +62,14 @@ def slugify(value):
     if value:
         return value.replace(" ","-")
 
+
+@register.filter
+def dict__(value):
+    try:
+        return f"{value.__dict__}"
+    except:
+        return None
+    
 @register.filter
 def jsonify(value):
     # If we have a queryset, then convert it into a list.

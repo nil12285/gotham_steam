@@ -1,0 +1,37 @@
+{% load wagtailcore_tags wagtailimages_tags static filters %}
+{% load i18n %}
+
+<div class="card h-100 bg-transparent text-dark-blue rounded-0">
+  <a href="{{ post.page_url }}" class="text-decoration-none text-dark-blue d-flex flex-column h-100">
+    
+    <div class="card-img-container" style="height: 240px; overflow: hidden;">
+        {% if post.cover_image %}
+            {% image post.cover_image width-300 class="w-100 h-100 object-fit-cover" %}
+        {% else %}
+            <div class="bg-secondary w-100 h-100 d-flex align-items-center justify-content-center">
+                <span>No Image</span>
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="card-body text-center d-flex flex-column p-2">
+      <h2 class="h5 fw-bold text-uppercase mb-2" >
+        {{ post.title }}
+      </h2>
+      
+      <p class="small mb-4 flex-grow-1 text-start">
+        {% if post.search_description %}
+          {{ post.search_description }}
+        {% else %}
+          Explore our expert insights and guides!
+        {% endif %}
+      </p>
+
+      <div class="mt-auto">
+        <time class="fw-bold small" datetime='{{ post.visible_date|date:"Y-m-d" }}'>
+          {{ post.visible_date|date:"F j, Y" }}
+        </time>
+      </div>
+    </div>
+  </a>
+</div>

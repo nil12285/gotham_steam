@@ -46,6 +46,7 @@ from wagtail import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
 from cast.urls import urlpatterns as cast_urls
 from search import views as search_views
+from wagtail.contrib.sitemaps.views import sitemap
 
 urlpatterns = [
     path("django-admin/", admin.site.urls),
@@ -59,7 +60,9 @@ urlpatterns = [
     # path("cast/", include(cast_urls)), # Optional: for dedicated cast views
     path("cast/comments/", include("cast.comments.urls")),
     path("cast/", include((cast_urls, "cast"), namespace="cast")),
-    # 2. For anything not caught by a more specific rule, hand over to Wagtail
+    
+    path('sitemap.xml', sitemap),
+
     path("", include(wagtail_urls)),
 ]
 
