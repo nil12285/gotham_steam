@@ -14,14 +14,12 @@ from wagtail_newsletter.models import NewsletterPageMixin
 from .utilities import (
     FeatureBlock,
     RawHTMLBlock,
-    RICH_TEXT_BLOCK_FEATURES,
 )
 from wagtail.images.models import Image  # Import Wagtail Image model for explicit FK
 from wagtail_color_panel.fields import ColorField
 from wagtail_color_panel.blocks import NativeColorBlock
 from wagtail_newsletter.models import NewsletterPageMixin
 from .utilities import (
-    RICH_TEXT_BLOCK_FEATURES,
     FEATURE_LAYOUT_CHOICES,
     LINE_HEIGHT_CHOICES,
     TEXT_ALIGNMENT_CHOICES,
@@ -129,7 +127,7 @@ class PrivacyPolicyPage(Page):
     parent_page_types = ['home.HomePage']
     body = StreamField(
         [
-            ("paragraph", blocks.RichTextBlock(features=RICH_TEXT_BLOCK_FEATURES)),
+            ("paragraph", blocks.RichTextBlock()),
             ("raw_html", RawHTMLBlock()),
         ],
         use_json_field=True,
@@ -143,7 +141,7 @@ class TermsAndServicesPage(Page):
     parent_page_types = ['home.HomePage']
     body = StreamField(
         [
-            ("paragraph", blocks.RichTextBlock(features=RICH_TEXT_BLOCK_FEATURES)),
+            ("paragraph", blocks.RichTextBlock()),
             ("raw_html", RawHTMLBlock()),
         ],
         use_json_field=True,

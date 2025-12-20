@@ -14,14 +14,12 @@ from wagtail_newsletter.models import NewsletterPageMixin
 from .utilities import (
     FeatureBlock,
     RawHTMLBlock,
-    RICH_TEXT_BLOCK_FEATURES,
 )
 from wagtail.images.models import Image  # Import Wagtail Image model for explicit FK
 from wagtail_color_panel.fields import ColorField
 from wagtail_color_panel.blocks import NativeColorBlock
 from wagtail_newsletter.models import NewsletterPageMixin
 from .utilities import (
-    RICH_TEXT_BLOCK_FEATURES,
     FEATURE_LAYOUT_CHOICES,
     LINE_HEIGHT_CHOICES,
     TEXT_ALIGNMENT_CHOICES,
@@ -116,14 +114,6 @@ class AgeGroup(AbstractBaseFilterModel):
         verbose_name = "Age Group"
         verbose_name_plural = "Age Groups"
 
-
-
-class ProgramTag(TaggedItemBase):
-    content_object = ParentalKey(
-        'home.Program',
-        on_delete=models.CASCADE,
-        related_name='tagged_items'
-    )
 
 class ProgramProgramType(models.Model):
     page = ParentalKey('home.Program', on_delete=models.CASCADE, related_name='program_program_types')
@@ -278,7 +268,7 @@ class Program(WagtailCacheMixin, Page):
         blank=True,
         null=True,
         help_text="Detailed description and program overview.",
-        features=RICH_TEXT_BLOCK_FEATURES
+        # features=RICH_TEXT_BLOCK_FEATURES
     )
     
     program_delivery = ParentalManyToManyField(
@@ -521,14 +511,14 @@ class ProgramIntroBlock(blocks.StructBlock):
 
     text_left = blocks.RichTextBlock(
         required=True,
-        features=RICH_TEXT_BLOCK_FEATURES,
+        # features=RICH_TEXT_BLOCK_FEATURES,
         help_text="Text content displayed next to the image. Supports standard formatting and color via the 'colour' feature.",
     )
 
     # Standard Wagtail rich text editor for formatted body content
     text_right = blocks.RichTextBlock(
         required=True,
-        features=RICH_TEXT_BLOCK_FEATURES,
+        # features=RICH_TEXT_BLOCK_FEATURES,
         help_text="Text content displayed next to the image. Supports standard formatting and color via the 'colour' feature.",
     )
 

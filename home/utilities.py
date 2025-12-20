@@ -67,7 +67,7 @@ class FeatureBlock(blocks.StructBlock):
     title = blocks.CharBlock(required=True, max_length=150)
     text = blocks.RichTextBlock(
         required=True, 
-        features=RICH_TEXT_BLOCK_FEATURES,
+        # features=RICH_TEXT_BLOCK_FEATURES,
         help_text="Detailed text content for the feature section."
     )
     
