@@ -56,6 +56,7 @@ INSTALLED_APPS = list(set([
     "search",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
+    "wagtail.contrib.sitemaps",
     "wagtail.embeds",
     "wagtail.sites",
     "wagtail.users",
@@ -259,10 +260,8 @@ WAGTAILADMIN_RICH_TEXT_EDITORS = {
                 "ol", "ul", "code", "blockquote", "hr", 
                 
                 # Links and embedding
-                "link", "document-link", "embed", "image", "colour",
-                
-                # Custom Styles (allows for font control/line spacing via CSS classes)
-                "styles",
+                "link", "document-link", "embed", "image", 
+
             ],
             # Custom Style Definitions (These correspond to CSS classes you must define in your static files)
             # This is how you provide "font selection" and "line spacing" control to the user:
@@ -270,10 +269,10 @@ WAGTAILADMIN_RICH_TEXT_EDITORS = {
                 "styles": {
                     "inline": [
                         {"label": "Subtle Emphasis", "type": "SMALL", "element": "span", "class": "text-muted"},
-                        {"label": "Large Highlight", "type": "HIGHLIGHT", "element": "span", "class": "fs-3 text-primary"},
+                        {"label": "Large Highlight", "type": "HIGHLIGHT", "element": "span", "class": "text-primary"},
                         # Use classes like these in your CSS to control line spacing/fonts
-                        {"label": "Wide Line Spacing", "type": "WIDE_SPACE", "element": "p", "class": "line-height-lg"},
-                        {"label": "Narrow Line Spacing", "type": "NARROW_SPACE", "element": "p", "class": "line-height-sm"},
+                        {"label": "Wide Line Spacing", "type": "WIDE_SPACE", "element": "span", "class": "line-height-lg"},
+                        {"label": "Narrow Line Spacing", "type": "NARROW_SPACE", "element": "span", "class": "line-height-sm"},
                     ],
                     "block": [
                         {"label": "Callout Block", "type": "CALLOUT", "element": "div", "class": "callout-block"},
