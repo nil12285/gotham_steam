@@ -1,0 +1,10 @@
+{% load wagtailimages_tags %}
+
+<mj-button
+  href="{{ value.url|add_utm:{
+    'utm_campaign': page.slug,
+    'utm_content': 'primary_cta'
+  } }}"
+>
+  {{ value.text }}
+</mj-button>

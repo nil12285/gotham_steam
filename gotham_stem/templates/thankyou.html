@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags %}
+
+{% block title %}Thank You{% endblock %}
+
+{% block content %}
+<main class="thank-you-section d-flex align-items-center justify-content-center bg-light py-3" style="min-height: 70vh;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-8 col-lg-6 text-center">
+                <div class="mb-4">
+                    <h1 style="font-size: 5.5rem;"><i class="bi bi-check-circle-fill text-primary-green"></i></h1>
+                </div>
+
+                <h1 class="display-4 fw-bold mb-3">THANK YOU FOR SUBSCRIBING!</h1>
+                
+                <p class="lead text-secondary mb-4">
+                    We're so excited to have you join our community!
+                </p>
+
+                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                    <a href="{{site_pages.programs.url }}" class="btn btn-lg px-5 text-white fw-bold shadow-sm bg-dark-blue text-white">
+                        Explore Programs
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

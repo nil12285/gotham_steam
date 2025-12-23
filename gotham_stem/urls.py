@@ -6,8 +6,11 @@ from wagtail.admin import urls as wagtailadmin_urls
 from wagtail import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
 from cast import cast_and_wagtail_urls
-
+from cast.urls import urlpatterns as cast_urls
 from search import views as search_views
+from wagtail.contrib.sitemaps.views import sitemap
+from newsletter.views import newsletter_signup, newsletter_thankyou
+
 
 urlpatterns = [
     path("django-admin/", admin.site.urls),
@@ -37,17 +40,6 @@ urlpatterns = urlpatterns + [
 
 
 
-from django.conf import settings
-from django.urls import include, path
-from django.contrib import admin
-
-from wagtail.admin import urls as wagtailadmin_urls
-from wagtail import urls as wagtail_urls
-from wagtail.documents import urls as wagtaildocs_urls
-from cast.urls import urlpatterns as cast_urls
-from search import views as search_views
-from wagtail.contrib.sitemaps.views import sitemap
-
 urlpatterns = [
     path("django-admin/", admin.site.urls),
     path("admin/", include(wagtailadmin_urls)),
@@ -63,6 +55,8 @@ urlpatterns = [
     
     path('sitemap.xml', sitemap),
 
+    path("newsletter/subscribe/", newsletter_signup, name="subscribe"),
+    path("newsletter/thankyou/", newsletter_thankyou, name="thankyou"),
     path("", include(wagtail_urls)),
 ]
 

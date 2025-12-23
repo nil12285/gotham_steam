@@ -92,10 +92,10 @@ class ProgramAdmin(ModelAdmin):
     add_to_settings_menu = False  # or True to add your model to the Settings sub-menu
     exclude_from_explorer = False # or True to exclude pages of this type from Wagtail's explorer view
     list_display = ('title', 'city', 'status_string', 'first_published_at', 'last_published_at', 'action_buttons')
-    list_filter = ('city',)
+    list_filter = ('gotham_state',)
     search_fields = ('title')
     list_display_add_buttons = 'action_buttons'
-    list_export = ('title', 'city', 'status_string', 'first_published_at', 'last_published_at')
+    list_export = ('title', 'city', 'status_string', 'last_published_at')
     export_filename = 'programs_list_export'
     
     def action_buttons(self, obj):

@@ -11,8 +11,7 @@ DJANGO_VITE_DEV_MODE = False
 DJANGO_VITE["default"]["dev_mode"] = False
 DJANGO_VITE["cast"]["dev_mode"] = False
 
-
-WAGTAILADMIN_BASE_URL = "https://gothamstem.com"
+WAGTAILADMIN_BASE_URL = BASE_URL = "https://gothamstem.com"
 
 # ManifestStaticFilesStorage is recommended in production, to prevent
 # outdated JavaScript / CSS assets being served from cache

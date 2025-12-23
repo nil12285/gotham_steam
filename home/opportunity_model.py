@@ -34,6 +34,12 @@ YES_NO_CHOICES = [
 ]
 
 
+GOTHAM_STATE_CHOICES = [
+    ("pending", "Pending"),
+    ("live", "Llive"),
+    ("archive", "Archive"),
+]
+
 class AbstractBaseFilterModel(models.Model):
     """
     Base model for all dynamic filter choices like ProgramType, Location, etc.
@@ -308,6 +314,11 @@ class Program(WagtailCacheMixin, Page):
     staff_details = models.TextField(null=True, blank=True, help_text="Brief details about the staff/founders.")
     scholarship_details = models.TextField(null=True, blank=True, help_text="Details about scholarship or financial aid.")
     
+    gotham_state = models.CharField(
+        max_length=20,
+        choices=GOTHAM_STATE_CHOICES,
+        default="pending"
+    )
 
     # --- Content Panels ---
     content_panels = Page.content_panels + [
@@ -413,6 +424,7 @@ class Program(WagtailCacheMixin, Page):
                 ], heading="Social & Website Links"),
                 
                 MultiFieldPanel([
+                    FieldPanel('gotham_state'),
                     FieldPanel('application_details'),
                     FieldPanel('attached_files'),
                     FieldPanel('referred_by'),
@@ -425,6 +437,24 @@ class Program(WagtailCacheMixin, Page):
             classname="collapsed" # Optionally collapse this internal section by default
         ),
     ]
+
+
+    def save(self, clean=True, user=None, log_action=False, **kwargs):
+        if self.pk:
+            old_page = Page.objects.get(pk=self.pk).specific
+            was_live = old_page.live
+        else:
+            was_live = False
+        is_live = self.live
+
+        if not was_live and is_live:
+            self.gotham_state = 'live'
+        elif was_live and not is_live:
+            self.gotham_state = 'archive'
+        else: # was_live and is_live | not was_live and not is_live
+            pass
+
+        return super().save(clean, user, log_action, **kwargs)
 
 
     # Override get_context to fetch all live opportunities for initial load (optional)

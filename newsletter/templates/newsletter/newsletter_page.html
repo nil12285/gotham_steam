@@ -1,0 +1,48 @@
+{% load wagtail_newsletter wagtailcore_tags wagtailimages_tags static %}
+
+{% mrml %}
+<mjml>
+    <mj-body>
+        <mj-raw>
+            <!-- Company Header -->
+        </mj-raw>
+        <mj-section background-color="#7091E6">
+            <mj-column>
+                <mj-image align="left" alt="Gotham STEM" height="30px" width="180px"
+                    src="{% newsletter_static 'images/logo.png' %}"></mj-image>
+            </mj-column>
+        </mj-section>
+        <mj-section padding="0px">
+            <mj-column width="600px">
+                {% image page.hero_image width-600 as hero_img %}
+                <mj-image padding="0px" align="left" alt="Gotham STEM" width="600"
+                        src="{{hero_img.full_url}}"></mj-image>
+            </mj-column>
+        </mj-section>
+        
+        {% for block in page.body %}
+        <mj-section padding="0px">
+            <mj-column padding-top="0px">
+                {% include_block block %}
+            </mj-column>
+        </mj-section>
+        {% endfor %}
+        
+        <mj-section background-color="#ffffff" padding="20px">
+            {% if recipients.footer_note %}
+            <mj-column>
+                <mj-text font-size="12px">
+                    {{ recipients.footer_note|newsletter_richtext }}
+                </mj-text>
+            </mj-column>
+            {% endif %}
+            <mj-column >
+                <mj-text align="center" font-size="12px">
+                    <a href="*|UNSUB|*">Unsubscribe</a>
+                </mj-text>
+            </mj-column>
+        </mj-section>
+
+    </mj-body>
+</mjml>
+{% endmrml %}

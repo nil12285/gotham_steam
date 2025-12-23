@@ -10,18 +10,18 @@ from wagtail.admin.rich_text.converters.html_to_contentstate import (
 ) 
 from wagtail.admin.modal_workflow import render_modal_workflow
 
-@hooks.register('insert_global_admin_css')
-def global_admin_css():
-    return format_html(
-        '<link rel="stylesheet" href="{}">', 
-        static('css/bootstrap.min.css')
-    )
+# @hooks.register('insert_global_admin_css')
+# def global_admin_css():
+#     return format_html(
+#         '<link rel="stylesheet" href="{}">', 
+#         static('css/bootstrap.min.css')
+#     )
 
 
-@hooks.register("insert_global_admin_js")
-def add_admin_bootstrap_js():
-    return format_html(
-        '<script src="{}"></script>', 
-        static('js/admin_bootstrap.js')
-    )
+# @hooks.register("insert_global_admin_js")
+# def add_admin_bootstrap_js():
+#     return format_html(
+#         '<script src="{}"></script>', 
+#         static('js/admin_bootstrap.js')
+#     )
 

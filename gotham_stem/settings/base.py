@@ -54,6 +54,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 INSTALLED_APPS = list(set([
     "home",
     "search",
+    "newsletter",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
     "wagtail.contrib.sitemaps",
@@ -109,6 +110,7 @@ TEMPLATES = [
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [
             PROJECT_DIR / "templates",
+            PROJECT_DIR / "newsletter" / "templates",
         ],
         "APP_DIRS": True,
         "OPTIONS": {
@@ -187,39 +189,6 @@ USE_I18N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/6.0/howto/static-files/
-
-STATICFILES_FINDERS = [
-    "django.contrib.staticfiles.finders.FileSystemFinder",
-    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
-]
-
-STATICFILES_DIRS = [
-    PROJECT_DIR / "static",
-]
-
-STATIC_ROOT = BASE_DIR / "static"
-STATIC_URL = "/static/"
-
-MEDIA_ROOT = BASE_DIR / "media"
-MEDIA_URL = "/media/"
-# WAGTAILIMAGES_IMAGE_MODEL = "cast.Image"
-
-DJANGO_VITE_DEV_MODE = True
-
-DJANGO_VITE = {
-    "default": {
-        "dev_mode": True,
-    },
-    "cast": {
-        "dev_mode": True,
-        # This tells Vite where to find the blog's specific manifest file
-        "manifest_path": os.path.join(STATIC_ROOT, "cast", "vite", "manifest.json"),
-        "static_url_prefix": "cast/",
-    }
-}
-
 CAST_IMAGE_FORMATS = ["jpeg", "avif"]
 CAST_BOOTSTRAP_VERSION = 4
 CAST_COMMENTS_ENABLED = False
@@ -294,9 +263,40 @@ WAGTAILSEARCH_BACKENDS = {
     }
 }
 
+
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
-WAGTAILADMIN_BASE_URL = "http://localhost:8000"
+BASE_URL = WAGTAILADMIN_BASE_URL = "http://localhost:8000"
+STATIC_URL = "/static/"
+
+STATICFILES_FINDERS = [
+    "django.contrib.staticfiles.finders.FileSystemFinder",
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+]
+
+STATICFILES_DIRS = [
+    PROJECT_DIR / "static",
+]
+
+STATIC_ROOT = BASE_DIR / "static"
+MEDIA_ROOT = BASE_DIR / "media"
+
+# WAGTAILIMAGES_IMAGE_MODEL = "cast.Image"
+
+DJANGO_VITE_DEV_MODE = True
+
+DJANGO_VITE = {
+    "default": {
+        "dev_mode": True,
+    },
+    "cast": {
+        "dev_mode": True,
+        # This tells Vite where to find the blog's specific manifest file
+        "manifest_path": os.path.join(STATIC_ROOT, "cast", "vite", "manifest.json"),
+        "static_url_prefix": "cast/",
+    }
+}
+
 
 # Allowed file extensions for documents in the document library.
 # This can be omitted to allow all files, but note that this may present a security risk
@@ -305,6 +305,18 @@ WAGTAILADMIN_BASE_URL = "http://localhost:8000"
 WAGTAILDOCS_EXTENSIONS = ['csv', 'docx', 'key', 'odt', 'pdf', 'pptx', 'rtf', 'txt', 'xlsx', 'zip']
 
 
-WAGTAIL_NEWSLETTER_MAILCHIMP_API_KEY = "the-mailchimp-api-key"
-WAGTAIL_NEWSLETTER_FROM_NAME = "Example Newsletter"
-WAGTAIL_NEWSLETTER_REPLY_TO = "newsletter@example.com"
+MAILCHIMP_API_KEY =  get_config_value('mailchimp','API_KEY')
+MAILCHIMP_SERVER =  get_config_value('mailchimp','SERVER')
+MAILCHIMP_AUDIENCE_ID =  get_config_value('mailchimp','AUDIENCE_ID')
+
+WAGTAIL_NEWSLETTER_MAILCHIMP_API_KEY = MAILCHIMP_API_KEY
+WAGTAIL_NEWSLETTER_FROM_NAME = get_config_value('newsletter','FROM_NAME')
+WAGTAIL_NEWSLETTER_REPLY_TO = get_config_value('newsletter','REPLY_TO')
+WAGTAIL_NEWSLETTER_CACHE_TIMEOUT = 3600
+WAGTAIL_NEWSLETTER_RECIPIENTS_MODEL = "newsletter.GothamNewsletterRecipient"
+
+
+NEWSLETTER_UTM_DEFAULTS = {
+    "utm_source": "newsletter",
+    "utm_medium": "email",
+}

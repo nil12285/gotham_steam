@@ -10,7 +10,6 @@ from wagtail.images.blocks import ImageChooserBlock
 from modelcluster.fields import ParentalKey, ParentalManyToManyField
 from modelcluster.contrib.taggit import ClusterTaggableManager
 from taggit.models import TaggedItemBase
-from wagtail_newsletter.models import NewsletterPageMixin
 from .utilities import (
     FeatureBlock,
     RawHTMLBlock,
@@ -18,7 +17,6 @@ from .utilities import (
 from wagtail.images.models import Image  # Import Wagtail Image model for explicit FK
 from wagtail_color_panel.fields import ColorField
 from wagtail_color_panel.blocks import NativeColorBlock
-from wagtail_newsletter.models import NewsletterPageMixin
 from .utilities import (
     FEATURE_LAYOUT_CHOICES,
     LINE_HEIGHT_CHOICES,
@@ -109,6 +107,7 @@ class HomePage(Page):
         "home.ContactPage",
         "home.PrivacyPolicyPage",
         "home.TermsAndServicesPage",
+        "newsletter.NewsletterIndexPage"
     ]
 
 
@@ -149,5 +148,4 @@ class TermsAndServicesPage(Page):
     content_panels = Page.content_panels + [
         FieldPanel("body"),
     ]
-
 

@@ -77,21 +77,25 @@ a:hover {
     border-radius: 0.3rem;
     overflow: hidden;
     display: flex;
-}
+}footer-input-group
 
-.footer-input-group .form-control {
+.newsletter-form .form-control {
     background-color: transparent !important;
     border: none;
-    color: var(--color-white);
+    color: var(--color-dark-blue);
     padding: 0.75rem 1rem;
     font-size: 0.9rem;
 }
 
-.footer-input-group .form-control::placeholder {
-    color: rgba(255, 255, 255, 0.6);
+#newsletter-email {
+    min-width: 270px !important;
 }
 
-.footer-input-group .btn {
+.newsletter-form .form-control::placeholder {
+    color: var(--color-dark-blue);
+}
+
+.newsletter-form .btn {
     background-color: transparent !important;
     border: none;
     color: var(--color-white);
@@ -373,3 +377,14 @@ a:hover {
     background-color: rgba(255, 255, 255, 0.05) !important;
     transition: background-color 0.3s ease;
 }
+
+
+.django-messages .alert {
+    margin-bottom: 0px;
+}
+
+.flash { padding: 10px; margin-bottom: 10px; border-radius: 4px; }
+.flash-success { background: #d4edda; color: #155724; }
+.flash-error { background: #f8d7da; color: #721c24; }
+.flash-warning { background: #fff3cd; color: #856404; }
+.flash-info { background: #d1ecf1; color: #0c5460; }

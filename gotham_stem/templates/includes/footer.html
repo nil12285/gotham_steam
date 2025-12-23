@@ -59,9 +59,14 @@
             <div class="col-lg-4 pt-3">
                 
                 {# Newsletter Input Group #}
-                <div class="input-group footer-input-group mb-4">
-                    <input type="email" class="form-control" placeholder="Enter your email address">
-                    <button class="btn" type="button">SUBSCRIBE</button>
+                <div id="subscribe-form row" class="input-group footer-input-group mb-4">
+                    <form id="newsletter-form" class="d-inline-flex">
+                        {% csrf_token %} 
+                        <div class="newsletter-form d-grid gap-md-4 d-md-flex">
+                            <input type="email" class="form-control" id="newsletter-email" name="email" placeholder="Enter your email address" required>
+                            <button class="btn btn-dark-blue" type="submit">SUBSCRIBE</button>
+                        </div>
+                    </form>
                 </div>
                 
                 {# Social Media #}
