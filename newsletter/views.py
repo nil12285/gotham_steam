@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.http import JsonResponse
 import mailchimp_marketing as MailchimpMarketing
-from newsletter.models import GothamNewsletterRecipient
+from newsletter.models import GothamSubscriber
 from django.views.decorators.http import require_POST, require_GET
 from django.template.response import TemplateResponse
 from logging import getLogger
@@ -31,9 +31,9 @@ def newsletter_signup(request):
     if not email:
         return JsonResponse({'status': 'error', 'message': 'Email is required.'}, status=400)
 
-    recipient, created = GothamNewsletterRecipient.objects.update_or_create(
+    recipient, created = GothamSubscriber.objects.update_or_create(
         email=email,
-        active=0 
+        active=1
     )
     
     try:

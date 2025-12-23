@@ -81,9 +81,9 @@ class NewsletterPage(NewsletterPageMixin, Page):
 
 
 
-class GothamNewsletterRecipient(NewsletterRecipients):
+class GothamSubscriber(models.Model):
     email = models.EmailField(unique=True)
-    active = models.BooleanField(default=False)
+    active = models.BooleanField(default=True)
     created = CreationDateTimeField(_('created'))
     modified = ModificationDateTimeField(_('modified'), auto_now=True)
 
@@ -95,5 +95,8 @@ class GothamNewsletterRecipient(NewsletterRecipients):
         super().save(**kwargs)
 
     class Meta:
-        get_latest_by = 'modified'
+        get_latest_by = 'created'
         verbose_name = "Subscriber"
+
+    def __str__(self):
+        return self.email

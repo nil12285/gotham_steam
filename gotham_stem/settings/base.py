@@ -313,7 +313,8 @@ WAGTAIL_NEWSLETTER_MAILCHIMP_API_KEY = MAILCHIMP_API_KEY
 WAGTAIL_NEWSLETTER_FROM_NAME = get_config_value('newsletter','FROM_NAME')
 WAGTAIL_NEWSLETTER_REPLY_TO = get_config_value('newsletter','REPLY_TO')
 WAGTAIL_NEWSLETTER_CACHE_TIMEOUT = 3600
-WAGTAIL_NEWSLETTER_RECIPIENTS_MODEL = "newsletter.GothamNewsletterRecipient"
+WAGTAIL_NEWSLETTER_CAMPAIGN_BACKEND = "wagtail_newsletter.campaign_backends.mailchimp.MailchimpCampaignBackend"
+WAGTAIL_NEWSLETTER_RECIPIENTS_MODEL = "wagtail_newsletter.NewsletterRecipients"
 
 
 NEWSLETTER_UTM_DEFAULTS = {
