@@ -28,13 +28,12 @@
 {% if selected_filters %}
     <div class="active-filters-container mb-4 d-flex flex-wrap align-items-center gap-2 px-md-4">
         <span class="text-muted small fw-bold me-1">Active Filters:</span>
-        
         {% for key, values in selected_filters.items %}
             {% if key != 'q' %} {# Skip the search query text if you only want category badges #}
                 {% for value_slug in values %}
                     <button type="button" 
                             class="btn btn-outline-primary btn-sm rounded-pill d-flex align-items-center py-1 ps-3 pe-2 shadow-sm filter-badge"
-                            onclick="removeFilter('{{ key }}', '{{ value_slug }}')">
+                            onclick='$(`input[name="${name}"][value=""]`)'>
                         
                         <span class="me-2">
                             {% for field_name, filter_config in program_filters.items %}
@@ -94,7 +93,7 @@
         <div class="row mt-2">
             <div class="col-12">
                 <div class="small text-secondary">
-                    {{ program.program_summary }}
+                    {{ program.specific.search_description }}
                 </div>
             </div>
         </div>

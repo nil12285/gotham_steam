@@ -50,10 +50,10 @@ a:hover {
     background-color: var(--color-medium-purple) !important;
 }
 
-.border-dark-blue {border-color: var(--color-dark-blue);}
-.border-light-blue {border-color: var(--color-light-blue);}
-.border-light-purple{border-color: var(--color-light-purple);}
-.border-medium-purple{border-color: var(--color-medium-purple);}
+.border-dark-blue {border-color: var(--color-dark-blue) !important;}
+.border-light-blue {border-color: var(--color-light-blue) !important;}
+.border-light-purple {border-color: var(--color-light-purple) !important;}
+.border-medium-purple {border-color: var(--color-medium-purple) !important;}
 
 .placeholder-dark-blue::placeholder{color: var(--color-dark-blue);}
 .placeholder-light-blue::placeholder{color: var(--color-light-blue);}
@@ -67,6 +67,12 @@ a:hover {
     color: var(--color-white);
 }
 
+.btn.text-medium-purple:hover {
+    background-color: var(--color-light-blue);
+}
+
+
+
 .footer-dark-blue {
     background-color: var(--color-dark-blue);
     color: var(--color-white);
@@ -77,7 +83,7 @@ a:hover {
     border-radius: 0.3rem;
     overflow: hidden;
     display: flex;
-}footer-input-group
+}
 
 .newsletter-form .form-control {
     background-color: transparent !important;
