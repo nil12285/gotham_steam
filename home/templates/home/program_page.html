@@ -5,7 +5,7 @@
 
 {% block content %}
     <div class="container py-4 mt-2">
-        {# TOP HEADER ROW: Title and Logo #}
+        
         <div class="row align-items-start mb-2">
             <div class="col-md-7 col-12">
                 <nav aria-label="breadcrumb">
@@ -17,14 +17,12 @@
                 </nav>
                 <h1 class="display-4 text-dark-blue display-title text-uppercase mb-0">{{ page.title }}</h1>
                 <p class="h5 text-secondary mb-3">{{ page.city }}, {{ page.state }}</p>
-
-                {# MOBILE CONTACT SECTION (Visible on mobile, hidden on desktop) #}
+                
                 <div class="contact-section d-block d-md-none mt-3 mb-4">
                     {% include "home/blocks/program_contact_block.html" %}
                 </div>
             </div>
 
-            {# LOGO COLUMN: Aligned with title on desktop #}
             <div class="col-md-5 d-none d-md-block text-center pt-4">
                 {% if page.logo_image %}
                     {% image page.logo_image width-400 as logo_img %}
@@ -33,12 +31,10 @@
             </div>
         </div>
 
-        {# MAIN CONTENT ROW #}
+        
         <div class="row g-5">
-            {# LEFT COLUMN: Desktop Contact + Overview #}
+            
             <div class="col-12 col-md-6 order-2 order-md-1">
-                
-                {# DESKTOP CONTACT SECTION (Hidden on mobile, visible on desktop) #}
                 <div class="contact-section d-none d-md-block mb-5">
                     {% include "home/blocks/program_contact_block.html" %}
                 </div>
@@ -56,7 +52,7 @@
                 </div>
             </div>
 
-            {# RIGHT COLUMN: Essential Information #}
+            
             <div class="col-12 col-md-6 order-1 order-md-2">
                 <div class="sticky-sidebar-container sticky-top">
                     <div class="card border-0 rounded-0 p-4 shadow-sm" style="background-color: #E2E4E9;">
