@@ -388,3 +388,40 @@ a:hover {
 .flash-error { background: #f8d7da; color: #721c24; }
 .flash-warning { background: #fff3cd; color: #856404; }
 .flash-info { background: #d1ecf1; color: #0c5460; }
+
+
+/* Ensure the mobile menu doesn't take up the full screen width on larger phones/tablets */
+@media (max-width: 991px) {
+    #offcanvasNavbar.offcanvas-end {
+        width: 300px; /* Adjust this width to your preference */
+        border-left: 1px solid rgba(255,255,255,0.2);
+    }
+}
+
+/* Fix for the close button color consistency */
+.btn-close-white {
+    filter: invert(1) grayscale(100%) brightness(200%);
+}
+
+
+/* Custom styles for the Subscribe Modal */
+#subscribeModal .modal-content {
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+#subscribeModal .form-control:focus {
+    border-color: var(--color-light-purple);
+    box-shadow: 0 0 0 0.25rem rgba(112, 145, 230, 0.25);
+}
+
+#subscribeModal .btn-dark-blue {
+    background-color: var(--color-dark-blue);
+    border: none;
+    transition: transform 0.2s;
+}
+
+#subscribeModal .btn-dark-blue:hover {
+    transform: translateY(-2px);
+    background-color: var(--color-medium-purple);
+}

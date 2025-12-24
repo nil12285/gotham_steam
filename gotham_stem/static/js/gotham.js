@@ -66,4 +66,47 @@ $(function() {
     });
 
 
+    const $subscribeForm = $('#popup-subscribe-form');
+    
+    if ($subscribeForm.length) {
+        $subscribeForm.on('submit', function(e) {
+            e.preventDefault();
+            
+            const $submitBtn = $(this).find('button');
+            const email = $(this).find('input[type="email"]').val();
+            
+            $.ajax({
+                url: '/newsletter/subscribe/', 
+                type: 'POST',
+                data: {
+                    'email': email,
+                    // 'csrfmiddlewaretoken': csrftoken
+                },
+                success: function(data) {
+                    addDjangoMessage("Success! Please check your email to confirm.", "success");
+                    setTimeout(() => {
+                        const modalElement = document.getElementById('subscribeModal');
+                        const modalInstance = bootstrap.Modal.getOrCreateInstance(modalElement);
+                        
+                        if (modalInstance) {
+                            modalInstance.hide();
+                        }
+                        
+                        // Reset form
+                        $subscribeForm[0].reset();
+                        $submitBtn.html('SUBSCRIBE')
+                                .removeClass('btn-success')
+                                .addClass('btn-dark-blue');
+                    }, 800);
+                },
+                error: function(xhr) {
+                    const errorMsg = xhr.responseJSON ? xhr.responseJSON.message : "An error occurred.";
+                    addDjangoMessage("Error: " + errorMsg, "danger")
+                }
+            });
+            
+        });
+    }   
+
+
 });
