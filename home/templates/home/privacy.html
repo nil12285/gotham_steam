@@ -27,7 +27,7 @@
         <div class="row align-items-start gx-5">
             <div class="col">
                 <h1 class="display-4 fw-normal mb-4 text-dark-blue">{{page.title}}</h1>
-                <span>page.last_published_at|date</span>
+                <label class="h5">Last updated:</label>&nbsp;<span>{{page.last_published_at|date}}</span>
                 <div class="about-content lead-sm">
                     {{page.body_text|richtext}}
                 </div>

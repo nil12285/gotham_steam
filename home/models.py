@@ -110,7 +110,7 @@ class HomePage(Page):
         "home.GuidancePage",
         "home.AboutPage",
         "home.PrivacyPolicyPage",
-        "home.TermsAndServicesPage",
+        "home.TermsAndConditionsPage",
         "newsletter.NewsletterIndexPage",
     ]
 
@@ -147,6 +147,22 @@ class AboutPage(Page):
 class PrivacyPolicyPage(Page):
     class Meta:
         verbose_name = "Privacy Policy"
+
+    template = 'home/privacy.html'
+    parent_page_types = ['home.HomePage']
+    
+    body_text = RichTextField(
+        blank=True
+    )
+
+    content_panels = Page.content_panels + [
+        FieldPanel('body_text')
+    ]
+
+
+class TermsAndConditionsPage(Page):
+    class Meta:
+        verbose_name = "Terms & Conditions"
 
     template = 'home/privacy.html'
     parent_page_types = ['home.HomePage']
@@ -216,18 +232,4 @@ class GuidancePage(Page):
         FieldPanel('mathing_program'),
     ]
 
-
-
-class TermsAndServicesPage(Page):
-    parent_page_types = ['home.HomePage']
-    body = StreamField(
-        [
-            ("paragraph", blocks.RichTextBlock()),
-            ("raw_html", RawHTMLBlock()),
-        ],
-        use_json_field=True,
-    )
-    content_panels = Page.content_panels + [
-        FieldPanel("body"),
-    ]
 
