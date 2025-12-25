@@ -13,7 +13,7 @@ def site_info(request):
         top_level_pages = root_page.get_children().live().in_menu()
         
         if not data:
-            pages = {page.slug: page for page in top_level_pages}
+            pages = {page.slug.replace("-","_"): page for page in top_level_pages}
             data = {
                 "site_pages": pages,
                 "site" : site

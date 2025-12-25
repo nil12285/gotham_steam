@@ -142,7 +142,23 @@ class AboutPage(Page):
         FieldPanel('body_text')
     ]
 
+
+
+class PrivacyPolicyPage(Page):
+    class Meta:
+        verbose_name = "Privacy Policy"
+
+    template = 'home/privacy.html'
+    parent_page_types = ['home.HomePage']
     
+    body_text = RichTextField(
+        blank=True
+    )
+
+    content_panels = Page.content_panels + [
+        FieldPanel('body_text')
+    ]
+
 
 
 class GuidanceSectionBlock(blocks.StructBlock):
@@ -200,22 +216,6 @@ class GuidancePage(Page):
         FieldPanel('mathing_program'),
     ]
 
-
-
-
-
-class PrivacyPolicyPage(Page):
-    parent_page_types = ['home.HomePage']
-    body = StreamField(
-        [
-            ("paragraph", blocks.RichTextBlock()),
-            ("raw_html", RawHTMLBlock()),
-        ],
-        use_json_field=True,
-    )
-    content_panels = Page.content_panels + [
-        FieldPanel("body"),
-    ]
 
 
 class TermsAndServicesPage(Page):
