@@ -1,29 +1,18 @@
 from django.db import models
 from django.utils.text import slugify
 from django.core.cache import cache
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.db.models import Q
+from wagtail import blocks
 from wagtail.models import Page, Orderable
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel, InlinePanel
 from wagtail.fields import StreamField, RichTextField
 from wagtail import blocks
-from wagtail.images.blocks import ImageChooserBlock
-from modelcluster.fields import ParentalKey, ParentalManyToManyField
-from modelcluster.contrib.taggit import ClusterTaggableManager
-from taggit.models import TaggedItemBase
+from modelcluster.fields import ParentalKey
 from .utilities import (
     FeatureBlock,
     RawHTMLBlock,
 )
-from wagtail.images.models import Image  # Import Wagtail Image model for explicit FK
-from wagtail_color_panel.fields import ColorField
-from wagtail_color_panel.blocks import NativeColorBlock
-from .utilities import (
-    FEATURE_LAYOUT_CHOICES,
-    LINE_HEIGHT_CHOICES,
-    TEXT_ALIGNMENT_CHOICES,
-)
 from .opportunity_model import *
+
 
 class AbstractFilterModel(models.Model):
     
@@ -118,22 +107,75 @@ class HomePage(Page):
     subpage_types = [
         "home.ProgramIndexPage", 
         "cast.Blog",
-        "home.ContactPage",
+        "home.GuidancePage",
         "home.PrivacyPolicyPage",
         "home.TermsAndServicesPage",
-        "newsletter.NewsletterIndexPage"
+        "newsletter.NewsletterIndexPage",
     ]
 
 
     
+class SectionBlock(blocks.StructBlock):
+    title = blocks.CharBlock(required=True)
+    nav_titile = blocks.CharBlock(required=True)
+    anchor_id = blocks.CharBlock(
+        required=True, 
+        help_text="A unique ID for scrolling (e.g., 'subject-matter'). No spaces."
+    )
+    content = blocks.RichTextBlock()
+
+    class Meta:
+        template = "blocks/guidance_section_block.html"
+        icon = "placeholder"
 
 
-class ContactPage(Page):
+
+class GuidancePage(Page):
+    class Meta:
+        verbose_name = "Guidance"
+
+    template = 'home/guidance.html'
     parent_page_types = ['home.HomePage']
-    intro = models.TextField(blank=True)
+
+    hero_image = models.ForeignKey(
+        "wagtailimages.Image",
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="+",
+        help_text="The large background image for the hero section.",
+    )
+
+    intro_title = RichTextField(
+        max_length=500,
+        blank=True
+    )
+
+    intro_text = RichTextField(
+        max_length=500,
+        blank=True
+    )
+
+    
+
+    types_of_program = StreamField([
+        ('types_of_program', SectionBlock()),
+    ], use_json_field=True, blank=True)
+
+    mathing_program = StreamField([
+        ('mathing_program', SectionBlock()),
+    ], use_json_field=True, blank=True)
+    
     content_panels = Page.content_panels + [
-        FieldPanel("intro", classname="full"),
+        FieldPanel('hero_image'),
+        FieldPanel('intro_title'),
+        FieldPanel('intro_text'),
+        FieldPanel('types_of_program'),
+        FieldPanel('mathing_program'),
     ]
+
+
+
 
 
 class PrivacyPolicyPage(Page):

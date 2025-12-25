@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags wagtailimages_tags filters %}
+
+{% block extra_css %}
+<style>
+    .nav.sticky-top {
+        top: 80px; 
+        height: fit-content;
+    }
+    section[id] {
+        scroll-margin-top: 100px;
+    }
+</style>
+{% endblock %}
+
+
+{% block content %}
+{% image page.hero_image fill-1440x600 as hero_img %}
+<section class="hero-section text-white text-center  d-none d-md-flex  align-items-center justify-content-center" style="
+        background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('{{ hero_img.url }}') center/cover no-repeat;">
+    <div class="container py-5">
+    </div>
+</section>
+
+
+<section class="hero-section bg-light-purple">
+    <div class="container-fluid px-5">
+        <div class="container py-2"
+            style="{% if self.text_color %}color: {{ self.text_color }} !important;{% else %}{% endif %}">
+            <div class="row align-items-center g-5 text-dark-blue text-bold">
+                <div class="col">{{ page.intro_title|richtext }}</div>
+            </div>
+            <div class="row align-items-center g-5 text-white mt-2">
+                <div class="col">{{ page.intro_text|richtext }}</div>
+            </div>    
+        </div>
+    </div>
+</section>
+
+<div class="container my-5">
+    <div class="row">
+        <aside class="d-none d-md-block col-md-4 col-lg-3 mb-4">
+            <div class="nav p-4 bg-light rounded shadow-sm sticky-top" style="top: 10rem; z-index: 1020;">
+                <h6 class="text-uppercase fw-bold text-secondary mb-3">Types of Programs</h6>
+                <ul class="list-unstyled mb-5">
+                    {% for ptype in page.types_of_program %}
+                    <li class="mb-2">
+                        <a href="#{{ptype.value.anchor_id}}" class="text-decoration-none text-muted">
+                            {{ptype.value.nav_titile|title}}
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+
+                <h6 class="text-uppercase fw-bold text-secondary mb-3">Matching the Program</h6>
+                <ul class="list-unstyled">
+                    {% for ptype in page.mathing_program %}
+                    <li class="mb-2">
+                        <a href="#{{ptype.value.anchor_id}}" class="text-decoration-none text-muted">
+                            {{ptype.value.nav_titile|title}}
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </aside>
+
+        <main class="col-md-8 col-lg-9 ps-md-5">
+            <h1 class="display-6 fw-normal text-success mb-4">What types of STEM programs are out there?</h1>
+            <p class="lead text-muted mb-5">
+                STEM programs come in all shapes and sizes, and some aren't always obvious. 
+                Knowing the different types can make it easier to find one that's a great fit for you.
+            </p>
+
+            {% for ptype in page.types_of_program %}
+            <section id="{{ptype.value.anchor_id}}" class="mb-5" style="scroll-margin-top: 120px;">
+                <h2 class="h3 text-success mb-3">{{ptype.value.title|title}}</h2>
+                {{ptype.value.content|richtext}}
+            </section>
+            {% endfor %}
+        
+            <h1 class="display-6 fw-normal text-success mb-4">Matching the program to your child & family</h1>
+            <p class="lead text-muted mb-5">
+                Once you have a sense of the types of programs that might be out there,
+                the next step is to align them with your child's unique prof ile and your
+                family's practicalities
+            </p>
+
+            {% for ptype in page.mathing_program %}
+            <section id="{{ptype.value.anchor_id}}" class="mb-5" style="scroll-margin-top: 120px;">
+                <h2 class="h3 text-success mb-3">{{ptype.value.title|title}}</h2>
+                {{ptype.value.content|richtext}}
+            </section>
+            {% endfor %}
+        </main>
+    </div>
+</div>
+
+{% endblock content %}
