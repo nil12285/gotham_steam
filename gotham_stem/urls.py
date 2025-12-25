@@ -10,7 +10,7 @@ from cast.urls import urlpatterns as cast_urls
 from search import views as search_views
 from wagtail.contrib.sitemaps.views import sitemap
 from newsletter.views import newsletter_signup, newsletter_thankyou
-
+from home.views import ContactUs
 
 urlpatterns = [
     path("django-admin/", admin.site.urls),
@@ -54,11 +54,13 @@ urlpatterns = [
     path("cast/", include((cast_urls, "cast"), namespace="cast")),
     
     path('sitemap.xml', sitemap),
-
+    path('contact-us/<str:mode>/', ContactUs.as_view(),name='contact-us'),
+    path('contact-us/', ContactUs.as_view(),name='contact-us-custom'),
     path("newsletter/subscribe/", newsletter_signup, name="subscribe"),
     path("newsletter/thankyou/", newsletter_thankyou, name="thankyou"),
     path("", include(wagtail_urls)),
 ]
+
 
 
 if settings.DEBUG:

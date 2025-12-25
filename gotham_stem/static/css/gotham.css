@@ -65,12 +65,40 @@ a:hover {
 .btn-dark-blue {
     background-color: var(--color-dark-blue);
     color: var(--color-white);
+    border-color: var(--color-dark-blue) !important;
+}
+
+.btn-dark-green {
+    background-color: var(--color-primary-green);
+    color: var(--color-white);
+    border-color: var(--color-primary-green) !important;
+}
+
+.btn-dark-green:hover {
+    color: var(--color-primary-green)
+}
+.btn-dark-blue:hover {
+    color: var(--color-dark-blue)
 }
 
 .btn.text-medium-purple:hover {
     background-color: var(--color-light-blue);
 }
 
+.alert-error {
+	--bs-alert-color: var(--bs-danger-text-emphasis);
+	--bs-alert-bg: var(--bs-danger-bg-subtle);
+	--bs-alert-border-color: var(--bs-danger-border-subtle);
+	--bs-alert-link-color: var(--bs-danger-text-emphasis);
+}
+
+
+.breadcrumb li:last-child {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex: 1;
+}
 
 
 .footer-dark-blue {
@@ -122,6 +150,7 @@ a:hover {
 
 .footer-link:hover {
     opacity: 1;
+    color: var(--color-light-blue);
 }
 
 .full-width-section {

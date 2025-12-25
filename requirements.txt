@@ -38,4 +38,4 @@ django-cast==0.2.50
 django-allauth==65.13.1
 wagtail-modeladmin==2.2.0
 wagtail-cache==3.0.0
-mailchimp-marketing==3.0.80
+mailchimp-marketing==3.0.80 

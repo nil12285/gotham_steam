@@ -119,6 +119,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                'wagtail.contrib.settings.context_processors.settings',
                 "home.context_processors.site_info",
             ],
         },
@@ -305,13 +306,13 @@ DJANGO_VITE = {
 WAGTAILDOCS_EXTENSIONS = ['csv', 'docx', 'key', 'odt', 'pdf', 'pptx', 'rtf', 'txt', 'xlsx', 'zip']
 
 
-MAILCHIMP_API_KEY =  get_config_value('mailchimp','API_KEY')
-MAILCHIMP_SERVER =  get_config_value('mailchimp','SERVER')
-MAILCHIMP_AUDIENCE_ID =  get_config_value('mailchimp','AUDIENCE_ID')
+MAILCHIMP_API_KEY =  get_config_value('mailchimp','api_key')
+MAILCHIMP_SERVER =  get_config_value('mailchimp','server')
+MAILCHIMP_AUDIENCE_ID =  get_config_value('mailchimp','audience_id')
 
 WAGTAIL_NEWSLETTER_MAILCHIMP_API_KEY = MAILCHIMP_API_KEY
-WAGTAIL_NEWSLETTER_FROM_NAME = get_config_value('newsletter','FROM_NAME')
-WAGTAIL_NEWSLETTER_REPLY_TO = get_config_value('newsletter','REPLY_TO')
+WAGTAIL_NEWSLETTER_FROM_NAME = get_config_value('newsletter','from_name')
+WAGTAIL_NEWSLETTER_REPLY_TO = get_config_value('newsletter','reply_to')
 WAGTAIL_NEWSLETTER_CACHE_TIMEOUT = 3600
 WAGTAIL_NEWSLETTER_CAMPAIGN_BACKEND = "wagtail_newsletter.campaign_backends.mailchimp.MailchimpCampaignBackend"
 WAGTAIL_NEWSLETTER_RECIPIENTS_MODEL = "wagtail_newsletter.NewsletterRecipients"
@@ -321,3 +322,8 @@ NEWSLETTER_UTM_DEFAULTS = {
     "utm_source": "newsletter",
     "utm_medium": "email",
 }
+
+
+RECAPTCHA_SITE_KEY = get_config_value('google','recaptcha_site_key')
+GOOGLE_API_KEY = get_config_value('google','api_key')
+GOOGLE_PROJECT_ID = get_config_value('google','project_id')
