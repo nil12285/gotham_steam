@@ -108,14 +108,44 @@ class HomePage(Page):
         "home.ProgramIndexPage", 
         "cast.Blog",
         "home.GuidancePage",
+        "home.AboutPage",
         "home.PrivacyPolicyPage",
         "home.TermsAndServicesPage",
         "newsletter.NewsletterIndexPage",
     ]
 
 
+
+class AboutPage(Page):
+    class Meta:
+        verbose_name = "About"
+
+    template = 'home/about.html'
+    parent_page_types = ['home.HomePage']
+
+
+    founder_image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
     
-class SectionBlock(blocks.StructBlock):
+    body_text = RichTextField(
+        max_length=2000,
+        blank=True
+    )
+
+    content_panels = Page.content_panels + [
+        FieldPanel('founder_image'),
+        FieldPanel('body_text')
+    ]
+
+    
+
+
+class GuidanceSectionBlock(blocks.StructBlock):
     title = blocks.CharBlock(required=True)
     nav_titile = blocks.CharBlock(required=True)
     anchor_id = blocks.CharBlock(
@@ -123,10 +153,6 @@ class SectionBlock(blocks.StructBlock):
         help_text="A unique ID for scrolling (e.g., 'subject-matter'). No spaces."
     )
     content = blocks.RichTextBlock()
-
-    class Meta:
-        template = "blocks/guidance_section_block.html"
-        icon = "placeholder"
 
 
 
@@ -159,11 +185,11 @@ class GuidancePage(Page):
     
 
     types_of_program = StreamField([
-        ('types_of_program', SectionBlock()),
+        ('types_of_program', GuidanceSectionBlock()),
     ], use_json_field=True, blank=True)
 
     mathing_program = StreamField([
-        ('mathing_program', SectionBlock()),
+        ('mathing_program', GuidanceSectionBlock()),
     ], use_json_field=True, blank=True)
     
     content_panels = Page.content_panels + [

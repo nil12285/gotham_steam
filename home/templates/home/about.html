@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags wagtailimages_tags filters %}
+
+{%block title%}{{page.title}}{% endblock%}
+
+{% block content %}
+<section class="about-section py-5">
+    <div class="container py-4">
+        <div class="row align-items-start gx-5">
+            <div class="col-lg-8 order-2 order-md-1">
+                <h1 class="display-4 fw-normal mb-4">{{page.title}}</h1>
+                
+                <div class="about-content lead-sm">
+                    {{page.body_text|richtext}}
+                </div>
+            </div>
+
+            <div class="col-lg-4 mt-md-5 mt-lg-0 order-1 order-md-2 text-center pt-md-5">
+                <div class="founder-image-wrapper pt-md-5">
+                    {% if page.founder_image %}
+                    {% image page.founder_image width-200 as founder_img %}
+                    <img src="{{founder_img.url}}" alt="Founder of Gotham Stem" class="img-fluid rounded mb-2 shadow">
+                    <p class="fst-italic opacity-75 mt-2">Founder, Gotham Stem</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{% endblock content %}

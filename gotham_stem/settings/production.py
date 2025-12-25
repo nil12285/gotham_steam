@@ -1,6 +1,7 @@
 from .base import *
 
 DEBUG = False
+ENV = 'prod'
 SECRET_KEY = get_config_value('secret', 'key')
 ALLOWED_HOSTS = ["*"]
 

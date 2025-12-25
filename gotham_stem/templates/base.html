@@ -34,7 +34,7 @@
     {% endblock %}
 </head>
 
-<body class="{% block body_class %}{% endblock %}">
+<body class="{% block body_class %}{% endblock %}" data-bs-spy="scroll" data-bs-target="#sidebar-nav" data-bs-offset="120">
     {% wagtailuserbar %}
 
     {% include "includes/header.html" %}

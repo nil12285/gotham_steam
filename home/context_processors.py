@@ -1,6 +1,6 @@
 from django.core.cache import cache
-from wagtail.models import Site, Page
-
+from wagtail.models import Site
+from django.conf import settings
 
 def site_info(request):
     site = Site.find_for_request(request)
@@ -9,7 +9,7 @@ def site_info(request):
         top_level_pages = root_page.get_children().live().in_menu()
         cache_key = f"site_pages_{root_page.id}"
 
-        data = cache.get(cache_key)
+        data = cache.get(cache_key) if settings.ENV == 'prod' else None
         top_level_pages = root_page.get_children().live().in_menu()
         
         if not data:

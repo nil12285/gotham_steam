@@ -20,6 +20,7 @@ PROJECT_DIR = Path(__file__).resolve().parent.parent
 BASE_DIR = PROJECT_DIR.parent
 SITE_ID = 1
 DEBUG_LEVEL = 'INFO'
+ENV = 'local'
 try:
     config = configparser.SafeConfigParser(allow_no_value=True)
 except:
