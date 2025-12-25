@@ -1,9 +1,10 @@
 from django.db import models
 from django.utils.text import slugify
+from django.core.cache import cache
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
-from wagtail.models import Page
-from wagtail.admin.panels import FieldPanel, MultiFieldPanel
+from wagtail.models import Page, Orderable
+from wagtail.admin.panels import FieldPanel, MultiFieldPanel, InlinePanel
 from wagtail.fields import StreamField, RichTextField
 from wagtail import blocks
 from wagtail.images.blocks import ImageChooserBlock
@@ -43,10 +44,27 @@ class AbstractFilterModel(models.Model):
 
 
 
+class HomePageFeaturedPost(Orderable):
+    page = ParentalKey(
+        "HomePage", 
+        related_name="featured_posts", 
+        on_delete=models.CASCADE
+    )
+    post = models.ForeignKey(
+        "cast.Post", 
+        on_delete=models.CASCADE, 
+        related_name="+"
+    )
+
+    panels = [
+        FieldPanel("post"),
+    ]
+
 
 class HomePage(Page):
     class Meta:
         verbose_name = "Gotham Homepage"
+
     parent_page_types = ['wagtailcore.Page']
     page_ptr = models.OneToOneField(
         Page,
@@ -73,16 +91,17 @@ class HomePage(Page):
         use_json_field=True,
         blank=True,
     )
-    
-    featured_blogs = ParentalManyToManyField(
-        "cast.Post",
-        blank=True,
-        help_text="Select up to 3 articles to feature."
-    )
 
     @property
-    def featured_blogs_list(self):
-        return self.featured_blogs.all().specific()
+    def featured_post_list(self):
+        cache_key = 'home_page_featured_post_list'
+        data = cache.get(cache_key)
+        if not data:
+            data = [item.post for item in self.featured_posts.all().select_related('post')]
+            cache.set(cache_key, data, 3600)
+
+        return data
+    
 
     content_panels = Page.content_panels + [
         MultiFieldPanel(
@@ -93,12 +112,7 @@ class HomePage(Page):
             heading="1. Hero Section Content",
         ),
         FieldPanel("body", heading="2-4. Feature Blocks"),
-        MultiFieldPanel(
-            [
-                FieldPanel("featured_blogs"),
-            ],
-            heading="5. Featured Insights & Resources",
-        ),
+        InlinePanel("featured_posts", label="Featured Posts", max_num=3),
     ]
 
     subpage_types = [

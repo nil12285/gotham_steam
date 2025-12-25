@@ -123,6 +123,7 @@ a:hover {
 
 #newsletter-email {
     min-width: 270px !important;
+    background-color: var(--color-white) !important;
 }
 
 .newsletter-form .form-control::placeholder {
@@ -460,3 +461,19 @@ a:hover {
     transform: translateY(-2px);
     background-color: var(--color-medium-purple);
 }
+
+
+.block-heading {
+    font-size: 2.5rem;
+    color: var(--color-dark-gray);
+}
+
+.ellipsis-3-lines {
+    line-height: 1.5rem;
+    max-height: 4.5rem;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+}
+

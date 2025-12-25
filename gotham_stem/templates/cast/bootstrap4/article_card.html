@@ -2,7 +2,7 @@
 {% load i18n %}
 
 <div class="card h-100 bg-transparent text-dark-blue rounded-0">
-  <a href="{{ post.page_url }}" class="text-decoration-none text-dark-blue d-flex flex-column h-100">
+  <a href="{% pageurl post %}" class="text-decoration-none text-dark-blue d-flex flex-column h-100">
     
     <div class="card-img-container" style="height: 240px; overflow: hidden;">
         {% if post.cover_image %}
@@ -19,8 +19,8 @@
         {{ post.title }}
       </h2>
       
-      <p class="small mb-4 flex-grow-1 text-start">
-        {% if post.search_description %}
+      <p class="small ellipsis-3-lines mb-4 flex-grow-1 {% if post.search_description and display_description %}text-start{% else %}text-center{% endif %} insights search-description">
+        {% if post.search_description and display_description %}
           {{ post.search_description }}
         {% else %}
           Explore our expert insights and guides!
