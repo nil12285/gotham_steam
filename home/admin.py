@@ -1,4 +1,4 @@
-from wagtail_modeladmin.options import ModelAdmin, modeladmin_register
+from wagtail_modeladmin.options import ModelAdmin, ModelAdminGroup, modeladmin_register
 from home.models import (
     Program,
     ProgramType,
@@ -10,7 +10,10 @@ from home.models import (
     FeesCategory,
     GenderFilter,
     FocusTopic,
-    AgeGroup
+    AgeGroup, 
+    Resource,
+    ResourceType,
+    ResourceCategory
 )
 
 class ProgramTypeAdmin(ModelAdmin):
@@ -18,6 +21,7 @@ class ProgramTypeAdmin(ModelAdmin):
     menu_label = 'Program Type'
     menu_icon = 'tag'
     list_display = ('name', 'slug')
+    list_display_add_buttons = 'slug'
 
 
 class ProgramDeliveryAdmin(ModelAdmin):
@@ -25,6 +29,7 @@ class ProgramDeliveryAdmin(ModelAdmin):
     menu_label = 'Program Delivery'
     menu_icon = 'tag'
     list_display = ('name', 'slug')
+    list_display_add_buttons = 'slug'
 
 
 class ProgramLocationAdmin(ModelAdmin):
@@ -32,6 +37,7 @@ class ProgramLocationAdmin(ModelAdmin):
     menu_label = 'Program Location'
     menu_icon = 'tag'
     list_display = ('name', 'slug')
+    list_display_add_buttons = 'slug'
 
 
 class NYCNeighborhoodAdmin(ModelAdmin):
@@ -39,6 +45,7 @@ class NYCNeighborhoodAdmin(ModelAdmin):
     menu_label = 'NYC Neighborhood'
     menu_icon = 'tag'
     list_display = ('name', 'slug')
+    list_display_add_buttons = 'slug'
 
 
 class SessionStartAdmin(ModelAdmin):
@@ -46,6 +53,7 @@ class SessionStartAdmin(ModelAdmin):
     menu_label = 'Session Start'
     menu_icon = 'tag'
     list_display = ('name', 'slug')
+    list_display_add_buttons = 'slug'
 
 
 class SessionLengthAdmin(ModelAdmin):
@@ -53,6 +61,7 @@ class SessionLengthAdmin(ModelAdmin):
     menu_label = 'Session Length'
     menu_icon = 'tag'
     list_display = ('name', 'slug')
+    list_display_add_buttons = 'slug'
 
 
 class FeesCategoryAdmin(ModelAdmin):
@@ -60,6 +69,7 @@ class FeesCategoryAdmin(ModelAdmin):
     menu_label = 'Fees Category'
     menu_icon = 'tag'
     list_display = ('name', 'slug')
+    list_display_add_buttons = 'slug'
 
 
 class GenderFilterAdmin(ModelAdmin):
@@ -67,6 +77,7 @@ class GenderFilterAdmin(ModelAdmin):
     menu_label = 'Gender Filter'
     menu_icon = 'tag'
     list_display = ('name', 'slug')
+    list_display_add_buttons = 'slug'
 
 
 class FocusTopicAdmin(ModelAdmin):
@@ -74,6 +85,7 @@ class FocusTopicAdmin(ModelAdmin):
     menu_label = 'Focus Topic'
     menu_icon = 'tag'
     list_display = ('name', 'slug')
+    list_display_add_buttons = 'slug'
 
 
 class AgeGroupAdmin(ModelAdmin):
@@ -81,7 +93,7 @@ class AgeGroupAdmin(ModelAdmin):
     menu_label = 'Age Group'
     menu_icon = 'tag'
     list_display = ('name', 'slug')
-
+    list_display_add_buttons = 'slug'
 
 
 class ProgramAdmin(ModelAdmin):
@@ -91,30 +103,82 @@ class ProgramAdmin(ModelAdmin):
     menu_order = 200  # will put in 3rd place (000 being 1st, 100 2nd)
     add_to_settings_menu = False  # or True to add your model to the Settings sub-menu
     exclude_from_explorer = False # or True to exclude pages of this type from Wagtail's explorer view
-    list_display = ('title', 'city', 'status_string', 'first_published_at', 'last_published_at', 'action_buttons')
+    list_display = ('title', 'city', 'status_string', 'first_published_at', 'last_published_at',)
     list_filter = ('gotham_state',)
     search_fields = ('title')
-    list_display_add_buttons = 'action_buttons'
+    list_display_add_buttons = 'last_published_at'
     list_export = ('title', 'city', 'status_string', 'last_published_at')
     export_filename = 'programs_list_export'
-    
-    def action_buttons(self, obj):
-        return '' 
+    list_display_links = ('title',)
     
     def status_string(self, obj):
         return obj.status_string.title()
     
-    action_buttons.short_description = 'Actions'
     status_string.short_description = 'Status'
 
-modeladmin_register(ProgramAdmin)
-modeladmin_register(ProgramTypeAdmin)
-modeladmin_register(ProgramDeliveryAdmin)
-modeladmin_register(ProgramLocationAdmin)
-modeladmin_register(NYCNeighborhoodAdmin)
-modeladmin_register(SessionStartAdmin)
-modeladmin_register(SessionLengthAdmin)
-modeladmin_register(FeesCategoryAdmin)
-modeladmin_register(GenderFilterAdmin)
-modeladmin_register(FocusTopicAdmin)
-modeladmin_register(AgeGroupAdmin)
+
+
+class ResourceCategoryAdmin(ModelAdmin):
+    model = ResourceCategory
+    menu_label = 'Resource Category'
+    menu_icon = 'folder-open-inverse'
+    list_display = ('name', 'slug',)
+    search_fields = ('name',)
+    list_display_add_buttons = 'slug'
+
+
+class ResourceTypeAdmin(ModelAdmin):
+    model = ResourceType
+    menu_label = 'Resource Type'
+    menu_icon = 'tag'
+    list_display = ('name', 'slug',)
+    search_fields = ('name',)
+    list_display_add_buttons = 'slug'
+    
+
+class ResourceAdmin(ModelAdmin):
+    model = Resource
+    menu_label = 'Resource'
+    menu_icon = 'doc-full-inverse'
+    list_display = ('name', 'author', 'age_group',)
+    list_display_links = None
+    list_filter = ('categories', 'types', )
+    search_fields = ('name',)
+    list_display_add_buttons = 'age_group'
+    add_to_settings_menu = False
+    exclude_from_explorer = False
+    list_export = ('name', 'author', 'age_group',)
+    export_filename = 'resource_list_export'
+
+
+
+class ProgramGroupAdmin(ModelAdminGroup):
+    menu_label = 'Program Manager'
+    menu_icon = 'folder'
+    items = (
+        ProgramAdmin,
+        ProgramTypeAdmin,
+        ProgramDeliveryAdmin,
+        ProgramLocationAdmin,
+        NYCNeighborhoodAdmin,
+        SessionStartAdmin,
+        SessionLengthAdmin,
+        FeesCategoryAdmin,
+        GenderFilterAdmin,
+        FocusTopicAdmin,
+        AgeGroupAdmin,
+    )
+
+
+class ResourceGroupAdmin(ModelAdminGroup):
+    menu_label = 'Resource Manager'
+    menu_icon = 'folder'
+    items = (
+        ResourceAdmin, 
+        ResourceCategoryAdmin, 
+        ResourceTypeAdmin
+    )
+
+
+modeladmin_register(ProgramGroupAdmin)
+modeladmin_register(ResourceGroupAdmin)

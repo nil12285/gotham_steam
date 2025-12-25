@@ -11,25 +11,9 @@ from .utilities import (
     FeatureBlock,
     RawHTMLBlock,
 )
-from .opportunity_model import *
-
-
-class AbstractFilterModel(models.Model):
-    
-    name = models.CharField(max_length=255, unique=True)
-    slug = models.SlugField(max_length=255, unique=True, blank=True)
-
-    class Meta:
-        abstract = True
-        ordering = ['name']
-
-    def __str__(self):
-        return self.name
-
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.name)
-        super().save(*args, **kwargs)
+from wagtailcache.cache import WagtailCacheMixin
+from home.opportunity_model import *
+from home.resource_model import *
 
 
 
@@ -50,7 +34,7 @@ class HomePageFeaturedPost(Orderable):
     ]
 
 
-class HomePage(Page):
+class HomePage(WagtailCacheMixin, Page):
     class Meta:
         verbose_name = "Gotham Homepage"
 
@@ -105,8 +89,9 @@ class HomePage(Page):
     ]
 
     subpage_types = [
-        "home.ProgramIndexPage", 
         "cast.Blog",
+        "home.ProgramIndexPage", 
+        "home.ResourcePage", 
         "home.GuidancePage",
         "home.AboutPage",
         "home.PrivacyPolicyPage",
@@ -116,7 +101,7 @@ class HomePage(Page):
 
 
 
-class AboutPage(Page):
+class AboutPage(WagtailCacheMixin, Page):
     class Meta:
         verbose_name = "About"
 
@@ -144,7 +129,7 @@ class AboutPage(Page):
 
 
 
-class PrivacyPolicyPage(Page):
+class PrivacyPolicyPage(WagtailCacheMixin, Page):
     class Meta:
         verbose_name = "Privacy Policy"
 
@@ -160,7 +145,7 @@ class PrivacyPolicyPage(Page):
     ]
 
 
-class TermsAndConditionsPage(Page):
+class TermsAndConditionsPage(WagtailCacheMixin, Page):
     class Meta:
         verbose_name = "Terms & Conditions"
 
@@ -188,7 +173,7 @@ class GuidanceSectionBlock(blocks.StructBlock):
 
 
 
-class GuidancePage(Page):
+class GuidancePage(WagtailCacheMixin, Page):
     class Meta:
         verbose_name = "Guidance"
 
