@@ -57,13 +57,23 @@ class HomePage(WagtailCacheMixin, Page):
         blank=True
     )
 
-    body = StreamField(
-        [
-            ("feature_block", FeatureBlock()),
-        ],
-        use_json_field=True,
-        blank=True,
+    hero_description = RichTextField(
+        max_length=500,
+        blank=True
     )
+
+    intro_text = RichTextField(
+        max_length=1000,
+        blank=True
+    )
+
+    # body = StreamField(
+    #     [
+    #         ("feature_block", FeatureBlock()),
+    #     ],
+    #     use_json_field=True,
+    #     blank=True,
+    # )
 
     @property
     def featured_post_list(self):
@@ -81,10 +91,17 @@ class HomePage(WagtailCacheMixin, Page):
             [
                 FieldPanel("hero_image"),
                 FieldPanel("hero_text", classname="full"),
+                FieldPanel("hero_description", classname="full"),
             ],
             heading="1. Hero Section Content",
         ),
-        FieldPanel("body", heading="2-4. Feature Blocks"),
+        MultiFieldPanel(
+            [
+                FieldPanel("intro_text", classname="full"),
+            ],
+            heading="2. Intro Section",
+        ),
+        # FieldPanel("body", heading="2-4. Feature Blocks"),
         InlinePanel("featured_posts", label="Featured Posts", max_num=3),
     ]
 

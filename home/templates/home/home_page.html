@@ -4,52 +4,127 @@
 {% block content %}
 
 {# 1. HERO SECTION (Using hero_image as background) #}
-<section class="hero-section text-white text-center d-flex align-items-center justify-content-center" 
-    style="
-        {% if page.hero_image %}
-            {% image page.hero_image fill-1920x800 as hero_img %}
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('{{ hero_img.url }}') center/cover no-repeat;
-        {% else %}
-            /* Fallback dark blue gradient */
-            background: linear-gradient(135deg, #0d1a26, #1a2c38);
-        {% endif %}
-        min-height: 70vh;
-        padding: 6rem 1rem;
-    ">
-</section>
-<section class="bg-light-purple text-white py-5">
-    <div class="container">
-        {{ page.hero_text|richtext }}
+<section class="hero-section position-relative text-white">
+    <div class="hero-overlay" {% if page.hero_image %} {% image page.hero_image fill-1920x800 as hero_img %}
+        style='background:url("{{hero_img.url}}") center center / cover no-repeat;' {% endif %}></div>
+
+    <div class="container h-100 position-relative">
+        <div class="row h-100 align-items-center">
+            <div class="col-lg-6 col-md-8 pt-5 pb-3">
+                <h1 class="fw-bold display-5 mt-5 mb-3">
+                    {{page.hero_text|richtext}}
+                </h1>
+
+                <p class="lead">
+                    {{page.hero_description|richtext}}
+                </p>
+            </div>
+        </div>
     </div>
 </section>
 
+
 {# 2-4. FEATURE BLOCKS (Render StreamField) #}
-<div class="feature-blocks-container">
-    {% for block in page.body %}
-    {% include_block block %}
-    {% endfor %}
-</div>
+{#<div class="feature-blocks-container">#}
+    {#% for block in page.body %#}
+    {#% include_block block %#}
+    {#% endfor %#}
+    {#</div>#}
+
+<section class="py-5 text-center">
+    <div class="container">
+        <!-- Intro text -->
+        <div class="row mb-5">
+            <div class="col-lg-12 text-start fs-3 px-3">
+                {{page.intro_text|richtext}}
+            </div>
+        </div>
+
+        <!-- Icon grid -->
+        <div class="row justify-content-center g-4">
+
+            <div class="col-6 col-md-3">
+                <div class="feature-icon  mx-auto mb-3" style="background-color: #00bd00;">
+                    <img src="{% static 'images/find-icon.png'%}" alt="Find Programs" class="icon-img">
+                </div>
+                <h6 class="fw-bold">Find<br>Programs</h6>
+            </div>
+
+            <div class="col-6 col-md-3">
+                <div class="feature-icon  mx-auto mb-3" style="background-color: #8842ff;">
+                    <img src="{% static 'images/home-icon.png'%}" alt="STEM at Home" class="icon-img">
+                </div>
+                <h6 class="fw-bold">STEM at<br>Home</h6>
+            </div>
+
+            <div class="col-6 col-md-3">
+                <div class="feature-icon mx-auto mb-3" style="background-color: #ff8400;">
+                    <img src="{% static 'images/insights-icon.png'%}" alt="Insights and Articles" class="icon-img">
+                </div>
+                <h6 class="fw-bold">Insights &<br>Articles</h6>
+            </div>
+
+            <div class="col-6 col-md-3">
+                <div class="feature-icon  mx-auto mb-3" style="background-color: #ff0012;">
+                    <img src="{% static 'images/essentials-icon.png'%}" alt="The Essentials" class="icon-img">
+                </div>
+                <h6 class="fw-bold">The<br>Essentials</h6>
+            </div>
+
+        </div>
+    </div>
+</section>
+
 
 {# 5. FEATURED INSIGHTS & RESOURCES #}
-{% if page.featured_post_list %}
+
 <section class="featured-blogs-section py-5 bg-light-gray">
+    {% if page.featured_post_list %}
     <div class="container">
         <h2 class="text-center display-6 fw-bold mb-5">Insights & Resources</h2>
 
-        <div class="row g-4 justify-content-center">
+        <div class="row g-4 justify-content-center bg-white">
             {% for post in page.featured_post_list %}
-                <div class="col-12 col-md-6 col-lg-4 px-md-5">
+            <div class="col-12 col-md-6 col-lg-4 px-md-5 mb-md-4">
                 {% include "cast/bootstrap4/article_card.html" with post=post display_description=False %}
-                </div>
+            </div>
             {% endfor %}
         </div>
-
-        <div class="text-center mt-5">
-            <a href="{{site_pages.insights.url}}"
-                class="btn btn-lg btn-dark-blue text-uppercase">View All Insights</a>
-        </div>
     </div>
+    {% endif %}
+    <section class="py-5 bg-light">
+        <div class="container px-7">
+            <div class="newsletter-box mx-auto p-4 p-md-5">
+                <div class="row align-items-center">
+                    <div class="col mb-4 mb-lg-0">
+                        <span class="newsletter-eyebrow">
+                            Stay in the STEM loop
+                        </span>
+
+                        <h2 class="fw-bold mt-2 mb-2">
+                            Opportunities, ideas &amp; events straight to your inbox
+                        </h2>
+
+                        <p class="text-muted mb-0">
+                            Be the first to know about new STEM programs, opportunities and local events.
+                        </p>
+                    </div>
+                </div>
+                <div class="row align-items-center my-4">
+                    <div class="col">
+                        <form id="newsletter-form" class="d-flex gap-2">
+                            <input type="email" class="form-control form-control-lg"
+                                placeholder="Enter your email address" required>
+                            <button type="submit" class="btn btn-warning btn-lg px-4">
+                                Subscribe
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
 </section>
-{% endif %}
 
 {% endblock content %}
