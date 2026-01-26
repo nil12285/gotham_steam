@@ -19,7 +19,12 @@
                 <div class="founder-image-wrapper pt-md-5">
                     {% if page.founder_image %}
                     {% image page.founder_image width-200 as founder_img %}
-                    <img src="{{founder_img.url}}" alt="Founder of Gotham Stem" class="img-fluid rounded mb-2 shadow">
+                    <img
+                        src="{{founder_img.url}}"
+                        alt="Founder, Gotham Stem"
+                        class="rounded-circle img-fluid shadow"
+                        style="width: 220px; height: 220px; object-fit: cover;"
+                    />
                     <p class="fst-italic opacity-75 mt-2">Founder, Gotham Stem</p>
                     {% endif %}
                 </div>
