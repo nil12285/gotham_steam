@@ -52,12 +52,18 @@ a:hover {
     color: var(--color-dark-blue) !important;
 }
 
+.text-light-blue {
+    color: var(--color-light-blue) !important;
+}
+
+
 .bg-dark-blue {
     background-color: var(--color-dark-blue) !important;
 }
 
 .bg-light-purple {
     background-color: var(--color-light-purple) !important;
+    color: var(--color-white);
 }
 
 .bg-light-blue {
@@ -233,7 +239,30 @@ a:hover {
 }
 
 /* --- Hero Section --- */
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  
+  background: linear-gradient(
+      90deg,
+      rgba(60, 90, 160, 0.85) 0%,
+      rgba(60, 90, 160, 0.75) 40%,
+      rgba(60, 90, 160, 0.55) 100%
+    ),
+    url("/static/images/HOMEPAGE PICT_shutterstock_2036186297.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Ensure content stays above overlay */
+.hero-section .container {
+  z-index: 2;
+}
+
+
 .hero-section {
+  overflow: hidden;
   min-height: 420px;
   background: linear-gradient(var(--color-dark-blue),var(--color-light-blue), var(--color-light-purple)); 
   
@@ -320,6 +349,31 @@ a:hover {
     font-weight: bold;
     font-size: 1.25rem;
     line-height: 1.2;
+}
+
+.exceptional-badge {
+  position: absolute;
+  top: -15px;
+  left: 15px;
+  /* right: -15px; */
+  background-color: #ffb703; /* warm yellow */
+  color: var(--color-dark-blue);
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 6px 10px;
+  border-radius: 999px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  z-index: 10;
+  max-width: 120px;
+}
+
+.exceptional-badge-inline {
+  background-color: #ffb703;
+  color: #111;
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 8px 16px;
+  border-radius: 999px;
 }
 
 .result-card .text-muted.d-flex {

@@ -5,8 +5,14 @@
 
 {# 1. HERO SECTION (Using hero_image as background) #}
 <section class="hero-section position-relative text-white">
-    <div class="hero-overlay" {% if page.hero_image %} {% image page.hero_image fill-1920x800 as hero_img %}
-        style='background:url("{{hero_img.url}}") center center / cover no-repeat;' {% endif %}></div>
+    <div class="hero-bg" {% if page.hero_image %} {% image page.hero_image fill-1920x800 as hero_img %}
+        style="background:
+         linear-gradient(
+           90deg,
+           rgba(60,90,160,0.8),
+           rgba(60,90,160,0.6)
+         ),
+         url('{{ hero_img.url }}') center / cover no-repeat;" {% endif %}></div>
 
     <div class="container h-100 position-relative">
         <div class="row h-100 align-items-center">
@@ -113,7 +119,7 @@
                 <div class="row align-items-center my-4">
                     <div class="col">
                         <form id="newsletter-form" class="d-flex gap-2">
-                            <input type="email" class="form-control form-control-lg"
+                            <input id="email" name="email" type="email" class="form-control form-control-lg"
                                 placeholder="Enter your email address" required>
                             <button type="submit" class="btn btn-warning btn-lg px-4">
                                 Subscribe

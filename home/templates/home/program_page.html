@@ -15,6 +15,15 @@
                         <li class="breadcrumb-item active" aria-current="page">{{ page.title }}</li>
                     </ol>
                 </nav>
+
+                {% if page.is_exceptional %}
+                <div class="mb-3">
+                    <span class="badge exceptional-badge-inline d-inline-flex align-items-center gap-2">
+                        <i class="bi bi-award"></i>
+                        Exceptional
+                    </span>
+                </div>
+                {% endif %}
                 <h1 class="display-4 text-dark-blue display-title text-uppercase mb-0">{{ page.title }}</h1>
                 <p class="h5 text-secondary mb-3">{{ page.city }}, {{ page.state }}</p>
                 

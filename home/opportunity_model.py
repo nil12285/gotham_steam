@@ -647,24 +647,36 @@ class ProgramIndexPage(Page):
         help_text="The large background image for the hero section.",
     )
 
-    intro = StreamField(
-        [
-            ("intro_block", ProgramIntroBlock()),
-            ("raw_html", RawHTMLBlock()),
-        ],
-        block_counts={
-            "intro_block": {"min_num": 1}
-        },
-        null=True,
-        blank=True,
-        use_json_field=True,
-        help_text="Add alternating feature blocks (image and text) or raw HTML for the main body of the homepage.",
+    hero_text = RichTextField(
+        max_length=500,
+        blank=True
     )
+
+    hero_description = RichTextField(
+        max_length=1000,
+        blank=True
+    )
+
+
+    # intro = StreamField(
+    #     [
+    #         ("intro_block", ProgramIntroBlock()),
+    #         ("raw_html", RawHTMLBlock()),
+    #     ],
+    #     block_counts={
+    #         "intro_block": {"min_num": 1}
+    #     },
+    #     null=True,
+    #     blank=True,
+    #     use_json_field=True,
+    #     help_text="Add alternating feature blocks (image and text) or raw HTML for the main body of the homepage.",
+    # )
 
     
     content_panels = Page.content_panels + [
         FieldPanel('hero_image'),
-        FieldPanel('intro'),
+        FieldPanel('hero_text'),
+        FieldPanel('hero_description'),
     ]
 
 
