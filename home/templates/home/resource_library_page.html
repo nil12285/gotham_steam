@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags wagtailimages_tags filters %}
+
+
+{% block content %}
+
+{% include "home/blocks/hero_block.html" with page_obj=page %}
+
+<section class="content-categories py-5">
+  <div class="container">
+    <div class="row g-4">
+        {% for rcat in resource_categories %}
+        <div class="col-6 col-md-3">
+            <div class="category-card text-center h-100">
+                {% image rcat.logo width-160 as logo_img %}
+                <a href="">
+                <img src="{{logo_img.url}}" alt="{{rcat.name}}" class="category-icon mb-3">
+                <div class="category-title">
+                    {{rcat.name|title}}
+                </div>
+              </a>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+  </div>
+</section>
+
+
+{% endblock content %}
+
+{% block extra_js %}
+<script></script>
+{% endblock extra_js %}

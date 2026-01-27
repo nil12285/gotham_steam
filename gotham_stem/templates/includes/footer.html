@@ -4,13 +4,10 @@
         <div class="row gy-4">
 
             <!-- Brand -->
-            <div class="col-lg-3">
+            <div class="col-lg-3 mt-0">
                 <div class="footer-brand mb-3">
-                    <strong class="fs-5">GOTHAM <span class="text-accent">✻</span> STEM</strong>
+                    <img height="70px" src="{% static 'images/logo.png' %}" alt="Gotham STEM" class="me-2">
                 </div>
-                <p class="small">
-                    NYC’s guide to STEM programs &amp; activities
-                </p>
             </div>
 
             <!-- Explore -->
@@ -18,7 +15,7 @@
                 <h6 class="footer-title">Explore</h6>
                 <ul class="list-unstyled footer-links">
                     <li><a href="{{site_pages.programs.url }}">Find Programs</a></li>
-                    <li><a href="#">STEM at Home</a></li>
+                    <li><a href="{{site_pages.resources.url}}">STEM at Home</a></li>
                     <li><a href="{{site_pages.insights.url}}">Insights &amp; Learning</a></li>
                     <li><a href="{{site_pages.guidance.url }}">The Essentials</a></li>
                 </ul>

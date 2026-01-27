@@ -35,11 +35,11 @@
 
         <span class="me-2">
             {% for field_name, filter_config in program_filters.items %}
-            {% if field_name == key or key == filter_config.title|slugify %}
-            {% for choice in filter_config.data %}
-            {% if choice.slug == value_slug %}{{ choice.name }}{% endif %}
-            {% endfor %}
-            {% endif %}
+                {% if field_name == key or key == filter_config.title|slugify %}
+                    {% for choice in filter_config.data %}
+                        {% if choice.slug == value_slug %}{{ choice.name }}{% endif %}
+                    {% endfor %}
+                {% endif %}
             {% endfor %}
         </span>
 
@@ -68,7 +68,7 @@
 {% if opportunities.object_list|length > 0 %}
 <div class="col-12 col-md-12 results-section p-4">
     {% for program in opportunities.object_list %}
-    <div class="result-card position-relative p-3 shadow-sm bg-white border-1 mb-4">
+    <div class="result-card position-relative p-3 shadow-sm bg-white border-2 mb-4">
 
         <div class="row align-items-start">
             <!-- Exceptional badge -->
@@ -77,8 +77,8 @@
                 <i class="bi bi-award"></i> Exceptional
             </span>
             {% endif %}
-            <div class="col-12 col-sm-8 col-md-8 order-2 order-sm-1">
-                <p class="program-title mb-1 mt-2 mt-sm-0">
+            <div class="col-12 col-sm-8 col-md-8 order-2 order-sm-1 mt-3">
+                <p class="program-title mb-1 mt-sm-0">
                     {{ program.title|title }}
                 </p>
                 <p class="text-muted small mb-2 d-flex align-items-center">

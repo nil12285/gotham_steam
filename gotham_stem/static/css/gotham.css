@@ -666,3 +666,29 @@ a:hover {
     -webkit-line-clamp: 3;
 }
 
+.content-categories {
+  background-color: var(--color-light-gray);
+}
+
+.category-card {
+  background: var(--color-white);
+  padding: 32px 20px;
+  border-radius: 6px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.category-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.06);
+}
+
+.category-icon {
+  max-width: 160px;
+  height: auto;
+}
+
+.category-title {
+  font-weight: 600;
+  color: var(--color-orange)
+  font-size: 1.1rem;
+}

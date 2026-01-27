@@ -10,9 +10,9 @@ def site_info(request):
         cache_key = f"site_pages_{root_page.id}"
 
         data = cache.get(cache_key) if settings.ENV == 'prod' else None
-        top_level_pages = root_page.get_children().live().in_menu()
         
         if not data:
+            top_level_pages = root_page.get_children().live().in_menu()
             pages = {page.slug.replace("-","_"): page for page in top_level_pages}
             data = {
                 "site_pages": pages,

@@ -12,8 +12,8 @@ from home.models import (
     FocusTopic,
     AgeGroup, 
     Resource,
-    ResourceType,
-    ResourceCategory
+    ResourceCategory,
+    ResourceAcademicStage
 )
 
 class ProgramTypeAdmin(ModelAdmin):
@@ -118,17 +118,17 @@ class ProgramAdmin(ModelAdmin):
 
 
 
-class ResourceCategoryAdmin(ModelAdmin):
-    model = ResourceCategory
-    menu_label = 'Resource Category'
+class ResourceAcademicStageAdmin(ModelAdmin):
+    model = ResourceAcademicStage
+    menu_label = 'Resource Academic Stage'
     menu_icon = 'folder-open-inverse'
     list_display = ('name', 'slug',)
     search_fields = ('name',)
     list_display_add_buttons = 'slug'
 
 
-class ResourceTypeAdmin(ModelAdmin):
-    model = ResourceType
+class ResourceCategoryAdmin(ModelAdmin):
+    model = ResourceCategory
     menu_label = 'Resource Type'
     menu_icon = 'tag'
     list_display = ('name', 'slug',)
@@ -175,8 +175,8 @@ class ResourceGroupAdmin(ModelAdminGroup):
     menu_icon = 'folder'
     items = (
         ResourceAdmin, 
-        ResourceCategoryAdmin, 
-        ResourceTypeAdmin
+        ResourceAcademicStageAdmin, 
+        ResourceCategoryAdmin
     )
 
 

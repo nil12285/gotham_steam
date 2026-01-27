@@ -108,7 +108,7 @@ class HomePage(WagtailCacheMixin, Page):
     subpage_types = [
         "cast.Blog",
         "home.ProgramIndexPage", 
-        "home.ResourcePage", 
+        "home.ResourceIndexPage", 
         "home.GuidancePage",
         "home.AboutPage",
         "home.PrivacyPolicyPage",

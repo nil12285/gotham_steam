@@ -1,7 +1,7 @@
 {% load wagtailcore_tags wagtailimages_tags static filters %}
 {% load i18n %}
 
-<div class="card h-100 bg-transparent text-dark-blue rounded-0">
+<div class="card h-100 bg-transparent text-dark-blue border-0">
   <a href="{% pageurl post %}" class="text-decoration-none text-dark-blue d-flex flex-column h-100">
     
     <div class="card-img-container" style="height: 240px; overflow: hidden;">
@@ -14,7 +14,7 @@
         {% endif %}
     </div>
 
-    <div class="card-body text-center d-flex flex-column p-2">
+    <div class="card-body text-center d-flex flex-column p-2 mt-2">
       <h2 class="h5 fw-bold text-uppercase mb-2" >
         {{ post.title }}
       </h2>
@@ -28,10 +28,12 @@
       </p>
 
       <div class="mt-auto">
-        
-        <time class="fw-bold small" datetime='{{ post.visible_date|date:"Y-m-d" }}'>
+        <div class="fw-bold mb-2" style="letter-spacing: 0.12em; color: var(--color-orange);">
+            Read more
+        </div>
+        <!-- <time class="fw-bold small" datetime='{{ post.visible_date|date:"Y-m-d" }}'>
           {{ post.visible_date|date:"F j, Y" }}
-        </time>
+        </time> -->
       </div>
     </div>
   </a>
