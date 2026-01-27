@@ -180,7 +180,7 @@ a:hover {
   color: var(--color-white);
 }
 
-.btn-share {
+.btn-orange {
   background-color: var(--color-orange);
   color: var(--color-white);
   font-weight: 600;
@@ -188,7 +188,7 @@ a:hover {
   border-radius: 999px;
 }
 
-.btn-share:hover {
+.btn-orange:hover {
   background-color: var(--color-dark-orange);
   color: var(--color-white);
 }
@@ -631,6 +631,7 @@ a:hover {
 /* Custom styles for the Subscribe Modal */
 #subscribeModal .modal-content {
     border-radius: 12px;
+    min-width: 400px;
     overflow: hidden;
 }
 

@@ -16,27 +16,10 @@
 
 
 {% block content %}
-{% image page.hero_image fill-1440x600 as hero_img %}
-<section class="hero-section text-white text-center  d-none d-md-flex  align-items-center justify-content-center" style="
-        background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('{{ hero_img.url }}') center/cover no-repeat;">
-    <div class="container py-5">
-    </div>
-</section>
 
 
-<section class="hero-section bg-light-purple">
-    <div class="container-fluid px-5">
-        <div class="container py-2"
-            style="{% if self.text_color %}color: {{ self.text_color }} !important;{% else %}{% endif %}">
-            <div class="row align-items-center g-5 text-dark-blue text-bold">
-                <div class="col">{{ page.intro_title|richtext }}</div>
-            </div>
-            <div class="row align-items-center g-5 text-white mt-2">
-                <div class="col">{{ page.intro_text|richtext }}</div>
-            </div>    
-        </div>
-    </div>
-</section>
+
+{% include "home/blocks/hero_block.html" with page_obj=page %}
 
 <div class="container my-5">
     <div class="row">

@@ -192,9 +192,9 @@ class GuidanceSectionBlock(blocks.StructBlock):
 
 class GuidancePage(WagtailCacheMixin, Page):
     class Meta:
-        verbose_name = "Guidance"
+        verbose_name = "The Essentials"
 
-    template = 'home/guidance.html'
+    template = 'home/essentials.html'
     parent_page_types = ['home.HomePage']
 
     hero_image = models.ForeignKey(
@@ -206,13 +206,13 @@ class GuidancePage(WagtailCacheMixin, Page):
         help_text="The large background image for the hero section.",
     )
 
-    intro_title = RichTextField(
+    hero_text = RichTextField(
         max_length=500,
         blank=True
     )
 
-    intro_text = RichTextField(
-        max_length=500,
+    hero_description = RichTextField(
+        max_length=1000,
         blank=True
     )
 
@@ -228,8 +228,8 @@ class GuidancePage(WagtailCacheMixin, Page):
     
     content_panels = Page.content_panels + [
         FieldPanel('hero_image'),
-        FieldPanel('intro_title'),
-        FieldPanel('intro_text'),
+        FieldPanel('hero_text'),
+        FieldPanel('hero_description'),
         FieldPanel('types_of_program'),
         FieldPanel('mathing_program'),
     ]
