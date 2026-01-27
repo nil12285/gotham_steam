@@ -6,8 +6,9 @@
     --bs-accordion-active-bg: #2D3D76;
     --bs-accordion-active-color: #FFFFFF;
     --color-light-purple: #8697C4;
+    --color-lighter-purple: #9fa7c1;
     --color-primary-green: #4CAF50;
-    --color-light-blue: #5b94ed;
+    --color-light-blue: #7091E6;
     --color-medium-purple: #44578B;
     --color-background-light: #F7F7FB;
     --color-white: #ffffff;
@@ -16,10 +17,17 @@
     --color-light-silver: #B4B4B4;
     --color-orange: #ff8a1f;
     --color-dark-orange: #e67912;
+    --bs-body-font-family: 'Montserrat', sans-serif;
+    --bs-pagination-active-color: #7091E6;
+    --bs-pagination-active-bg: #7091E6;
+    --bs-pagination-active-border-color: #7091E6;
 }
 
 html {
     scroll-behavior: smooth;
+}
+body {
+  font-family: 'Montserrat', sans-serif !important;
 }
 
 .px-6 {
@@ -56,6 +64,13 @@ a:hover {
     color: var(--color-light-blue) !important;
 }
 
+.text-light-purple {
+    color: var(--color-light-purple) !important;
+}
+
+.text-lighter-purple {
+    color: var(--color-lighter-purple) !important;
+}
 
 .bg-dark-blue {
     background-color: var(--color-dark-blue) !important;
@@ -540,7 +555,7 @@ a:hover {
 }
 
 .bi-social {
-    color: var(--color-medium-purple);
+    color: var(--color-lighter-purple);
     font-size: 1.75rem;
     transition: 0.2s;
     cursor: pointer;
@@ -587,12 +602,6 @@ a:hover {
 .object-fit-cover {
     object-fit: cover;
 }
-  /* Card hover effect */
-.card:hover {
-    background-color: rgba(255, 255, 255, 0.05) !important;
-    transition: background-color 0.3s ease;
-}
-
 
 .django-messages .alert {
     margin-bottom: 0px;

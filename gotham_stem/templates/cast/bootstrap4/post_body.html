@@ -3,11 +3,11 @@
 {% load i18n %}
 
 <article class="post-detail mb-4">
-    <header class="bg-primary text-white py-5 mb-4 bg-light-purple">
+    <header class="text-white py-5 mb-4">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-7">
-                    <h1 class="display-4 fw-bold pe-md-5 text-dark-blue">
+                    <h1 class="display-4 fw-bold pe-md-5 text-light-blue">
                         {{ page.title }}
                     </h1>
                 </div>
@@ -21,15 +21,15 @@
     </header>
 
     <div class="container">
-        <nav aria-label="breadcrumb" class="py-2">
+        <!-- <nav aria-label="breadcrumb" class="py-2">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/" class="text-decoration-none">Home</a></li>
                 <li class="breadcrumb-item"><a href="{{ blog_url }}" class="text-decoration-none">Insights</a></li>
                 <li class="breadcrumb-item active" aria-current="page">{{ page.title }}</li>
             </ol>
-        </nav>
+        </nav> -->
         <div class="row mb-5">
-            <div class="col-md-6">
+            <!-- <div class="col-md-6">
                 <div class="text-uppercase fw-bold text-secondary small mb-1">
                     {{ page.owner.get_full_name|default:page.owner.username }}
                 </div>
@@ -37,14 +37,14 @@
                     {{ page.visible_date|date:"m/d/Y" }}
                 </div>
             </div>
-            
-            <div class="col-md-6 text-md-end">
+             -->
+            <!-- <div class="col-md-6 text-md-end">
                 <div class="text-primary-green fw-normal">
                     {# Assuming you have these fields or use placeholders #}
                     NAEYC Newsletter<br>
                     November issue
                 </div>
-            </div>
+            </div> -->
         </div>
 
         <div class="row justify-content-start">
