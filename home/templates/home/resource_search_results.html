@@ -3,6 +3,18 @@
 
 {% block title %}{{ page.title }}{% endblock %}
 
+{% block extra_css %}
+<style>
+.accordion-button:not(.collapsed){
+    background-color: var(--color-white);
+    box-shadow: none;
+}
+.accordion-button:focus {
+    box-shadow: none;
+}
+</style>
+{% endblock %}
+
 {% block content %}
 <div class="container my-5">
     <div class="row align-items-start gx-5">
