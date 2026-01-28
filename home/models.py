@@ -109,6 +109,7 @@ class HomePage(WagtailCacheMixin, Page):
         "cast.Blog",
         "home.ProgramIndexPage", 
         "home.ResourceIndexPage", 
+        "home.ResourceSearchResultPage",
         "home.GuidancePage",
         "home.AboutPage",
         "home.PrivacyPolicyPage",

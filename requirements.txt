@@ -34,7 +34,7 @@ Willow==1.12.0
 psycopg2-binary==2.9.11
 wagtail-color-panel==1.7.1
 wagtail-newsletter[mailchimp,mrml]==0.2.4
-django-cast==0.2.50
+django-cast==0.2.52
 django-allauth==65.13.1
 wagtail-modeladmin==2.2.0
 wagtail-cache==3.0.0

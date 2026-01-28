@@ -9,7 +9,6 @@
         {% with all_params=request.GET.urlencode|safe %}
         {% with current_params=all_params|cut:'page=' %}
 
-        {# Previous Button #}
         {% if page_obj.has_previous %}
         <li class="page-item">
             <a class="page-link text-dark-blue fw-bold" href="?{{ current_params }}&page={{ page_obj.previous_page_number }}" aria-label="Previous">

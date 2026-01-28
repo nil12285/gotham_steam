@@ -1,10 +1,132 @@
 {% extends "base.html" %}
-{% load static wagtailcore_tags wagtailimages_tags filters %}
+{% load static wagtailcore_tags wagtailimages_tags %}
 
-{%block title%}{{page.title}}{% endblock%}
+{% block title %}{{ page.title }}{% endblock %}
 
 {% block content %}
+<div class="container my-5">
+    <div class="row align-items-start gx-5">
+        <div class="col-lg-8 order-2 order-md-1">
+            <h1 class="display-4 fw-normal mb-4 text-light-blue fw-bold">{{ page.title }}</h1>
+        </div>
+    </div>
+    <div class="row">
+        <aside class="col-md-3">
+            <div class="accordion accordion-flush" id="filterAccordion">
+                
+                <div class="accordion-item border-top-0">
+                    <h2 class="accordion-header" id="headingStage">
+                        <button class="accordion-button fw-bold px-2 {% if not selected_filters.stage %}collapsed{% endif %}" 
+                                type="button" data-bs-toggle="collapse" data-bs-target="#collapseStage" 
+                                aria-expanded="{% if selected_filters.stage %}true{% else %}false{% endif %}" 
+                                aria-controls="collapseStage">
+                            Academic Stage
+                        </button>
+                    </h2>
+                    <div id="collapseStage" class="accordion-collapse collapse {% if selected_filters.stage %}show{% endif %}" 
+                         aria-labelledby="headingStage">
+                        <div class="accordion-body px-0">
+                            {% for stage in academic_stages %}
+                            <div class="form-check mb-2">
+                                <input name="stage" class="form-check-input" type="checkbox" value="{{ stage.slug }}" id="stage_{{ stage.slug }}" 
+                                       {% if stage.slug in selected_filters.stage %}checked{% endif %}>
+                                <label class="form-check-label" for="stage_{{ stage.slug }}">
+                                    {{ stage.name|title }} ({{ stage.resource_count }})
+                                </label>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
 
-<section class="py-5"></section>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingCat">
+                        <button class="accordion-button fw-bold px-2 {% if not selected_filters.cat %}collapsed{% endif %}" 
+                                type="button" data-bs-toggle="collapse" data-bs-target="#collapseCat" 
+                                aria-expanded="{% if selected_filters.cat %}true{% else %}false{% endif %}" 
+                                aria-controls="collapseCat">
+                            Category
+                        </button>
+                    </h2>
+                    <div id="collapseCat" class="accordion-collapse collapse {% if selected_filters.cat %}show{% endif %}" 
+                         aria-labelledby="headingCat">
+                        <div class="accordion-body px-0">
+                            {% for cat in categories %}
+                            <div class="form-check mb-2">
+                                <input name="cat" class="form-check-input" type="checkbox" value="{{ cat.slug }}" id="cat_{{ cat.slug }}" 
+                                       {% if cat.slug in selected_filters.cat %}checked{% endif %}>
+                                <label class="form-check-label" for="cat_{{ cat.slug }}">
+                                    {{ cat.name|title }} ({{ cat.resource_count }})
+                                </label>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
 
+            </div>
+        </aside>
+
+        <main class="col-md-9">
+            <div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-2">
+                <!-- <span class="text-muted">Displaying <span class="text-green">{{ resources.paginator.count }}</span> search results</span> -->
+                <h2 class="h4 fw-normal text-dark-blue mb-0">
+                    Displaying <span class="text-primary-green fw-bold">{{ resources.paginator.count }}</span> search result{% if resources.paginator.count != 1 %}s{% endif %}
+                </h2>
+                <a href="{{ page.url }}" class="text-decoration-none text-muted small">clear all</a>
+            </div>
+
+            {% for rec in resources %}
+            <div class="row mb-5 g-4">
+                <div class="col-sm-3 col-md-2">
+                    {% if rec.image %}
+                        {% image rec.image width-150 height-200 as logo_img %}
+                        <img src="{{ logo_img.url }}" class="img-fluid rounded shadow-sm" alt="{{ rec.name }}">
+                    {% endif %}
+                </div>
+                <div class="col-sm-9 col-md-10">
+                    <h5 class="fw-bold mb-1">
+                        <a target="_blank" href="{{ rec.link }}" class="text-decoration-none text-dark">
+                            {{ rec.name }}
+                        </a>
+                    </h5>
+                    <p class="mb-1 text-muted">by {{ rec.author }}</p>
+                    <p class="small text-secondary">Ages: {{ rec.age_group }}</p>
+                </div>
+            </div>
+            {% empty %}
+                <p>No resources found matching your criteria.</p>
+            {% endfor %}
+
+            {% include "includes/pagination.html" with page_obj=resources %}
+        </main>
+    </div>
+</div>
 {% endblock content %}
+
+
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const filterCheckboxes = document.querySelectorAll('#filterAccordion .form-check-input');
+
+    filterCheckboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+            updateFilters();
+        });
+    });
+
+    function updateFilters() {
+        const params = new URLSearchParams();
+        filterCheckboxes.forEach(cb => {
+            if (cb.checked) {
+                params.append(cb.name, cb.value);
+            }
+        });
+        window.location.href = window.location.pathname + '?' + params.toString();
+    }
+});
+</script>
+{% endblock extra_js %}
+

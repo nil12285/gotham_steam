@@ -4,6 +4,7 @@ from home.abstract_model import AbstractBaseFilterModel
 from modelcluster.fields import ParentalKey, ParentalManyToManyField
 from modelcluster.models import ClusterableModel
 from django.db import models
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from wagtailcache.cache import WagtailCacheMixin
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 from wagtail.models import Page
@@ -73,11 +74,18 @@ class Resource(ClusterableModel):
     # Simplified ManyToMany (No 'through' model needed)
     categories = ParentalManyToManyField(
         'home.ResourceAcademicStage', 
-        blank=True
+        blank=True,
+        related_name='resource_categories'
     )
     types = ParentalManyToManyField(
         'home.ResourceCategory', 
-        blank=True
+        blank=True,
+        related_name='resources'
+    )
+    academic_stages = ParentalManyToManyField(
+        'home.ResourceAcademicStage', 
+        blank=True,
+        related_name='resource_academic_stages'
     )
 
     panels = [
@@ -139,3 +147,75 @@ class ResourceIndexPage(WagtailCacheMixin, Page):
         # Fetch all resources to display on the page
         context['resource_categories'] = ResourceCategory.objects.all()
         return context
+    
+
+class ResourceSearchResultPage(WagtailCacheMixin, Page):
+
+    template = 'home/resource_search_results.html'
+    parent_page_types = ['home.HomePage']
+    
+    class Meta:
+        verbose_name = "resource search results"
+
+    RESOURCE_FILTERS = {
+        'cat': {
+            'field': 'types',
+            'multiselect': True,
+        },
+        'stage': {
+            'field': 'academic_stages',
+            'multiselect': True,
+        },
+    }
+
+
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request, *args, **kwargs)
+        
+        resources = Resource.objects.all().prefetch_related('types', 'academic_stages')        
+        get_params = request.GET
+        selected_filters = {}
+
+        for param_name, config in self.RESOURCE_FILTERS.items():
+            param_values = get_params.getlist(param_name) 
+            
+            if param_values:
+                # Clean empty strings
+                param_values = [v for v in param_values if v]
+                if not param_values:
+                    continue
+
+                selected_filters[param_name] = param_values
+                field_path = config['field']
+
+                if config.get('multiselect', False):
+                    filter_key = f"{field_path}__slug__in"
+                    resources = resources.filter(**{filter_key: param_values}).distinct()
+                else:
+                    filter_key = f"{field_path}__id"
+                    resources = resources.filter(**{filter_key: param_values[0]})
+
+        page_num = get_params.get('page', 1)
+        paginator = Paginator(resources, 10) 
+
+        try:
+            paginated_resources = paginator.page(page_num)
+        except PageNotAnInteger:
+            paginated_resources = paginator.page(1)
+        except EmptyPage:
+            paginated_resources = paginator.page(paginator.num_pages)
+            
+        context.update({
+            'resources': paginated_resources, 
+            'selected_filters': selected_filters,
+            'form_action_url': self.url,
+            'categories': ResourceCategory.objects.annotate(
+                resource_count=models.Count('resources')
+            ),
+            'academic_stages': ResourceAcademicStage.objects.annotate(
+                resource_count=models.Count('resource_academic_stages')
+            ),
+        })
+            
+        return context
+    

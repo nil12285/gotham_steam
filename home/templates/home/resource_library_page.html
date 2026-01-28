@@ -9,11 +9,12 @@
 <section class="content-categories py-5">
   <div class="container">
     <div class="row g-4">
+        {% slugurl 'magazines' as magazines_url %}
         {% for rcat in resource_categories %}
         <div class="col-6 col-md-3">
             <div class="category-card text-center h-100">
                 {% image rcat.logo width-160 as logo_img %}
-                <a href="">
+                <a href="{{magazines_url}}?cat={{rcat.slug}}">
                 <img src="{{logo_img.url}}" alt="{{rcat.name}}" class="category-icon mb-3">
                 <div class="category-title">
                     {{rcat.name|title}}

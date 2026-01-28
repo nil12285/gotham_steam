@@ -1,6 +1,24 @@
 {% extends "base.html" %}
 {% load static wagtailcore_tags wagtailimages_tags filters %}
 
+{% block extra_css %}
+<style>
+
+/* --- Accordion Fixes --- */
+.accordion-button {
+    color: var(--color-white) !important;
+    background-color: var(--color-dark-blue) !important;
+    box-shadow: none !important;
+}
+
+.accordion-button::after {
+    --bs-accordion-btn-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='M2 5L8 11L14 5'/%3e%3c/svg%3e");
+    --bs-accordion-active-btn-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='M2 5L8 11L14 5'/%3e%3c/svg%3e");
+    background-image: var(--bs-accordion-btn-icon);
+}
+
+</style>
+{% endblock %}
 
 {% block content %}
 
@@ -22,7 +40,7 @@
             </div>
 
             <!-- Heading -->
-            <h2 class="fw-bold mb-3" style="color: #253a7d;">
+            <h2 class="fw-bold mb-3" style="color: var(--color-dark-blue);">
                 Love a STEM program or have feedback to share?
             </h2>
 
@@ -64,7 +82,7 @@
 
                 <div class="offcanvas-body p-3 p-md-0 ps-md-4">
                     <div id="accordionProgramFilter" class="accordion w-95">
-                        <h3 class="fw-bold text-dark-blue text-center pt-4 d-none d-md-block">CHOOSE PROGRAMS</h3>
+                        <h4 class="fw-bold text-light-blue text-center pt-4 d-none d-md-block">CHOOSE PROGRAMS</h4>
                         <form id="program-filter-form" method="GET">
                             {% for key, filter in program_filters.items %}
                             <div class="accordion-item mb-2 border-0 rounded-0">
