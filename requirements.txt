@@ -39,3 +39,4 @@ django-allauth==65.13.1
 wagtail-modeladmin==2.2.0
 wagtail-cache==3.0.0
 mailchimp-marketing==3.0.80 
+boto3==1.42.36

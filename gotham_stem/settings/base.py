@@ -160,6 +160,14 @@ DATABASES = {
     }
 }
 
+OCI = {
+    'ACCESS_KEY' : get_config_value('oci','access_key'),
+    'SECRET_KEY' : get_config_value('oci','secret_key'),
+    'NAMESPACE' : get_config_value('oci','namespace'),
+    'REGION' : get_config_value('oci','region'),
+    'BUCKET_NAME' : get_config_value('oci','bucket'),
+}
+
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
 
