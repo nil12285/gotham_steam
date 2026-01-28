@@ -35,12 +35,11 @@ class Command(BaseCommand):
             return
 
         # 3. Check for OCI Configurations
-        # We look for these in settings.py or environment variables
-        oci_access_key = getattr(settings, "OCI_ACCESS_KEY", os.getenv("OCI_ACCESS_KEY"))
-        oci_secret_key = getattr(settings, "OCI_SECRET_KEY", os.getenv("OCI_SECRET_KEY"))
-        oci_namespace = getattr(settings, "OCI_NAMESPACE", os.getenv("OCI_NAMESPACE"))
-        oci_region = getattr(settings, "OCI_REGION", os.getenv("OCI_REGION"))
-        oci_bucket = getattr(settings, "OCI_BUCKET_NAME", os.getenv("OCI_BUCKET_NAME"))
+        oci_access_key = settings.OCI['ACCESS_KEY']
+        oci_secret_key = settings.OCI['SECRET_KEY']
+        oci_namespace = settings.OCI['NAMESPACE']
+        oci_region = settings.OCI['REGION']
+        oci_bucket = settings.OCI['BUCKET_NAME']
 
         if all([oci_access_key, oci_secret_key, oci_namespace, oci_region, oci_bucket]):
             self.stdout.write("OCI configuration found. Initiating upload...")
