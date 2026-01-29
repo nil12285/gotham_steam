@@ -120,7 +120,7 @@ class ProgramAdmin(ModelAdmin):
 
 class ResourceAcademicStageAdmin(ModelAdmin):
     model = ResourceAcademicStage
-    menu_label = 'Resource Academic Stage'
+    menu_label = 'Academic Stage'
     menu_icon = 'folder-open-inverse'
     list_display = ('name', 'slug',)
     search_fields = ('name',)
@@ -129,7 +129,7 @@ class ResourceAcademicStageAdmin(ModelAdmin):
 
 class ResourceCategoryAdmin(ModelAdmin):
     model = ResourceCategory
-    menu_label = 'Resource Type'
+    menu_label = 'Categories'
     menu_icon = 'tag'
     list_display = ('name', 'slug',)
     search_fields = ('name',)
